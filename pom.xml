@@ -21,5 +21,10 @@
             <artifactId>sphinx4-core</artifactId>
             <version>5prealpha</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.jimregan</groupId>
+            <artifactId>cmusphinx-clarinpl</artifactId>
+            <version>0.01</version>
+        </dependency>
     </dependencies>
 </project>
