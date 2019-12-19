@@ -9,17 +9,15 @@ import edu.cmu.sphinx.decoder.adaptation.Stats;
 import edu.cmu.sphinx.decoder.adaptation.Transform;
 import edu.cmu.sphinx.result.WordResult;
 
-//https://gowatchseries.fm/the-jonathan-ross-show-season-15-episode-3
-
 public class Transcriber {
     Configuration cfg;
     StreamSpeechRecognizer rec;
     SpeechResult res;
     Transcriber() throws Exception {
         cfg = new Configuration();
-        cfg.setAcousticModelPath("resource:/io/github/jimregan/polishtranscriber/cmusphinx-clarinpl");
-        cfg.setDictionaryPath("resource:/io/github/jimregan/polishtranscriber/cmusphinx-clarinpl/pl.dic");
-        cfg.setLanguageModelPath("resource:/io/github/jimregan/polishtranscriber/cmusphinx-clarinpl/pl.lm.DMP");
+        cfg.setAcousticModelPath("resource:/io/github/jimregan/cmusphinx-clarinpl/");
+        cfg.setDictionaryPath("resource:/io/github/jimregan/cmusphinx-clarinpl/pl.dic");
+        cfg.setLanguageModelPath("resource:/io/github/jimregan/cmusphinx-clarinpl/pl.lm.DMP");
         rec = new StreamSpeechRecognizer(cfg);
     }
 }
