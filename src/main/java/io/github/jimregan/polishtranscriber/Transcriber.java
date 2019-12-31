@@ -55,13 +55,15 @@ public class Transcriber {
                 if (aid[i] - lastId > 1) {
                     for (WordResult result : results.subList(lastId + 1,
                             aid[i])) {
-                        System.out.format("+ %-25s [%s]\n", result.getWord()
-                                .getSpelling(), result.getTimeFrame());
+                        System.out.format("+ %s\t%s\t%s\n", result.getWord()
+                                .getSpelling(), result.getTimeFrame(),
+                                result.getPronunciation().toString());
                     }
                 }
-                System.out.format("  %-25s [%s]\n", results.get(aid[i])
+                System.out.format("  %s\t%s\t%s\n", results.get(aid[i])
                         .getWord().getSpelling(), results.get(aid[i])
-                        .getTimeFrame());
+                        .getTimeFrame(), results.get(aid[i])
+                        .getPronunciation().toString());
                 lastId = aid[i];
             }
         }
