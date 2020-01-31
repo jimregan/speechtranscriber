@@ -238,12 +238,97 @@ public class PolishG2P {
         return tmp.toArray(new Piece[tmp.size()]);
     }
 
+    /**
+     * Converts 'nasal' final 'ę' to 'e'
+     * Makes a copy, because in many situations, we want both
+     * @param in
+     * @return
+     */
+    private static String[] denasaliseFinalE(String[] in) {
+        String[] tmp = Arrays.copyOf(in, in.length);
+        if (in[in.length - 1].equals("ɛ̃")) {
+            tmp[tmp.length - 1] = "ɛ";
+        }
+        return tmp;
+    }
+
     private static String[] piecesToString(Piece[] pieces) {
         List<String> tmp = new ArrayList<String>();
         for (Piece p : pieces) {
             tmp.addAll(Arrays.asList(p.p));
         }
         return tmp.toArray(new String[tmp.size()]);
+    }
+
+    private static boolean isVowelPhone(String s) {
+        switch (s) {
+            case "a":
+            case "ɛ":
+            case "ɛ̃":
+            case "i":
+            case "ɨ":
+            case "ɔ":
+            case "ɔ̃":
+            case "u":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Return true if phoneme is a vowel, liquid, or nasal
+     * @param s
+     * @return
+     */
+    private static boolean isVLNPhone(String s) {
+        switch (s) {
+            case "a":
+            case "ɛ":
+            case "ɛ̃":
+            case "i":
+            case "ɨ":
+            case "ɔ":
+            case "ɔ̃":
+            case "u":
+            case "m":
+            case "mʲ":
+            case "n":
+            case "ɲ":
+            case "ŋ":
+            case "l":
+            case "lʲ":
+            case "j":
+            case "r":
+            case "rʲ":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static char sylMarks(char c) {
+        switch (c) {
+            case '.':
+                return '.';
+            case '\'':
+                return 'ˈ';
+            case ',':
+                return 'ˌ';
+            default:
+                return c;
+        }
+    }
+
+    private static boolean isForwardVoiced(Piece p) {
+        if(p.p.length == 1 && p.p[0].equals("v") || p.p[0].equals("vʲ")) {
+            return true;
+        }
+        // 'rz' is forward voiced, 'ż' is not
+        if(p.g.equals("rz") && p.p[0].equals("ʐ")) {
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
