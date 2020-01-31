@@ -331,6 +331,36 @@ public class PolishG2P {
         return false;
     }
 
+    private static String devoice(String s) {
+        switch(s) {
+            case "b":
+                return "p";
+            case "d":
+                return "t";
+            case "d͡z":
+                return "t͡s";
+            case "d͡ʑ":
+                return "t͡ɕ";
+            case "d͡ʐ":
+                return "t͡ʂ";
+            case "ɡ":
+                return "k";
+            case "v":
+                return "f";
+            case "vʲ":
+                return "fʲ";
+            case "z":
+                return "s";
+            case "ʑ":
+                return "ɕ";
+            case "ʐ":
+                return "ʂ";
+
+            default:
+                return null;
+        }
+    }
+
     public static void main(String[] args) {
 
     }
