@@ -34,6 +34,19 @@ public class Alignables {
         commonPieces.add(new LongVowel("uí", "iː"));
         commonPieces.add(new LongVowel("oí", "iː"));
         commonPieces.add(new LongVowel("aoi", "iː"));
+        // kinda Ulster, but no instances from abair
+        // added as LongVowels there
+        commonPieces.add(new Diphthong("ío", "iː", "iˑə"));
+        commonPieces.add(new Diphthong("uío", "iː", "iˑə"));
+        commonPieces.add(new Diphthong("aío", "iː", "iˑə"));
+        // Ulster has reduction here
+        commonPieces.add(new LongVowel("ó", "oː"));
+        commonPieces.add(new LongVowel("ió", "oː"));
+        commonPieces.add(new LongVowel("eó", "oː"));
+        commonPieces.add(new LongVowel("eo", "oː"));
+        commonPieces.add(new LongVowel("ói", "oː"));
+        commonPieces.add(new LongVowel("eói", "oː"));
+        commonPieces.add(new LongVowel("eoi", "oː"));
 
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
@@ -63,5 +76,14 @@ public class Alignables {
         List<G2PPiece> piecesUL = new ArrayList<>();
         piecesUL.add(new LongVowel("o", "oː", "r(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesUL.add(new LongVowel("ao", "iː"));
+        piecesUL.add(new LongVowel("ío", "iː"));
+        piecesUL.add(new LongVowel("uío", "iː"));
+        piecesUL.add(new LongVowel("aío", "iː"));
+        piecesUL.add(new RLongVowel("ó", "oː", "o"));
+        piecesUL.add(new RLongVowel("ió", "oː", "o"));
+        piecesUL.add(new RLongVowel("eó", "oː", "o"));
+        piecesUL.add(new RLongVowel("eo", "oː", "o"));
+        piecesUL.add(new RLongVowel("ói", "oː", "o"));
+        piecesUL.add(new RLongVowel("eoi", "oː", "o"));
     }
 }

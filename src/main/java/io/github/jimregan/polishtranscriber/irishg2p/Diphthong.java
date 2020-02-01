@@ -10,4 +10,8 @@ public class Diphthong extends Vowel {
         this(g, p);
         this.unstressed = unstressed;
     }
+    public Diphthong(String g, String p, String unstressed, String context) {
+        this(g, p, unstressed);
+        this.context = context;
+    }
 }
