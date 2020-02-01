@@ -16,4 +16,11 @@ public class ShortVowel extends Vowel {
     String[] getStressed() {
         return stressedPhoneme.split(" ");
     }
+    @Override
+    String[][] getPhonemes () {
+        String[][] out = new String[2][];
+        out[0] = getStressed();
+        out[1] = getUnstressed();
+        return out;
+    }
 }
