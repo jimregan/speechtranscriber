@@ -5,7 +5,7 @@ import java.util.List;
 public class G2PPiece {
     String grapheme;
     String context = null;
-    List<List<String>> graphemes;
+    List<List<String>> phonemes;
 
     String getGrapheme() {
         return grapheme;
@@ -22,6 +22,24 @@ public class G2PPiece {
         this.context = context;
     }
     public boolean hasContext() {
-        return context == null;
+        return context != null;
+    }
+    private String makeMatchString() {
+        if (!hasContext()) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        if (this.context.startsWith("^")) {
+            sb.append(this.context);
+            sb.append('(');
+            sb.append(this.grapheme);
+            sb.append(')');
+        } else if (this.context.endsWith("$")) {
+            sb.append('(');
+            sb.append(this.grapheme);
+            sb.append(')');
+            sb.append(this.context);
+        }
+        return getContext();
     }
 }
