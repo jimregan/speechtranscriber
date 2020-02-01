@@ -29,6 +29,11 @@ public class Alignables {
         commonPieces.add(new LongVowel("éi", "eː"));
         commonPieces.add(new LongVowel("ae", "eː"));
         commonPieces.add(new LongVowel("aei", "eː"));
+        commonPieces.add(new LongVowel("í", "iː"));
+        commonPieces.add(new LongVowel("aí", "iː"));
+        commonPieces.add(new LongVowel("uí", "iː"));
+        commonPieces.add(new LongVowel("oí", "iː"));
+        commonPieces.add(new LongVowel("aoi", "iː"));
 
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
@@ -43,6 +48,7 @@ public class Alignables {
         piecesMU.add(new LongVowel("o", "oː", "(?:ll|nn)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesMU.add(new LongVowel("o", "iː", "(?:ll|nn)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesMU.add(new LongVowel("éa", "iː", "^(?:dh?|n)"));
+        piecesMU.add(new LongVowel("ao", "eː"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
@@ -52,8 +58,10 @@ public class Alignables {
         piecesCO.add(new LongVowel("o", "o", "(?:ll|nn|r)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesCO.add(new LongVowel("o", "iː", "(?:ll|nn|r)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesCO.add(new LongVowel("éa", "iː", "^(?:dh?|n)"));
+        piecesCO.add(new LongVowel("ao", "iː"));
 
         List<G2PPiece> piecesUL = new ArrayList<>();
-        piecesMU.add(new LongVowel("o", "oː", "r(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
+        piecesUL.add(new LongVowel("o", "oː", "r(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
+        piecesUL.add(new LongVowel("ao", "iː"));
     }
 }

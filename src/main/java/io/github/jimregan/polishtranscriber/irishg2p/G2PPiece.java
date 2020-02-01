@@ -24,21 +24,31 @@ public class G2PPiece {
     public boolean hasContext() {
         return context != null;
     }
-    private String makeMatchString() {
+    private String makeMatchString() throws Exception {
         if (!hasContext()) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        if (this.context.startsWith("^")) {
-            sb.append(this.context);
+        if (this.getContext().startsWith("^")) {
+            sb.append(this.getContext());
             sb.append('(');
-            sb.append(this.grapheme);
+            sb.append(this.getGrapheme());
             sb.append(')');
-        } else if (this.context.endsWith("$")) {
+        } else if (this.getContext().endsWith("$")) {
             sb.append('(');
-            sb.append(this.grapheme);
+            sb.append(this.getGrapheme());
             sb.append(')');
-            sb.append(this.context);
+            sb.append(this.getContext());
+        } else if (this.getContext().contains("_")) {
+            String[] parts = getContext().split("_");
+            if (parts.length != 2) {
+                throw new Exception("Context has more than one instance of grapheme");
+            }
+            sb.append(parts[0]);
+            sb.append('(');
+            sb.append(this.getGrapheme());
+            sb.append(')');
+            sb.append(parts[1]);
         }
         return getContext();
     }
