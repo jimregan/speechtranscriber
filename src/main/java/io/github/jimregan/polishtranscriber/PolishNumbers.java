@@ -178,4 +178,47 @@ public class PolishNumbers {
         card_to_ord.put("dziewięćdziesiąt", "dziewięćdziesiąty");
         CARD_TO_ORD = Collections.unmodifiableMap(card_to_ord);
     }
+
+    public static String inflectOrdinal(String ordinal, String gender, String gcase) {
+        if(gender == null || gender.equals("")) {
+            gender = "m";
+        }
+        if(gcase == null || gcase.equals("")) {
+            gcase = "nom";
+        }
+
+        if(gender.equals("m")) {
+            if(gcase.equals("nom") || gcase.equals("voc")) {
+                return ordinal;
+            } else if (gcase.equals("loc") || gcase.equals("ins")) {
+                return ordinal + "m";
+            } else if (gcase.equals("gen")) {
+                String mod = ordinal;
+                if(ordinal.endsWith("y")) {
+                    mod = ordinal.substring(0, ordinal.length() - 1);
+                }
+                return mod + "ego";
+            }
+        } else if(gender.equals("f")) {
+            String mod = ordinal;
+            if(ordinal.endsWith("y") || ordinal.endsWith("gi")) {
+                mod = ordinal.substring(0, ordinal.length() - 1);
+            }
+            if(gcase.equals("nom") || gcase.equals("voc")) {
+                return mod + "a";
+            } else if (gcase.equals("acc") || gcase.equals("ins")) {
+                return mod + "ą";
+            } else {
+                return mod + "ej";
+            }
+        }
+        return ordinal;
+    }
+    public static String inflectOrdinal(String ordinal, String gender) {
+        return inflectOrdinal(ordinal, gender, null);
+    }
+    public static String inflectOrdinal(String ordinal) {
+        return inflectOrdinal(ordinal, null, null);
+    }
+
 }
