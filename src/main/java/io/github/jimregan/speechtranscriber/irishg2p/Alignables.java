@@ -187,6 +187,10 @@ public class Alignables {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        piecesMU.add(new Consonant("l", "lˠ", "lʲ"));
+        piecesMU.add(new Consonant("ll", "lˠ", "l̻ʲ"));
+        piecesMU.add(new Consonant("n", "nˠ", "nʲ"));
+        piecesMU.add(new Consonant("nn", "nˠ", "n̻ʲ"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
