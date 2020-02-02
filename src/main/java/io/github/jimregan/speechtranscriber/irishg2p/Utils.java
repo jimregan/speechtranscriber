@@ -21,6 +21,9 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Utils {
     public static boolean startsSlenderVowel(String s) {
         if (s == null) {
@@ -77,13 +80,16 @@ public class Utils {
         return arrayEquals(a, b, 0);
     }
 
-    public static boolean checkContext(G2PPiece piece, String curstring, int i) {
+    public static boolean checkContext(G2PPiece piece, String curstring, int i) throws Exception {
         if(piece.hasContext()) {
+            Pattern p = Pattern.compile(piece.makeMatchString());
+            Matcher m = p.matcher(curstring);
             if(piece.getContext().startsWith("^") && i != 0) {
                 return false;
             }
-            if(!curstring.matches(piece.getContext())) {
-                return true;
+            if(!m.matches()) {
+                System.err.println(piece.makeMatchString());
+                return false;
             }
         }
         return false;

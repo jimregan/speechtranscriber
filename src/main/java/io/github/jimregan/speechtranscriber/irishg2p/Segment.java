@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Segment {
-    public static List<G2PPiece> segment(Entry e, Map<String, List<G2PPiece>> map) {
+    public static List<G2PPiece> segment(Entry e, Map<String, List<G2PPiece>> map) throws Exception {
         List<G2PPiece> out = new ArrayList<>();
         String in = e.getWord();
         for (int i = 0, j = 0; i < in.length() && j < e.getPhones().length; i++, j++) {

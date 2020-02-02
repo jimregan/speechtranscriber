@@ -50,8 +50,9 @@ public class UtilsTest {
     }
 
     @Test
-    public void testCheckContext() {
+    public void testCheckContext() throws Exception {
         Consonant mb = new Consonant("mb", "mˠ", "mʲ", "^");
+        Consonant mb1 = new Consonant("mb", "mˠ", "mʲ");
         String t1 = "mbosca";
         assertEquals(true, Utils.checkContext(mb, t1, 0));
         String t2 = "ambosca";

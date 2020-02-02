@@ -44,7 +44,7 @@ public abstract class G2PPiece {
     public boolean hasContext() {
         return context != null;
     }
-    private String makeMatchString() throws Exception {
+    public String makeMatchString() throws Exception {
         if (!hasContext()) {
             return null;
         }
@@ -70,7 +70,7 @@ public abstract class G2PPiece {
             sb.append(')');
             sb.append(parts[1]);
         }
-        return getContext();
+        return sb.toString();
     }
     public boolean hasUnstressedSequence() {
         return false;
