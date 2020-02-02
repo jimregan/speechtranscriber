@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Jim O'Regan <jaoregan@tcd.ie>
+ * Copyright 2020 Jim O'Regan <jaoregan@tcd.ie>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
