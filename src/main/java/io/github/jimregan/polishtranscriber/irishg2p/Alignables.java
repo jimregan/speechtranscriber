@@ -70,8 +70,9 @@ public class Alignables {
         piecesMU.add(new LongVowel("o", "iː", "(?:ll|nn)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesMU.add(new LongVowel("éa", "iː", "^(?:dh?|n)"));
         piecesMU.add(new LongVowel("ao", "eː"));
-        piecesMU.add(new LongVowel("uibh", "iː", "_[^aeiouáéíóú]"));
-        piecesMU.add(new LongVowel("uimh", "iː", "_[^aeiouáéíóú]"));
+        // Corca Dhuibhne
+        piecesMU.add(new LongVowel("uibh", "iː"));
+        piecesMU.add(new LongVowel("uimh", "iː"));
         piecesMU.add(new LongVowel("uibhe", "iː", "$"));
         piecesMU.add(new LongVowel("uimhe", "iː", "$"));
 
