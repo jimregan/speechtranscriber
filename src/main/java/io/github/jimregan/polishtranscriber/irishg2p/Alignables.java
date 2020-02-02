@@ -47,6 +47,14 @@ public class Alignables {
         commonPieces.add(new LongVowel("ói", "oː"));
         commonPieces.add(new LongVowel("eói", "oː"));
         commonPieces.add(new LongVowel("eoi", "oː"));
+        // possible reduction in Ulster?
+        commonPieces.add(new LongVowel("ú", "uː"));
+        commonPieces.add(new LongVowel("iú", "uː"));
+        commonPieces.add(new LongVowel("úi", "uː"));
+        commonPieces.add(new LongVowel("iúi", "uː"));
+        commonPieces.add(new LongVowel("úai", "uː"));
+        // not Ulster - but Munster?
+        commonPieces.add(new LongVowel("omh", "uː"));
 
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
@@ -62,6 +70,10 @@ public class Alignables {
         piecesMU.add(new LongVowel("o", "iː", "(?:ll|nn)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesMU.add(new LongVowel("éa", "iː", "^(?:dh?|n)"));
         piecesMU.add(new LongVowel("ao", "eː"));
+        piecesMU.add(new LongVowel("uibh", "iː", "_[^aeiouáéíóú]"));
+        piecesMU.add(new LongVowel("uimh", "iː", "_[^aeiouáéíóú]"));
+        piecesMU.add(new LongVowel("uibhe", "iː", "$"));
+        piecesMU.add(new LongVowel("uimhe", "iː", "$"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
@@ -85,5 +97,8 @@ public class Alignables {
         piecesUL.add(new RLongVowel("eo", "oː", "o"));
         piecesUL.add(new RLongVowel("ói", "oː", "o"));
         piecesUL.add(new RLongVowel("eoi", "oː", "o"));
+        piecesUL.add(new LongVowel("omh", "oː"));
+        piecesUL.add(new LongVowel("omh", "uː", "$"));
+        piecesUL.add(new LongVowel("omh", "uː", "[^a-záéíóú].*$"));
     }
 }
