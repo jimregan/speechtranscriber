@@ -35,7 +35,7 @@ public class UtilsTest {
     @Test
     public void testEndsSlenderVowel() {
         assertEquals(false, Utils.endsSlenderVowel("ae"));
-        assertEquals(false, Utils.endsSlenderVowel("e"));
-        assertEquals(false, Utils.endsSlenderVowel("blé"));
+        assertEquals(true, Utils.endsSlenderVowel("e"));
+        assertEquals(true, Utils.endsSlenderVowel("blé"));
     }
 }
