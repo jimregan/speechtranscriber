@@ -22,7 +22,8 @@
 package io.github.jimregan.speechtranscriber.irishg2p;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.Assert.*;
 
 public class UtilsTest {
 
@@ -54,8 +55,10 @@ public class UtilsTest {
         Consonant mb = new Consonant("mb", "mˠ", "mʲ", "^");
         Consonant mb1 = new Consonant("mb", "mˠ", "mʲ");
         String t1 = "mbosca";
-        assertEquals(true, Utils.checkContext(mb, t1, 0));
+        assertEquals(mb.makeMatchString(), "^(mb).*");
+        assertTrue(t1.matches("^(mb).*"));
+        assertTrue(Utils.checkContext(mb, t1, 0));
         String t2 = "ambosca";
-        assertEquals(false, Utils.checkContext(mb, t1, 1));
+        assertFalse(Utils.checkContext(mb, t1, 1));
     }
 }

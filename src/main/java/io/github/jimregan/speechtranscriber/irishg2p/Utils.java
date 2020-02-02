@@ -91,6 +91,12 @@ public class Utils {
             if(!m.matches()) {
                 return false;
             }
+            while(m.find()) {
+                if(m.regionStart() == i) {
+                    return true;
+                }
+            }
+            return false;
         }
         return false;
     }
