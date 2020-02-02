@@ -15,14 +15,26 @@ public class Seq extends G2PPiece {
     }
     private static final ShortVowel INSERT_SCHWA = new ShortVowel(null, null, "ə");
     public static Seq insertSchwa(String seqs, String broad, String slender) throws Exception {
-        if (!seqs.contains(" ") || !broad.contains(" ") || !slender.contains(" ")) {
-            throw new Exception("Missing space");
+        if (!seqs.contains(" ")) {
+            throw new Exception("Missing space: " + seqs);
+        }
+        if (!broad.contains(" ")) {
+            throw new Exception("Missing space: " + broad);
+        }
+        if (!slender.contains(" ")) {
+            throw new Exception("Missing space: " + slender);
         }
         String[] aseqs = seqs.split(" ");
         String[] abroad = broad.split(" ");
         String[] aslender = slender.split(" ");
-        if (aseqs.length != 2 || abroad.length != 2 || aslender.length != 2) {
-            throw new Exception("Too many spaces");
+        if (aseqs.length != 2) {
+            throw new Exception("Too many spaces: " + seqs);
+        }
+        if (abroad.length != 2) {
+            throw new Exception("Too many spaces: " + broad);
+        }
+        if (aslender.length != 2) {
+            throw new Exception("Too many spaces: " + slender);
         }
         String g = aseqs[0] + aseqs[1];
         return new Seq(g, new G2PPiece[]{
