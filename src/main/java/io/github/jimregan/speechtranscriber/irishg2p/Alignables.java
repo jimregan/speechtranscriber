@@ -22,9 +22,15 @@
 package io.github.jimregan.speechtranscriber.irishg2p;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Alignables {
+
+    public final static Map<String, List<G2PPiece>> MUNSTER;
+    public final static Map<String, List<G2PPiece>> CONNACHT;
+    public final static Map<String, List<G2PPiece>> ULSTER;
     static {
         List<G2PPiece> commonPieces = new ArrayList<>();
         commonPieces.add(new ShortVowel("a", "a"));
@@ -306,5 +312,30 @@ public class Alignables {
         piecesUL.add(new Consonant("ch", "x", "ç", "^"));
         piecesUL.add(new Consonant("n", "ɾˠ", null, "^c_[aouáóú]"));
         piecesUL.add(new Consonant("ch", "ɾˠ", "ɾˠ", "_t"));
+
+        MUNSTER = makeMap(commonPieces, piecesMU);
+        CONNACHT = makeMap(commonPieces, piecesCO);
+        ULSTER = makeMap(commonPieces, piecesUL);
+    }
+
+    private static Map<String, List<G2PPiece>> makeMap(List<G2PPiece> common, List<G2PPiece> dialect) {
+        Map<String, List<G2PPiece>> out = new HashMap<>();
+        for (G2PPiece piece : dialect) {
+            if(out.containsKey(piece.getGrapheme())) {
+                out.get(piece.getGrapheme()).add(piece);
+            } else {
+                List<G2PPiece> tmp = new ArrayList<>();
+                tmp.add(piece);
+                out.put(piece.getGrapheme(), tmp);
+            }
+        }
+        for (G2PPiece piece : common) {
+            if(out.containsKey(piece.getGrapheme())) {
+                List<G2PPiece> tmp = new ArrayList<>();
+                tmp.add(piece);
+                out.put(piece.getGrapheme(), tmp);
+            }
+        }
+        return out;
     }
 }
