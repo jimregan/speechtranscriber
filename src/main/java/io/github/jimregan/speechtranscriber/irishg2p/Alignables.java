@@ -235,8 +235,11 @@ public class Alignables {
         }
         piecesMU.add(new Consonant("l", "lˠ", "lʲ"));
         piecesMU.add(new Consonant("ll", "lˠ", "l̻ʲ"));
+        piecesMU.add(new Consonant("l", "lˠ", "lʲ", "^"));
         piecesMU.add(new Consonant("n", "nˠ", "nʲ"));
         piecesMU.add(new Consonant("nn", "nˠ", "n̻ʲ"));
+        piecesMU.add(new Consonant("n", "nˠ", "nʲ", "^"));
+        piecesMU.add(new Consonant("n-", "nˠ", "nʲ", "^"));
         piecesMU.add(new Consonant("sh", "h", "ç", "_(?:e[áo]i?)"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
