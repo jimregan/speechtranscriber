@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Jim O'Regan <jaoregan@tcd.ie>
+ * Copyright 2019 Jim O'Regan <jaoregan@tcd.ie>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -19,7 +19,21 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber.irishg2p;
+package io.github.jimregan.speechtranscriber;
 
-public class AlignablePiece {
+public class PolishTokeniser {
+    /** default whitespace regular expression pattern */
+    public static final String RX_DEFAULT_PL_WHITESPACE = "[ \n\t\r]+";
+    /** default letter regular expression pattern */
+    public static final String RX_DEFAULT_PL_ALPHABET = "[A-ZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź]+";
+    /** default uppercase regular expression pattern */
+    public static final String RX_DEFAULT_PL_UPPERCASE = "[A-ZĄĆĘŁŃÓŚŻŹ]+";
+    /** default lowercase regular expression pattern */
+    public static final String RX_DEFAULT_PL_LOWERCASE = "[a-ząćęłńóśżź]+";
+    /** default alpha-numeric regular expression pattern */
+    public static final String RX_DEFAULT_PL_ALPHANUMERIC = "[0-9A-ZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź]+";
+
+    /** default has-vowel regular expression */
+    public static final String RX_DEFAULT_PL_HAS_VOWEL = ".*[aąeęioóuyAĄEĘIOÓUY].*";
+
 }

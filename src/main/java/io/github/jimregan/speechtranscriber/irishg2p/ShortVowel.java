@@ -19,25 +19,34 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber.irishg2p;
+package io.github.jimregan.speechtranscriber.irishg2p;
 
-public class Diphthong extends Vowel {
-    public Diphthong() {}
-    public Diphthong(String g, String p) {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShortVowel extends Vowel {
+    public ShortVowel(String g, String p) {
         this.grapheme = g;
         this.stressedPhoneme = p;
-        this.unstressed = null;
+        this.unstressed = "ə";
     }
-    public Diphthong(String g, String p, String unstressed) {
+    public ShortVowel(String g, String p, String unstressed) {
         this(g, p);
         this.unstressed = unstressed;
     }
-    public Diphthong(String g, String p, String unstressed, String context) {
-        this(g, p, unstressed);
-        this.context = context;
+    @Override
+    String[][] getPhonemes () {
+        List<String[]> out = new ArrayList<String[]>();
+        if(getUnstressed() != null) {
+            out.add(getStressed());
+        }
+        if(getStressed() != null) {
+            out.add(getStressed());
+        }
+        return out.toArray(new String[out.size()][]);
     }
     @Override
     public boolean isLong() {
-        return true;
+        return false;
     }
 }

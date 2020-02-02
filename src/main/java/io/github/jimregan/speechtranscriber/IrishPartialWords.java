@@ -19,10 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber.irishg2p;
+package io.github.jimregan.speechtranscriber;
 
-public class ShortLongVowelPair extends LongVowelPair {
-    public ShortLongVowelPair(String g, String stressed) throws Exception {
-        super(g, stressed);
-    }
+public class IrishPartialWords {
 }
