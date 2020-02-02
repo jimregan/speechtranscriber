@@ -82,7 +82,6 @@ public class Utils {
 
     public static boolean checkContext(G2PPiece piece, String curstring, int i) throws Exception {
         if(piece.hasContext()) {
-            System.err.println(piece.makeMatchString());
             Pattern p = Pattern.compile(piece.makeMatchString());
             Matcher m = p.matcher(curstring);
             if(piece.getContext().startsWith("^") && i != 0) {
@@ -90,6 +89,9 @@ public class Utils {
             }
             if(!m.matches()) {
                 return false;
+            }
+            if(piece.getContext().startsWith("^") || piece.getContext().endsWith("$")) {
+                return true;
             }
             while(m.find()) {
                 if(m.regionStart() == i) {
