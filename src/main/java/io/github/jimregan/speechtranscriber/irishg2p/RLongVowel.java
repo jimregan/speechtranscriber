@@ -19,38 +19,15 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber.irishg2p;
+package io.github.jimregan.speechtranscriber.irishg2p;
 
-public class Consonant extends G2PPiece {
-    String broad;
-    String slender;
-    boolean is_broad = true;
-    boolean broadnessSet = false;
-    public Consonant(String g, String broad, String slender) {
-        this.grapheme = g;
-        this.broad = broad;
-        this.slender = slender;
-        if (broad == null) {
-            this.broadnessSet = true;
-            this.is_broad = false;
-        }
+public class RLongVowel extends LongVowel {
+    public RLongVowel(String g, String p, String unstressed) {
+        super(g, p);
+        this.unstressed = unstressed;
     }
-    public Consonant(String g, String broad, String slender, String context) {
-        this(g, broad, slender);
+    public RLongVowel(String g, String p, String unstressed, String context) {
+        this(g, p, unstressed);
         this.setContext(context);
-    }
-    @Override
-    public boolean isConsonant() {
-        return true;
-    }
-    public void setBroad(boolean broadness) {
-        this.broadnessSet = true;
-        this.is_broad = broadness;
-    }
-    public boolean isBroadnessSet() {
-        return broadnessSet;
-    }
-    public boolean isBroad() {
-        return this.is_broad;
     }
 }

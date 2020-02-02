@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Jim O'Regan <jaoregan@tcd.ie>
+ * Copyright 2019 Jim O'Regan <jaoregan@tcd.ie>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -19,15 +19,21 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber.irishg2p;
+package io.github.jimregan.speechtranscriber;
 
-public class LongVowel extends Vowel {
-    public LongVowel(String g, String p) {
-        this.grapheme = g;
-        this.stressedPhoneme = p;
-    }
-    public LongVowel(String g, String p, String context) {
-        this(g, p);
-        this.setContext(context);
-    }
+public class IrishTokeniser {
+    /** default whitespace regular expression pattern */
+    public static final String RX_DEFAULT_GA_WHITESPACE = "[ \n\t\r]+";
+    /** default letter regular expression pattern */
+    public static final String RX_DEFAULT_GA_ALPHABET = "[A-ZÁÉÍÓÚa-záéíóú]+";
+    /** default uppercase regular expression pattern */
+    public static final String RX_DEFAULT_GA_UPPERCASE = "[A-ZÁÉÍÓÚ]+";
+    /** default lowercase regular expression pattern */
+    public static final String RX_DEFAULT_GA_LOWERCASE = "[a-záéíóú]+";
+    /** default alpha-numeric regular expression pattern */
+    public static final String RX_DEFAULT_GA_ALPHANUMERIC = "[0-9A-ZÁÉÍÓÚáéíóú]+";
+
+    /** default has-vowel regular expression */
+    public static final String RX_DEFAULT_GA_HAS_VOWEL = ".*[aáeéiíoóuúAÁEÉIÍOÓUÚ].*";
+
 }

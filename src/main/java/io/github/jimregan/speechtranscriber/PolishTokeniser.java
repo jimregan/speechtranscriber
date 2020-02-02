@@ -19,21 +19,21 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber;
+package io.github.jimregan.speechtranscriber;
 
-public class IrishTokeniser {
+public class PolishTokeniser {
     /** default whitespace regular expression pattern */
-    public static final String RX_DEFAULT_GA_WHITESPACE = "[ \n\t\r]+";
+    public static final String RX_DEFAULT_PL_WHITESPACE = "[ \n\t\r]+";
     /** default letter regular expression pattern */
-    public static final String RX_DEFAULT_GA_ALPHABET = "[A-ZÁÉÍÓÚa-záéíóú]+";
+    public static final String RX_DEFAULT_PL_ALPHABET = "[A-ZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź]+";
     /** default uppercase regular expression pattern */
-    public static final String RX_DEFAULT_GA_UPPERCASE = "[A-ZÁÉÍÓÚ]+";
+    public static final String RX_DEFAULT_PL_UPPERCASE = "[A-ZĄĆĘŁŃÓŚŻŹ]+";
     /** default lowercase regular expression pattern */
-    public static final String RX_DEFAULT_GA_LOWERCASE = "[a-záéíóú]+";
+    public static final String RX_DEFAULT_PL_LOWERCASE = "[a-ząćęłńóśżź]+";
     /** default alpha-numeric regular expression pattern */
-    public static final String RX_DEFAULT_GA_ALPHANUMERIC = "[0-9A-ZÁÉÍÓÚáéíóú]+";
+    public static final String RX_DEFAULT_PL_ALPHANUMERIC = "[0-9A-ZĄĆĘŁŃÓŚŻŹa-ząćęłńóśżź]+";
 
     /** default has-vowel regular expression */
-    public static final String RX_DEFAULT_GA_HAS_VOWEL = ".*[aáeéiíoóuúAÁEÉIÍOÓUÚ].*";
+    public static final String RX_DEFAULT_PL_HAS_VOWEL = ".*[aąeęioóuyAĄEĘIOÓUY].*";
 
 }

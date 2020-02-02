@@ -19,18 +19,25 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber;
+package io.github.jimregan.speechtranscriber.irishg2p;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
-public class PolishNumbersTest {
-
-    @Test
-    public void testInflectOrdinal() {
-        assertEquals("drugi", PolishNumbers.inflectOrdinal("drugi"));
-        assertEquals("druga", PolishNumbers.inflectOrdinal("drugi", "f"));
-        assertEquals("drugim", PolishNumbers.inflectOrdinal("drugi", "m", "loc"));
+public class Diphthong extends Vowel {
+    public Diphthong() {}
+    public Diphthong(String g, String p) {
+        this.grapheme = g;
+        this.stressedPhoneme = p;
+        this.unstressed = null;
+    }
+    public Diphthong(String g, String p, String unstressed) {
+        this(g, p);
+        this.unstressed = unstressed;
+    }
+    public Diphthong(String g, String p, String unstressed, String context) {
+        this(g, p, unstressed);
+        this.context = context;
+    }
+    @Override
+    public boolean isLong() {
+        return true;
     }
 }

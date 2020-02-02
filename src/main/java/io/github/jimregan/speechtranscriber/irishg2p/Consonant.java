@@ -19,34 +19,38 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.polishtranscriber.irishg2p;
+package io.github.jimregan.speechtranscriber.irishg2p;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ShortVowel extends Vowel {
-    public ShortVowel(String g, String p) {
+public class Consonant extends G2PPiece {
+    String broad;
+    String slender;
+    boolean is_broad = true;
+    boolean broadnessSet = false;
+    public Consonant(String g, String broad, String slender) {
         this.grapheme = g;
-        this.stressedPhoneme = p;
-        this.unstressed = "ə";
+        this.broad = broad;
+        this.slender = slender;
+        if (broad == null) {
+            this.broadnessSet = true;
+            this.is_broad = false;
+        }
     }
-    public ShortVowel(String g, String p, String unstressed) {
-        this(g, p);
-        this.unstressed = unstressed;
+    public Consonant(String g, String broad, String slender, String context) {
+        this(g, broad, slender);
+        this.setContext(context);
     }
     @Override
-    String[][] getPhonemes () {
-        List<String[]> out = new ArrayList<String[]>();
-        if(getUnstressed() != null) {
-            out.add(getStressed());
-        }
-        if(getStressed() != null) {
-            out.add(getStressed());
-        }
-        return out.toArray(new String[out.size()][]);
+    public boolean isConsonant() {
+        return true;
     }
-    @Override
-    public boolean isLong() {
-        return false;
+    public void setBroad(boolean broadness) {
+        this.broadnessSet = true;
+        this.is_broad = broadness;
+    }
+    public boolean isBroadnessSet() {
+        return broadnessSet;
+    }
+    public boolean isBroad() {
+        return this.is_broad;
     }
 }
