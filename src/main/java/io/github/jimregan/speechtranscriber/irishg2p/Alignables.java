@@ -143,8 +143,22 @@ public class Alignables {
         commonPieces.add(new Consonant("ll", "l̻ˠ", "l̻ʲ"));
         commonPieces.add(new Consonant("n", "n̻ˠ", "nʲ"));
         commonPieces.add(new Consonant("nn", "n̻ˠ", "n̻ʲ"));
+        commonPieces.add(new Consonant("l", "l̻ˠ", "l̻ʲ", "^"));
+        commonPieces.add(new Consonant("n", "n̻ˠ", "n̻ʲ", "^"));
+
         commonPieces.add(new Consonant("q", "k", "c"));
         commonPieces.add(new Consonant("p", "pˠ", "pʲ"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾʲ"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾˠ", "^"));
+        commonPieces.add(new Consonant("rr", "ɾˠ", "ɾʲ"));
+        commonPieces.add(new Consonant("s", "sˠ", "ʃ"));
+        commonPieces.add(new Consonant("t", "t̪ˠ", "tʲ"));
+        commonPieces.add(new Consonant("v", "vʲ", "vʲ"));
+        commonPieces.add(new Consonant("w", "vˠ", "vˠ"));
+        commonPieces.add(new Consonant("x", "k sˠ", "k sˠ"));
+        commonPieces.add(new Consonant("bh", "vˠ", "vʲ"));
+        commonPieces.add(new Consonant("ch", "h", "ç"));
+        commonPieces.add(new Consonant("dh", "ɣ", "j"));
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
         commonPieces.add(new Consonant("d", "t̪ˠ", "tʲ", "f(?:á|eá|a?í)$"));
