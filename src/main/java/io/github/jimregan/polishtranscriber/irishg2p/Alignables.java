@@ -70,6 +70,15 @@ public class Alignables {
         // Not Ulster
         commonPieces.add(new Diphthong("eighea", "ai", "ə"));
         commonPieces.add(new Diphthong("aidh", "ai", "ə"));
+        // Not Munster
+        commonPieces.add(new Diphthong("igh", "ai", "ə"));
+
+        commonPieces.add(new Diphthong("abh", "au", "ə"));
+        commonPieces.add(new Diphthong("eabh", "au", "ə"));
+        commonPieces.add(new Diphthong("abha", "au", "ə"));
+        commonPieces.add(new Diphthong("abhai", "au", "ə"));
+        commonPieces.add(new Diphthong("eabha", "au", "ə"));
+        commonPieces.add(new Diphthong("eabhai", "au", "ə"));
 
         commonPieces.add(new Consonant("b", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("c", "k", "c"));
@@ -103,6 +112,11 @@ public class Alignables {
         piecesMU.add(new Seq("oidh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
         piecesMU.add(new Seq("oigh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("gh", null, "ɟ")}, "$"));
         piecesMU.add(new Seq("eidh", new G2PPiece[]{new ShortVowel("ei", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
+        piecesMU.add(new Diphthong("aigh", "ai", "i ɟ"));
+        piecesMU.add(new Diphthong("idh", "ai", "i ɟ"));
+        piecesMU.add(new Diphthong("igh", "ai", "i ɟ"));
+        piecesMU.add(new Seq("idh", new G2PPiece[]{new ShortVowel("i", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
+        piecesMU.add(new Seq("igh", new G2PPiece[]{new ShortVowel("i", null, "i"), new Consonant("gh", null, "ɟ")}, "$"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
@@ -114,6 +128,8 @@ public class Alignables {
         piecesCO.add(new LongVowel("éa", "iː", "^(?:dh?|n)"));
         piecesCO.add(new LongVowel("ao", "iː"));
         piecesCO.add(new Diphthong("eidh", "ai", "ə"));
+        piecesCO.add(new Diphthong("aigh", "ai", "ə"));
+        piecesCO.add(new Diphthong("idh", "ai", "ə"));
 
         List<G2PPiece> piecesUL = new ArrayList<>();
         piecesUL.add(new LongVowel("o", "oː", "r(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
@@ -138,7 +154,12 @@ public class Alignables {
         piecesUL.add(new RLongVowel("agh", "eː", "ə"));
         piecesUL.add(new LongVowel("agha", "eː"));
         piecesUL.add(new LongVowel("aghai", "eː"));
-        piecesCO.add(new RLongVowel("eidh", "eː", "ə"));
-        piecesCO.add(new RLongVowel("eighea", "eː", "ə"));
+        piecesUL.add(new RLongVowel("eidh", "eː", "ə"));
+        piecesUL.add(new RLongVowel("eighea", "eː", "ə"));
+        piecesUL.add(new RLongVowel("aidh", "eː", "iː"));
+        piecesUL.add(new RLongVowel("aigh", "eː", "iː"));
+        piecesUL.add(new LongVowel("idh", "iː"));
+        piecesUL.add(new Diphthong("igh", "ai", "ə"));
+        piecesUL.add(new Diphthong("eabh", "au", "uː"));
     }
 }
