@@ -169,7 +169,11 @@ public class Alignables {
         commonPieces.add(new Consonant("p", "pˠ", "pʲ"));
         commonPieces.add(new Consonant("r", "ɾˠ", "ɾʲ"));
         commonPieces.add(new Consonant("r", "ɾˠ", "ɾˠ", "^"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾˠ", "_d"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾˠ", "_t[^h]"));
         commonPieces.add(new Consonant("rr", "ɾˠ", "ɾʲ"));
+        commonPieces.add(new Consonant("rr", "ɾˠ", "ɾˠ", "_d"));
+        commonPieces.add(new Consonant("rr", "ɾˠ", "ɾˠ", "_t[^h]"));
         commonPieces.add(new Consonant("s", "sˠ", "ʃ"));
         commonPieces.add(new Consonant("t", "t̪ˠ", "tʲ"));
         commonPieces.add(new Consonant("t'", "t̪ˠ", "tʲ"));
