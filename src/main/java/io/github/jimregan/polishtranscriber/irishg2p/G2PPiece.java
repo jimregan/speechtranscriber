@@ -52,4 +52,7 @@ public class G2PPiece {
         }
         return getContext();
     }
+    public boolean hasUnstressedSequence() {
+        return false;
+    }
 }
