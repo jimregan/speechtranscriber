@@ -24,4 +24,8 @@ public class ShortVowel extends Vowel {
         }
         return out.toArray(new String[out.size()][]);
     }
+    @Override
+    public boolean isLong() {
+        return false;
+    }
 }

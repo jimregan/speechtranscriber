@@ -94,6 +94,14 @@ public class Alignables {
         commonPieces.add(new Diphthong("iuai", "uˑə"));
         commonPieces.add(new Diphthong("ia", "iˑə"));
         commonPieces.add(new Diphthong("iai", "iˑə"));
+        try {
+            commonPieces.add(new LongVowelPair("i á", "iː aː"));
+            commonPieces.add(new LongVowelPair("i ái", "iː aː"));
+            commonPieces.add(new LongVowelPair("u á", "uː aː"));
+            commonPieces.add(new LongVowelPair("u ái", "uː aː"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         commonPieces.add(new Consonant("b", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("c", "k", "c"));

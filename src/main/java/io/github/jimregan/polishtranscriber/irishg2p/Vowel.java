@@ -19,4 +19,8 @@ public abstract class Vowel extends G2PPiece {
     String[] getStressed() {
         return stressedPhoneme.split(" ");
     }
+    @Override
+    public boolean isVowel() {
+        return true;
+    }
 }
