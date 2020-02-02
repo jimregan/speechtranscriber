@@ -55,6 +55,15 @@ public class Alignables {
         commonPieces.add(new LongVowel("úai", "uː"));
         // not Ulster - but Munster?
         commonPieces.add(new LongVowel("omh", "uː"));
+        // Not Ulster
+        commonPieces.add(new Diphthong("adh", "ai", "ə"));
+        commonPieces.add(new Diphthong("adha", "ai", "ə"));
+        commonPieces.add(new Diphthong("adhai", "ai", "ə"));
+        commonPieces.add(new Diphthong("eadh", "ai", "ə"));
+        commonPieces.add(new Diphthong("eadhai", "ai", "ə"));
+        commonPieces.add(new Diphthong("agh", "ai", "ə"));
+        commonPieces.add(new Diphthong("agha", "ai", "ə"));
+        commonPieces.add(new Diphthong("aghai", "ai", "ə"));
 
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
@@ -101,5 +110,13 @@ public class Alignables {
         piecesUL.add(new LongVowel("omh", "oː"));
         piecesUL.add(new LongVowel("omh", "uː", "$"));
         piecesUL.add(new LongVowel("omh", "uː", "[^a-záéíóú].*$"));
+        piecesUL.add(new RLongVowel("adh", "iː", "uː"));
+        piecesUL.add(new LongVowel("adha", "iː"));
+        piecesUL.add(new LongVowel("adhai", "iː"));
+        piecesUL.add(new RLongVowel("eadh", "iː", "uː"));
+        piecesUL.add(new LongVowel("eadhai", "iː"));
+        piecesUL.add(new RLongVowel("agh", "eː", "ə"));
+        piecesUL.add(new LongVowel("agha", "eː"));
+        piecesUL.add(new LongVowel("aghai", "eː"));
     }
 }
