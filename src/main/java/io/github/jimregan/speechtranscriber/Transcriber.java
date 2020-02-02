@@ -1,4 +1,4 @@
-package io.github.jimregan.polishtranscriber;
+package io.github.jimregan.speechtranscriber;
 
 import java.io.File;
 import java.net.URL;

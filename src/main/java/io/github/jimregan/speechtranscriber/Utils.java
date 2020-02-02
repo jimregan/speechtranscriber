@@ -1,4 +1,4 @@
-package io.github.jimregan.polishtranscriber;
+package io.github.jimregan.speechtranscriber;
 
 public class Utils {
     static String join(String joiner, String[] arr) {
