@@ -39,23 +39,21 @@ public class Segment {
             List<G2PPiece> cur = map.get(g);
             for (G2PPiece piece : cur) {
                 String[][] phones = piece.getPhonemes();
-                if(piece.hasContext()) {
-                    if(piece.getContext().startsWith("^") && i != 0) {
-                        continue;
-                    }
-                    if(!curstring.matches(piece.getContext())) {
-                        continue;
-                    }
+                if (Utils.checkContext(piece, curstring, i)) {
+                    continue;
                 }
                 for (String[] phoneset : phones) {
-                    for (int ii = 0, ij = j; ii < phoneset.length && ij < e.getPhones().length; ii++, ij++) {
-                        if(!phoneset[ii].equals(e.getPhones()[ij])) {
-                            continue;
-                        }
+                    if(Utils.arrayEquals(phoneset, e.getPhones(), j)) {
+                        out.add(piece);
+                        j += phoneset.length - 1;
+                        i += ext - 1;
+                        ext = 1;
+
                     }
                 }
             }
         }
         return out;
     }
+
 }

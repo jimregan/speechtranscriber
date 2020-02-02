@@ -76,4 +76,16 @@ public class Utils {
     public static boolean arrayEquals(String[] a, String[] b) {
         return arrayEquals(a, b, 0);
     }
+
+    public static boolean checkContext(G2PPiece piece, String curstring, int i) {
+        if(piece.hasContext()) {
+            if(piece.getContext().startsWith("^") && i != 0) {
+                return true;
+            }
+            if(!curstring.matches(piece.getContext())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
