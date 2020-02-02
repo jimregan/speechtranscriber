@@ -135,10 +135,12 @@ public class Alignables {
         commonPieces.add(new Consonant("b’", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("b'fh", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("b’fh", "bˠ", "bʲ"));
+        commonPieces.add(new Consonant("bp", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("c", "k", "c"));
         commonPieces.add(new Consonant("d", "d̪ˠ", "dʲ"));
         commonPieces.add(new Consonant("d'", "d̪ˠ", "dʲ"));
         commonPieces.add(new Consonant("d’", "d̪ˠ", "dʲ"));
+        commonPieces.add(new Consonant("dt", "d̪ˠ", "dʲ"));
         commonPieces.add(new Consonant("f", "fˠ", "fʲ"));
         commonPieces.add(new Consonant("g", "ɡ", "ɟ"));
         commonPieces.add(new Consonant("gc", "ɡ", "ɟ"));
@@ -161,6 +163,7 @@ public class Alignables {
         commonPieces.add(new Consonant("l", "l̻ˠ", "l̻ʲ", "^"));
         commonPieces.add(new Consonant("n", "n̻ˠ", "n̻ʲ", "^"));
         commonPieces.add(new Consonant("n-", "n̻ˠ", "n̻ʲ", "^"));
+        commonPieces.add(new Consonant("nd", "n̻ˠ", "n̻ʲ", "^"));
 
         commonPieces.add(new Consonant("q", "k", "c"));
         commonPieces.add(new Consonant("p", "pˠ", "pʲ"));
@@ -172,10 +175,12 @@ public class Alignables {
         commonPieces.add(new Consonant("t'", "t̪ˠ", "tʲ"));
         commonPieces.add(new Consonant("t’", "t̪ˠ", "tʲ"));
         commonPieces.add(new Consonant("t-", "t̪ˠ", "tʲ", "^_[aeiouáéíóú]"));
+        commonPieces.add(new Consonant("ts", "t̪ˠ", "tʲ", "^"));
         commonPieces.add(new Consonant("v", "vʲ", "vʲ"));
         commonPieces.add(new Consonant("w", "vˠ", "vˠ"));
         commonPieces.add(new Consonant("x", "k sˠ", "k sˠ"));
         commonPieces.add(new Consonant("bh", "vˠ", "vʲ"));
+        commonPieces.add(new Consonant("bhf", "vˠ", "vʲ", "^"));
         commonPieces.add(new Consonant("ch", "x", "ç"));
         commonPieces.add(new Consonant("ch", "x", "", "$"));
         commonPieces.add(new Consonant("dh", "ɣ", "j"));
@@ -191,6 +196,7 @@ public class Alignables {
         commonPieces.add(new Consonant("sh", "h", "ç", "_(?:e[áo]i?|iúi?)"));
         commonPieces.add(new Consonant("th", "h", "h"));
         commonPieces.add(new Consonant("th", "h", "h", "^"));
+        commonPieces.add(new Consonant("th", "", "", "$"));
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
         commonPieces.add(new Consonant("d", "t̪ˠ", "tʲ", "f(?:á|eá|a?í)$"));
@@ -240,6 +246,7 @@ public class Alignables {
         piecesMU.add(new Consonant("nn", "nˠ", "n̻ʲ"));
         piecesMU.add(new Consonant("n", "nˠ", "nʲ", "^"));
         piecesMU.add(new Consonant("n-", "nˠ", "nʲ", "^"));
+        piecesMU.add(new Consonant("nd", "nˠ", "nʲ", "^"));
         piecesMU.add(new Consonant("sh", "h", "ç", "_(?:e[áo]i?)"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
@@ -293,5 +300,7 @@ public class Alignables {
         piecesUL.add(new Consonant("ch", "h", "ç"));
         piecesUL.add(new Consonant("ch", "h", "ç", "$"));
         piecesUL.add(new Consonant("ch", "x", "ç", "^"));
+        piecesUL.add(new Consonant("n", "ɾˠ", null, "^c_[aouáóú]"));
+        piecesUL.add(new Consonant("ch", "ɾˠ", "ɾˠ", "_t"));
     }
 }
