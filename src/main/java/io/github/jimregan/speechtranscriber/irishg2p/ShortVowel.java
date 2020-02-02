@@ -35,17 +35,6 @@ public class ShortVowel extends Vowel {
         this.unstressed = unstressed;
     }
     @Override
-    String[][] getPhonemes () {
-        List<String[]> out = new ArrayList<String[]>();
-        if(getUnstressed() != null) {
-            out.add(getStressed());
-        }
-        if(getStressed() != null) {
-            out.add(getStressed());
-        }
-        return out.toArray(new String[out.size()][]);
-    }
-    @Override
     public boolean isLong() {
         return false;
     }

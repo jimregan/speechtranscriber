@@ -21,6 +21,9 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Vowel extends G2PPiece {
     String stressedPhoneme;
     String unstressed = null;
@@ -43,5 +46,16 @@ public abstract class Vowel extends G2PPiece {
     @Override
     public boolean isVowel() {
         return true;
+    }
+    @Override
+    String[][] getPhonemes () {
+        List<String[]> out = new ArrayList<String[]>();
+        if(getUnstressed() != null) {
+            out.add(getStressed());
+        }
+        if(getStressed() != null) {
+            out.add(getStressed());
+        }
+        return out.toArray(new String[out.size()][]);
     }
 }
