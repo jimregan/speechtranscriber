@@ -67,7 +67,9 @@ public class Alignables {
         // Not Munster
         commonPieces.add(new Diphthong("oidh", "ai", "ə"));
         commonPieces.add(new Diphthong("oigh", "ai", "ə"));
-        commonPieces.add(new Diphthong("eidh", "ai", "ə"));
+        // Not Ulster
+        commonPieces.add(new Diphthong("eighea", "ai", "ə"));
+        commonPieces.add(new Diphthong("aidh", "ai", "ə"));
 
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
@@ -88,6 +90,9 @@ public class Alignables {
         piecesMU.add(new LongVowel("uimh", "iː"));
         piecesMU.add(new LongVowel("uibhe", "iː", "$"));
         piecesMU.add(new LongVowel("uimhe", "iː", "$"));
+        piecesMU.add(new Diphthong("oidh", "ai", "i ɟ"));
+        piecesMU.add(new Diphthong("oigh", "ai", "i ɟ"));
+        piecesMU.add(new Diphthong("eidh", "ai", "ə ɟ"));
         piecesMU.add(new Seq("oidh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
         piecesMU.add(new Seq("oigh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("gh", null, "ɟ")}, "$"));
         piecesMU.add(new Seq("eidh", new G2PPiece[]{new ShortVowel("ei", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
@@ -101,6 +106,7 @@ public class Alignables {
         piecesCO.add(new LongVowel("o", "iː", "(?:ll|nn|r)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
         piecesCO.add(new LongVowel("éa", "iː", "^(?:dh?|n)"));
         piecesCO.add(new LongVowel("ao", "iː"));
+        piecesCO.add(new Diphthong("eidh", "ai", "ə"));
 
         List<G2PPiece> piecesUL = new ArrayList<>();
         piecesUL.add(new LongVowel("o", "oː", "r(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
@@ -125,5 +131,7 @@ public class Alignables {
         piecesUL.add(new RLongVowel("agh", "eː", "ə"));
         piecesUL.add(new LongVowel("agha", "eː"));
         piecesUL.add(new LongVowel("aghai", "eː"));
+        piecesCO.add(new RLongVowel("eidh", "eː", "ə"));
+        piecesCO.add(new RLongVowel("eighea", "eː", "ə"));
     }
 }
