@@ -26,7 +26,6 @@ import java.util.List;
 public abstract class G2PPiece {
     String grapheme;
     String context = null;
-    List<List<String>> phonemes;
 
     String getGrapheme() {
         return grapheme;
