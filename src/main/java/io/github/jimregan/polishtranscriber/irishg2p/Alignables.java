@@ -111,17 +111,16 @@ public class Alignables {
         piecesMU.add(new LongVowel("uimh", "iː"));
         piecesMU.add(new LongVowel("uibhe", "iː", "$"));
         piecesMU.add(new LongVowel("uimhe", "iː", "$"));
-        piecesMU.add(new Diphthong("oidh", "ai", "i ɟ"));
-        piecesMU.add(new Diphthong("oigh", "ai", "i ɟ"));
-        piecesMU.add(new Diphthong("eidh", "ai", "ə ɟ"));
-        piecesMU.add(new Seq("oidh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
-        piecesMU.add(new Seq("oigh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("gh", null, "ɟ")}, "$"));
-        piecesMU.add(new Seq("eidh", new G2PPiece[]{new ShortVowel("ei", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
-        piecesMU.add(new Diphthong("aigh", "ai", "i ɟ"));
-        piecesMU.add(new Diphthong("idh", "ai", "i ɟ"));
-        piecesMU.add(new Diphthong("igh", "ai", "i ɟ"));
-        piecesMU.add(new Seq("idh", new G2PPiece[]{new ShortVowel("i", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
-        piecesMU.add(new Seq("igh", new G2PPiece[]{new ShortVowel("i", null, "i"), new Consonant("gh", null, "ɟ")}, "$"));
+        try {
+            piecesMU.add(new MaybeDiphthong("oi dh", "ai", "i ɟ"));
+            piecesMU.add(new MaybeDiphthong("oi gh", "ai", "i ɟ"));
+            piecesMU.add(new MaybeDiphthong("ei dh", "ai", "ə ɟ"));
+            piecesMU.add(new MaybeDiphthong("ai gh", "ai", "i ɟ"));
+            piecesMU.add(new MaybeDiphthong("i dh", "ai", "i ɟ"));
+            piecesMU.add(new MaybeDiphthong("i gh", "ai", "i ɟ"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
