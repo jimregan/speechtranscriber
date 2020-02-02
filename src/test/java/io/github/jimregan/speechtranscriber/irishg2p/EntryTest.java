@@ -21,30 +21,18 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
-public class Entry {
-    private String word;
-    private String[] phones;
-    public Entry(String word, String[] phones) {
-        this.word = word;
-        this.phones = phones;
-    }
-    public static Entry fromLine(String line) {
-        String word;
-        int index = 0;
-        for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == ' ' || line.charAt(i) == '\t') {
-                index = i;
-                break;
-            }
-        }
-        word = line.substring(0, index);
-        String[] phones = line.substring(index + 1).split(" ");
-        return new Entry(word, phones);
-    }
-    public String getWord() {
-        return word;
-    }
-    public String[] getPhones() {
-        return phones;
+import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
+public class EntryTest {
+
+    @Test
+    public void testFromLine() {
+        Entry e = Entry.fromLine("áthas aː h ə sˠ");
+        String[] ephones = new String[]{"aː", "h", "ə", "sˠ"};
+        assertEquals(e.getWord(), "áthas");
+        assertArrayEquals(e.getPhones(), ephones);
     }
 }
