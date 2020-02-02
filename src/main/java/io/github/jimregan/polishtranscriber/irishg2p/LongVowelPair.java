@@ -2,6 +2,7 @@ package io.github.jimregan.polishtranscriber.irishg2p;
 
 public class LongVowelPair extends Vowel {
     private Seq vowelSeq;
+    public LongVowelPair() {}
     public LongVowelPair(String g, String stressed) throws Exception {
         if (!g.contains(" ")) {
             throw new Exception("Missing space: " + g);

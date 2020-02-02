@@ -99,6 +99,8 @@ public class Alignables {
             commonPieces.add(new LongVowelPair("i ái", "iː aː"));
             commonPieces.add(new LongVowelPair("u á", "uː aː"));
             commonPieces.add(new LongVowelPair("u ái", "uː aː"));
+            commonPieces.add(new LongVowelPair("iu á", "uː aː"));
+            commonPieces.add(new LongVowelPair("iu ái", "uː aː"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -138,6 +140,13 @@ public class Alignables {
             piecesMU.add(new MaybeDiphthong("i gh", "ai", "i ɟ"));
             piecesMU.add(new MaybeDiphthong("a mh", "au", "ə vˠ"));
             piecesMU.add(new MaybeDiphthong("ea mh", "au", "ə vˠ"));
+
+            piecesMU.add(new LongVowelPair("i á", "i aː"));
+            piecesMU.add(new LongVowelPair("i ái", "i aː"));
+            piecesMU.add(new LongVowelPair("u á", "u aː"));
+            piecesMU.add(new LongVowelPair("u ái", "u aː"));
+            piecesMU.add(new LongVowelPair("iu á", "u aː"));
+            piecesMU.add(new LongVowelPair("iu ái", "u aː"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
