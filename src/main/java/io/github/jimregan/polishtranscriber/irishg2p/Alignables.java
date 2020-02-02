@@ -64,6 +64,10 @@ public class Alignables {
         commonPieces.add(new Diphthong("agh", "ai", "ə"));
         commonPieces.add(new Diphthong("agha", "ai", "ə"));
         commonPieces.add(new Diphthong("aghai", "ai", "ə"));
+        // Not Munster
+        commonPieces.add(new Diphthong("oidh", "ai", "ə"));
+        commonPieces.add(new Diphthong("oigh", "ai", "ə"));
+        commonPieces.add(new Diphthong("eidh", "ai", "ə"));
 
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
@@ -85,6 +89,8 @@ public class Alignables {
         piecesMU.add(new LongVowel("uibhe", "iː", "$"));
         piecesMU.add(new LongVowel("uimhe", "iː", "$"));
         piecesMU.add(new Seq("oidh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
+        piecesMU.add(new Seq("oigh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("gh", null, "ɟ")}, "$"));
+        piecesMU.add(new Seq("eidh", new G2PPiece[]{new ShortVowel("ei", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));

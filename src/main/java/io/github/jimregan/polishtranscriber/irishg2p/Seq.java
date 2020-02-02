@@ -10,4 +10,7 @@ public class Seq extends G2PPiece {
         this(g, pieces);
         this.context = context;
     }
+    public G2PPiece[] getPieces() {
+        return pieces;
+    }
 }
