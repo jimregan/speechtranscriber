@@ -71,6 +71,13 @@ public class Alignables {
         commonPieces.add(new Diphthong("eighea", "ai", "ə"));
         commonPieces.add(new Diphthong("aidh", "ai", "ə"));
 
+        commonPieces.add(new Consonant("b", "bˠ", "bʲ"));
+        commonPieces.add(new Consonant("c", "k", "c"));
+        commonPieces.add(new Consonant("f", "fˠ", "fʲ"));
+        commonPieces.add(new Consonant("g", "ɡ", "ɟ"));
+        commonPieces.add(new Consonant("k", "k", "c"));
+        commonPieces.add(new Consonant("q", "k", "c"));
+        commonPieces.add(new Consonant("p", "pˠ", "pʲ"));
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
         commonPieces.add(new Consonant("d", "t̪ˠ", "tʲ", "f(?:á|eá|a?í)$"));
