@@ -38,4 +38,14 @@ public class UtilsTest {
         assertEquals(true, Utils.endsSlenderVowel("e"));
         assertEquals(true, Utils.endsSlenderVowel("blé"));
     }
+
+    @Test
+    public void testArrayEquals() {
+        String[] a = new String[]{"a", "b"};
+        String[] b = new String[]{"a", "b", "c"};
+        assertEquals(true, Utils.arrayEquals(a, b));
+        String[] c = new String[]{"a", "b"};
+        String[] d = new String[]{"x", "y", "a", "b", "c"};
+        assertEquals(true, Utils.arrayEquals(c, d, 2));
+    }
 }

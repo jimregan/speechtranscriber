@@ -62,4 +62,18 @@ public class Utils {
                 return false;
         }
     }
+    public static boolean arrayEquals(String[] a, String[] b, int from) {
+        if (a.length > b.length) {
+            return false;
+        }
+        for (int i = 0; i < a.length; i++) {
+            if(!a[i].equals(b[from + i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean arrayEquals(String[] a, String[] b) {
+        return arrayEquals(a, b, 0);
+    }
 }
