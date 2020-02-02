@@ -54,11 +54,14 @@ public class UtilsTest {
     public void testCheckContext() throws Exception {
         Consonant mb = new Consonant("mb", "mˠ", "mʲ", "^");
         Consonant mb1 = new Consonant("mb", "mˠ", "mʲ");
+        Consonant mb2 = new Consonant("mb", "mˠ", "mʲ", "_o");
         String t1 = "mbosca";
         assertEquals(mb.makeMatchString(), "^(mb).*");
         assertTrue(t1.matches("^(mb).*"));
         assertTrue(Utils.checkContext(mb, t1, 0));
         String t2 = "ambosca";
         assertFalse(Utils.checkContext(mb, t1, 1));
+        String t3 = "mbambosca";
+        assertTrue(Utils.checkContext(mb2, t3, 3));
     }
 }

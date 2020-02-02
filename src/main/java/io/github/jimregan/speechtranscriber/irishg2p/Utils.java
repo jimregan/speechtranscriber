@@ -93,8 +93,9 @@ public class Utils {
             if(piece.getContext().startsWith("^") || piece.getContext().endsWith("$")) {
                 return true;
             }
+            m.reset();
             while(m.find()) {
-                if(m.regionStart() == i) {
+                if(m.start(1) == i) {
                     return true;
                 }
             }
