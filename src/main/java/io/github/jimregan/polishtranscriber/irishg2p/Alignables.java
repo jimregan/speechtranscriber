@@ -84,6 +84,7 @@ public class Alignables {
         piecesMU.add(new LongVowel("uimh", "iː"));
         piecesMU.add(new LongVowel("uibhe", "iː", "$"));
         piecesMU.add(new LongVowel("uimhe", "iː", "$"));
+        piecesMU.add(new Seq("oidh", new G2PPiece[]{new ShortVowel("oi", null, "i"), new Consonant("dh", null, "ɟ")}, "$"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
