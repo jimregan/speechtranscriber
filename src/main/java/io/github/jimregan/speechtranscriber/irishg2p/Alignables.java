@@ -132,9 +132,17 @@ public class Alignables {
 
         commonPieces.add(new Consonant("b", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("c", "k", "c"));
+        commonPieces.add(new Consonant("d", "d̪ˠ", "dʲ"));
         commonPieces.add(new Consonant("f", "fˠ", "fʲ"));
         commonPieces.add(new Consonant("g", "ɡ", "ɟ"));
+        commonPieces.add(new Consonant("h", "h", "h"));
+        commonPieces.add(new Consonant("j", "dʲ", "dʲ"));
         commonPieces.add(new Consonant("k", "k", "c"));
+        // not Munster
+        commonPieces.add(new Consonant("l", "l̻ˠ", "lʲ"));
+        commonPieces.add(new Consonant("ll", "l̻ˠ", "l̻ʲ"));
+        commonPieces.add(new Consonant("n", "n̻ˠ", "nʲ"));
+        commonPieces.add(new Consonant("nn", "n̻ˠ", "n̻ʲ"));
         commonPieces.add(new Consonant("q", "k", "c"));
         commonPieces.add(new Consonant("p", "pˠ", "pʲ"));
         // devoicings
