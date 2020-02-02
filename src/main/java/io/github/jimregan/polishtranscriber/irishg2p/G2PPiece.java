@@ -2,7 +2,7 @@ package io.github.jimregan.polishtranscriber.irishg2p;
 
 import java.util.List;
 
-public class G2PPiece {
+public abstract class G2PPiece {
     String grapheme;
     String context = null;
     List<List<String>> phonemes;
@@ -53,6 +53,15 @@ public class G2PPiece {
         return getContext();
     }
     public boolean hasUnstressedSequence() {
+        return false;
+    }
+    public boolean isConsonant() {
+        return !isVowel();
+    }
+    public boolean isVowel() {
+        return false;
+    }
+    public boolean isLong() {
         return false;
     }
 }

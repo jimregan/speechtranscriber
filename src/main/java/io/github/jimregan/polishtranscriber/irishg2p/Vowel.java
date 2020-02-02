@@ -1,6 +1,6 @@
 package io.github.jimregan.polishtranscriber.irishg2p;
 
-public class Vowel extends G2PPiece {
+public abstract class Vowel extends G2PPiece {
     String stressedPhoneme;
     String unstressed = null;
     public boolean startSlender() {

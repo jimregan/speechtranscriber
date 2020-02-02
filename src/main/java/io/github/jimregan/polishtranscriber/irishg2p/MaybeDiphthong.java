@@ -28,4 +28,12 @@ public class MaybeDiphthong extends Diphthong {
     public boolean hasUnstressedSequence() {
         return true;
     }
+    @Override
+    public boolean isLong() {
+        if (hasUnstressedSequence()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

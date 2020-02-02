@@ -5,7 +5,7 @@ public class Diphthong extends Vowel {
     public Diphthong(String g, String p) {
         this.grapheme = g;
         this.stressedPhoneme = p;
-        this.unstressed = "ə";
+        this.unstressed = null;
     }
     public Diphthong(String g, String p, String unstressed) {
         this(g, p);
@@ -14,5 +14,9 @@ public class Diphthong extends Vowel {
     public Diphthong(String g, String p, String unstressed, String context) {
         this(g, p, unstressed);
         this.context = context;
+    }
+    @Override
+    public boolean isLong() {
+        return true;
     }
 }

@@ -79,11 +79,21 @@ public class Alignables {
         commonPieces.add(new Diphthong("abhai", "au", "ə"));
         commonPieces.add(new Diphthong("eabha", "au", "ə"));
         commonPieces.add(new Diphthong("eabhai", "au", "ə"));
-        // Not Munster
         commonPieces.add(new Diphthong("amha", "au", "ə"));
         commonPieces.add(new Diphthong("amhai", "au", "ə"));
         commonPieces.add(new Diphthong("eamha", "au", "ə"));
         commonPieces.add(new Diphthong("eamhai", "au", "ə"));
+        commonPieces.add(new Diphthong("ogh", "au", "ə"));
+        commonPieces.add(new Diphthong("ogha", "au", "ə"));
+        commonPieces.add(new Diphthong("odh", "au", "ə"));
+        commonPieces.add(new Diphthong("odha", "au", "ə"));
+        commonPieces.add(new Diphthong("obha", "au", "ə"));
+        commonPieces.add(new Diphthong("obhai", "au", "ə"));
+        commonPieces.add(new Diphthong("ua", "uˑə"));
+        commonPieces.add(new Diphthong("uai", "uˑə"));
+        commonPieces.add(new Diphthong("iuai", "uˑə"));
+        commonPieces.add(new Diphthong("ia", "iˑə"));
+        commonPieces.add(new Diphthong("iai", "iˑə"));
 
         commonPieces.add(new Consonant("b", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("c", "k", "c"));
@@ -118,6 +128,8 @@ public class Alignables {
             piecesMU.add(new MaybeDiphthong("ai gh", "ai", "i ɟ"));
             piecesMU.add(new MaybeDiphthong("i dh", "ai", "i ɟ"));
             piecesMU.add(new MaybeDiphthong("i gh", "ai", "i ɟ"));
+            piecesMU.add(new MaybeDiphthong("a mh", "au", "ə vˠ"));
+            piecesMU.add(new MaybeDiphthong("ea mh", "au", "ə vˠ"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -169,5 +181,6 @@ public class Alignables {
         piecesUL.add(new Diphthong("eabh", "au", "uː"));
         piecesUL.add(new Diphthong("amh", "au", "uː"));
         piecesUL.add(new Diphthong("eamh", "au", "uː"));
+        piecesUL.add(new Diphthong("odh", "au", "uː"));
     }
 }
