@@ -82,13 +82,13 @@ public class Utils {
 
     public static boolean checkContext(G2PPiece piece, String curstring, int i) throws Exception {
         if(piece.hasContext()) {
+            System.err.println(piece.makeMatchString());
             Pattern p = Pattern.compile(piece.makeMatchString());
             Matcher m = p.matcher(curstring);
             if(piece.getContext().startsWith("^") && i != 0) {
                 return false;
             }
             if(!m.matches()) {
-                System.err.println(piece.makeMatchString());
                 return false;
             }
         }

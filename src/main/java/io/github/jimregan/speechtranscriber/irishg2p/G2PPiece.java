@@ -49,26 +49,34 @@ public abstract class G2PPiece {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        if (this.getContext().startsWith("^")) {
-            sb.append(this.getContext());
-            sb.append('(');
-            sb.append(this.getGrapheme());
-            sb.append(')');
-        } else if (this.getContext().endsWith("$")) {
-            sb.append('(');
-            sb.append(this.getGrapheme());
-            sb.append(')');
-            sb.append(this.getContext());
-        } else if (this.getContext().contains("_")) {
+        if (this.getContext().contains("_")) {
             String[] parts = getContext().split("_");
             if (parts.length != 2) {
                 throw new Exception("Context has more than one instance of grapheme");
+            }
+            if (!this.getContext().startsWith("^")) {
+                sb.append(".*");
             }
             sb.append(parts[0]);
             sb.append('(');
             sb.append(this.getGrapheme());
             sb.append(')');
             sb.append(parts[1]);
+            if (!this.getContext().endsWith("$")) {
+                sb.append(".*");
+            }
+        } else if (this.getContext().startsWith("^")) {
+            sb.append(this.getContext());
+            sb.append('(');
+            sb.append(this.getGrapheme());
+            sb.append(')');
+            sb.append(".*");
+        } else if (this.getContext().endsWith("$")) {
+            sb.append(".*");
+            sb.append('(');
+            sb.append(this.getGrapheme());
+            sb.append(')');
+            sb.append(this.getContext());
         }
         return sb.toString();
     }
