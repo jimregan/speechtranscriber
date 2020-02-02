@@ -21,6 +21,9 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Consonant extends G2PPiece {
     String broad;
     String slender;
@@ -52,5 +55,28 @@ public class Consonant extends G2PPiece {
     }
     public boolean isBroad() {
         return this.is_broad;
+    }
+    String[] getBroad() {
+        if (this.broad == null) {
+            return null;
+        }
+        return this.broad.split(" ");
+    }
+    String[] getSlender() {
+        if (this.slender == null) {
+            return null;
+        }
+        return this.slender.split(" ");
+    }
+    @Override
+    String[][] getPhonemes () {
+        List<String[]> out = new ArrayList<String[]>();
+        if(getBroad() != null) {
+            out.add(getBroad());
+        }
+        if(getSlender() != null) {
+            out.add(getSlender());
+        }
+        return out.toArray(new String[out.size()][]);
     }
 }
