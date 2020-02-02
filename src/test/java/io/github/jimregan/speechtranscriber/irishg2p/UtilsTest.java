@@ -48,4 +48,13 @@ public class UtilsTest {
         String[] d = new String[]{"x", "y", "a", "b", "c"};
         assertEquals(true, Utils.arrayEquals(c, d, 2));
     }
+
+    @Test
+    public void testCheckContext() {
+        Consonant mb = new Consonant("mb", "mˠ", "mʲ", "^");
+        String t1 = "mbosca";
+        assertEquals(true, Utils.checkContext(mb, t1, 0));
+        String t2 = "ambosca";
+        assertEquals(false, Utils.checkContext(mb, t1, 1));
+    }
 }

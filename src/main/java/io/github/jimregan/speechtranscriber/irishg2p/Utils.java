@@ -80,7 +80,7 @@ public class Utils {
     public static boolean checkContext(G2PPiece piece, String curstring, int i) {
         if(piece.hasContext()) {
             if(piece.getContext().startsWith("^") && i != 0) {
-                return true;
+                return false;
             }
             if(!curstring.matches(piece.getContext())) {
                 return true;
