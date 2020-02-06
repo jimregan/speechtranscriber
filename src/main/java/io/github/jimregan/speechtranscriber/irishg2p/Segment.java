@@ -24,11 +24,18 @@ package io.github.jimregan.speechtranscriber.irishg2p;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class Segment {
     public static List<G2PPiece> segment(Entry e, Map<String, List<G2PPiece>> map) throws Exception {
         List<G2PPiece> out = new ArrayList<>();
         String in = e.getWord();
+        String proc = in;
+        Pattern p = Pattern.compile("^" + Utils.buildRegex(map));
+        while(!in.equals("")) {
+
+        }
+        // FIXME: use regex instead, for backoff
         for (int i = 0, j = 0; i < in.length() && j < e.getPhones().length; i++, j++) {
             int ext = 1;
             while ((i + ext + 1) < in.length() && map.containsKey(in.substring(i, i + ext + 1))) {
