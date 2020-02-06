@@ -77,6 +77,6 @@ public class UtilsTest {
         tst.put("aa", l);
         tst.put("a", l);
         tst.put("aaa", l);
-        assertEquals("aaa|aa|a", Utils.buildRegex(tst));
+        assertEquals("(aaa|aa|a)", Utils.buildRegex(tst));
     }
 }

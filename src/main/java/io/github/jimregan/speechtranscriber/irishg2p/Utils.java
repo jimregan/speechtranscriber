@@ -108,6 +108,6 @@ public class Utils {
     public static <T> String buildRegex(Map<String, T> in) {
         String[] tmp = in.keySet().toArray(new String[in.size()]);
         Arrays.sort(tmp, Comparator.comparingInt(String::length).reversed());
-        return String.join("|", tmp);
+        return "(" + String.join("|", tmp) + ")";
     }
 }
