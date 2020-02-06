@@ -78,5 +78,9 @@ public class UtilsTest {
         tst.put("a", l);
         tst.put("aaa", l);
         assertEquals("(aaa|aa|a)", Utils.buildRegex(tst));
+        Map<String, String> tst2 = new HashMap<>();
+        tst2.put("foo", "bar");
+        tst2.put("foobar", "baz");
+        assertEquals("(foobar|foo)", Utils.buildRegex(tst2));
     }
 }
