@@ -39,7 +39,7 @@ public class Segment {
             List<G2PPiece> cur = map.get(g);
             for (G2PPiece piece : cur) {
                 String[][] phones = piece.getPhonemes();
-                if (Utils.checkContext(piece, curstring, i)) {
+                if (!Utils.checkContext(piece, curstring, i)) {
                     continue;
                 }
                 for (String[] phoneset : phones) {
