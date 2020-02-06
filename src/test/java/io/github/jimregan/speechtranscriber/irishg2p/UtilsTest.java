@@ -23,6 +23,11 @@ package io.github.jimregan.speechtranscriber.irishg2p;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class UtilsTest {
@@ -63,5 +68,15 @@ public class UtilsTest {
         assertFalse(Utils.checkContext(mb, t1, 1));
         String t3 = "mbambosca";
         assertTrue(Utils.checkContext(mb2, t3, 3));
+    }
+
+    public void testBuildRegex() {
+        List<G2PPiece> l = new ArrayList<>();
+        Map<String, List<G2PPiece>> tst = new HashMap<>();
+        l.add(new Consonant("mb", "mˠ", "mʲ"));
+        tst.put("aa", l);
+        tst.put("a", l);
+        tst.put("aaa", l);
+        assertEquals("aaa|aa|a", Utils.buildRegex(tst));
     }
 }

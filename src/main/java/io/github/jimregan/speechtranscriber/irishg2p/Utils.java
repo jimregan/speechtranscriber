@@ -21,6 +21,10 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,5 +106,11 @@ public class Utils {
             return false;
         }
         return false;
+    }
+
+    public static String buildRegex(Map<String, List<G2PPiece>> in) {
+        String[] tmp = in.keySet().toArray(new String[in.size()]);
+        Arrays.sort(tmp, Comparator.comparingInt(String::length).reversed());
+        return String.join("|", tmp);
     }
 }
