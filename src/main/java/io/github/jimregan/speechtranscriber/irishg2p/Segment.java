@@ -33,7 +33,11 @@ public class Segment {
         String proc = in;
         Pattern p = Pattern.compile("^" + Utils.buildRegex(map));
         while(!in.equals("")) {
-
+            // Needs to:
+            // Check longest part first
+            // try all of the list entries first
+            // if none of those work, try the longest match of proc.substring(0, matched.length()-1)
+            // to back off (while matched.length() > 1)
         }
         // FIXME: use regex instead, for backoff
         for (int i = 0, j = 0; i < in.length() && j < e.getPhones().length; i++, j++) {
