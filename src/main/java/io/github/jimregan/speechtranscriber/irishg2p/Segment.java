@@ -34,6 +34,12 @@ public class Segment {
         Pattern p = Pattern.compile("^" + Utils.buildRegex(map) + ".*$");
         for (int i = 0, j = 0; i < in.length() && j < e.getPhones().length; i++, j++) {
             Matcher m = p.matcher(in.substring(i));
+            if(!m.matches()) {
+                throw new Exception("No match: " + in.substring(i));
+            }
+            if(m.groupCount() != 1) {
+                throw new Exception("Wrong .groupCount(): " + m.groupCount());
+            }
             String key = m.group(1);
             boolean matched = false;
             int offset = 0;
@@ -57,8 +63,11 @@ public class Segment {
                         if(Utils.arrayEquals(phoneset, e.getPhones(), j)) {
                             out.add(piece);
                             matched = true;
-                            i += ext;
-                            j += phoneset.length - 1;
+                            if(ext > 0) {
+                                i += ext - 1;
+                            }
+                            j += (phoneset.length > 1) ? phoneset.length - 1 : 0;
+                            //j += phoneset.length - 1;
                         }
                     }
                 }
