@@ -32,7 +32,9 @@ public class Segment {
         List<G2PPiece> out = new ArrayList<>();
         String in = e.getWord();
         Pattern p = Pattern.compile("^" + Utils.buildRegex(map) + ".*$");
-        for (int i = 0, j = 0; i < in.length() && j < e.getPhones().length; i++, j++) {
+//        for (int i = 0, j = 0; i < in.length() && j < e.getPhones().length; i++, j++) {
+        for (int i = 0, j = 0; i < in.length(); i++, j++) {
+            System.err.println(i + " " + j);
             Matcher m = p.matcher(in.substring(i));
             if(!m.matches()) {
                 throw new Exception("No match: " + in.substring(i));
@@ -42,7 +44,6 @@ public class Segment {
             }
             String key = m.group(1);
             boolean matched = false;
-            int offset = 0;
             while(!matched && !key.equals("")) {
                 if(key.length() == 1 && !map.containsKey(key)) {
                     throw new Exception("No key for " + key + " (" + in + ")");
@@ -56,18 +57,19 @@ public class Segment {
                 List<G2PPiece> cur = map.get(key);
                 for (G2PPiece piece : cur) {
                     String[][] phones = piece.getPhonemes();
-                    if (!Utils.checkContext(piece, in.substring(i), offset)) {
-                        continue;
-                    }
+                    //if (!Utils.checkContext(piece, in.substring(i), i)) {
+                    //    continue;
+                    //}
                     for (String[] phoneset : phones) {
                         if(Utils.arrayEquals(phoneset, e.getPhones(), j)) {
                             out.add(piece);
+                            System.err.println(piece);
                             matched = true;
-                            if(ext > 0) {
-                                i += ext - 1;
-                            }
-                            j += (phoneset.length > 1) ? phoneset.length - 1 : 0;
-                            //j += phoneset.length - 1;
+                            System.err.println("i old " + i);
+                            i += (ext != 1) ? ext - 1 : 0;
+                            System.err.println("i new " + i);
+                            j += (phoneset.length != 1) ? phoneset.length - 1 : 0;
+                            break;
                         }
                     }
                 }
