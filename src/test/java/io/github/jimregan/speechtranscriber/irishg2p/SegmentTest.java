@@ -49,9 +49,10 @@ public class SegmentTest {
     @Test
     public void testSegment() throws Exception {
         List<G2PPiece> t1 = Segment.segment(athas, getAthasMap());
-        //assertEquals(t1.size(), 4);
+        assertEquals(t1.size(), 4);
         assertEquals(t1.get(0).getGrapheme(), "á");
         assertEquals(t1.get(1).getGrapheme(), "th");
         assertEquals(t1.get(2).getGrapheme(), "a");
+        assertEquals(t1.get(3).getGrapheme(), "s");
     }
 }
