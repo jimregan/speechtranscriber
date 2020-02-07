@@ -50,10 +50,10 @@ public abstract class Vowel extends G2PPiece {
     @Override
     String[][] getPhonemes () {
         List<String[]> out = new ArrayList<String[]>();
-        if(getUnstressed() != null) {
+        if(getStressed() != null) {
             out.add(getStressed());
         }
-        if(getStressed() != null) {
+        if(getUnstressed() != null) {
             out.add(getStressed());
         }
         return out.toArray(new String[out.size()][]);
