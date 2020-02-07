@@ -21,6 +21,7 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class G2PPiece {
@@ -91,5 +92,17 @@ public abstract class G2PPiece {
     }
     public boolean isLong() {
         return false;
+    }
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        out.append(grapheme);
+        out.append('[');
+        List<String> phn = new ArrayList<>();
+        for (String[] ss : getPhonemes()) {
+            phn.add(String.join(" ", ss));
+        }
+        out.append(String.join("; ", phn));
+        out.append(']');
+        return out.toString();
     }
 }
