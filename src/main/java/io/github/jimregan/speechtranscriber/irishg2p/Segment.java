@@ -55,17 +55,15 @@ public class Segment {
                 List<G2PPiece> cur = map.get(key);
                 for (G2PPiece piece : cur) {
                     String[][] phones = piece.getPhonemes();
-                    // TODO: fix this check
-                    //if (!Utils.checkContext(piece, in.substring(i), i)) {
-                    //    continue;
-                    //}
-                    for (String[] phoneset : phones) {
-                        if(Utils.arrayEquals(phoneset, e.getPhones(), j)) {
-                            out.add(piece);
-                            matched = true;
-                            i += (ext != 1) ? ext - 1 : 0;
-                            j += (phoneset.length != 1) ? phoneset.length - 1 : 0;
-                            break;
+                    if (Utils.checkContext(piece, in.substring(i), i)) {
+                        for (String[] phoneset : phones) {
+                            if(Utils.arrayEquals(phoneset, e.getPhones(), j)) {
+                                out.add(piece);
+                                matched = true;
+                                i += (ext != 1) ? ext - 1 : 0;
+                                j += (phoneset.length != 1) ? phoneset.length - 1 : 0;
+                                break;
+                            }
                         }
                     }
                 }

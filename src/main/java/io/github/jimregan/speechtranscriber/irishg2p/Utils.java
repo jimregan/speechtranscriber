@@ -102,7 +102,7 @@ public class Utils {
             }
             return false;
         }
-        return false;
+        return true;
     }
 
     public static <T> String buildRegex(Map<String, T> in) {
