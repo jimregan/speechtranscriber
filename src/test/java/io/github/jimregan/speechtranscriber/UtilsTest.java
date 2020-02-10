@@ -23,6 +23,7 @@ package io.github.jimregan.speechtranscriber;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class UtilsTest {
@@ -40,5 +41,10 @@ public class UtilsTest {
         assertEquals(6, Utils.getNumberPlace(356, 1));
         assertEquals(5, Utils.getNumberPlace(356, 2));
         assertEquals(3, Utils.getNumberPlace(356, 3));
+    }
+    @Test
+    public void testGetNumberPlaces() {
+        assertArrayEquals(new int[]{3, 5, 6}, Utils.getNumberPlaces(356));
+        assertArrayEquals(new int[]{3, 5, 6, 3, 5, 6}, Utils.getNumberPlaces(356356));
     }
 }
