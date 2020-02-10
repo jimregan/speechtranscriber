@@ -66,4 +66,23 @@ public class Roman {
                 return 0;
         }
     }
+    public static boolean isValid(String s) {
+        boolean ret = false;
+        for(char c : s.toLowerCase().toCharArray()) {
+            switch(c) {
+                case 'i':
+                case 'v':
+                case 'x':
+                case 'l':
+                case 'c':
+                case 'd':
+                case 'm':
+                    break;
+
+                default:
+                    return false;
+            }
+        }
+        return true;
+    }
 }

@@ -40,4 +40,11 @@ public class RomanTest {
         assertEquals(1990, Roman.romanToInt("mcmxc"));
         assertEquals(1994, Roman.romanToInt("mcmxciv"));
     }
+
+    @Test
+    public void testIsValid() {
+        assertEquals(true, Roman.isValid("xxiv"));
+        assertEquals(true, Roman.isValid("mcmxc"));
+        assertEquals(false, Roman.isValid("mcmxcad"));
+    }
 }
