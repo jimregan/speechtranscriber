@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Jim O'Regan <jaoregan@tcd.ie>
+ * Copyright 2020 Jim O'Regan <jaoregan@tcd.ie>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -19,19 +19,38 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.speechtranscriber;
+package io.github.jimregan.speechtranscriber.irishg2p;
 
-public class Utils {
-    static String join(String joiner, String[] arr) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr.length - 1; i++) {
-            sb.append(arr[i]);
-            sb.append(joiner);
+public class Consonant extends G2PPiece {
+    String broad;
+    String slender;
+    boolean is_broad = true;
+    boolean broadnessSet = false;
+    public Consonant(String g, String broad, String slender) {
+        this.grapheme = g;
+        this.broad = broad;
+        this.slender = slender;
+        if (broad == null) {
+            this.broadnessSet = true;
+            this.is_broad = false;
         }
-        sb.append(arr[arr.length - 1]);
-        return sb.toString();
     }
-    static String join(String[] arr) {
-        return join("", arr);
+    public Consonant(String g, String broad, String slender, String context) {
+        this(g, broad, slender);
+        this.setContext(context);
+    }
+    @Override
+    public boolean isConsonant() {
+        return true;
+    }
+    public void setBroad(boolean broadness) {
+        this.broadnessSet = true;
+        this.is_broad = broadness;
+    }
+    public boolean isBroadnessSet() {
+        return broadnessSet;
+    }
+    public boolean isBroad() {
+        return this.is_broad;
     }
 }

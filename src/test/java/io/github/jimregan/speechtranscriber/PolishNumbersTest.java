@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Jim O'Regan <jaoregan@tcd.ie>
+ * Copyright 2020 Jim O'Regan <jaoregan@tcd.ie>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -21,17 +21,16 @@
  */
 package io.github.jimregan.speechtranscriber;
 
-public class Utils {
-    static String join(String joiner, String[] arr) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr.length - 1; i++) {
-            sb.append(arr[i]);
-            sb.append(joiner);
-        }
-        sb.append(arr[arr.length - 1]);
-        return sb.toString();
-    }
-    static String join(String[] arr) {
-        return join("", arr);
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+public class PolishNumbersTest {
+
+    @Test
+    public void testInflectOrdinal() {
+        assertEquals("drugi", PolishNumbers.inflectOrdinal("drugi"));
+        assertEquals("druga", PolishNumbers.inflectOrdinal("drugi", "f"));
+        assertEquals("drugim", PolishNumbers.inflectOrdinal("drugi", "m", "loc"));
     }
 }

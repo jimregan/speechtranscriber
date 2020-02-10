@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Jim O'Regan <jaoregan@tcd.ie>
+ * Copyright 2020 Jim O'Regan <jaoregan@tcd.ie>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
@@ -19,19 +19,29 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.speechtranscriber;
+package io.github.jimregan.speechtranscriber.irishg2p;
 
-public class Utils {
-    static String join(String joiner, String[] arr) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr.length - 1; i++) {
-            sb.append(arr[i]);
-            sb.append(joiner);
-        }
-        sb.append(arr[arr.length - 1]);
-        return sb.toString();
+public abstract class Vowel extends G2PPiece {
+    String stressedPhoneme;
+    String unstressed = null;
+    public boolean startSlender() {
+        return Utils.startsSlenderVowel(this.getGrapheme());
     }
-    static String join(String[] arr) {
-        return join("", arr);
+    public boolean endsSlender() {
+        return Utils.endsSlenderVowel(this.getGrapheme());
+    }
+    String[] getUnstressed() {
+        if (this.unstressed == null) {
+            return null;
+        } else {
+            return unstressed.split(" ");
+        }
+    }
+    String[] getStressed() {
+        return stressedPhoneme.split(" ");
+    }
+    @Override
+    public boolean isVowel() {
+        return true;
     }
 }
