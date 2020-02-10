@@ -360,6 +360,45 @@ public class PolishG2P {
                 return null;
         }
     }
+    private static String revoice(String s) {
+        switch(s) {
+            case "p":
+                return "b";
+            case "t":
+                return "d";
+            case "t͡s":
+                return "d͡z";
+            case "t͡ɕ":
+                return "d͡ʑ";
+            case "t͡ʂ":
+                return "d͡ʐ";
+            case "k":
+                return "ɡ";
+            case "f":
+                return "v";
+            case "fʲ":
+                return "vʲ";
+            case "s":
+                return "z";
+            case "ɕ":
+                return "ʑ";
+            case "ʂ":
+                return "ʐ";
+
+            default:
+                return null;
+        }
+    }
+
+    private static String denasalise(String in) {
+        if(in.equals("ɛ̃")) {
+            return "ɛ";
+        } else if(in.equals("ɔ̃")) {
+            return "ɔ";
+        } else {
+            return in;
+        }
+    }
 
     public static void main(String[] args) {
 
