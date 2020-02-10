@@ -21,41 +21,17 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.Test;
 
-public abstract class Vowel extends G2PPiece {
-    String stressedPhoneme;
-    String unstressed = null;
-    public boolean startSlender() {
-        return Utils.startsSlenderVowel(this.getGrapheme());
-    }
-    public boolean endsSlender() {
-        return Utils.endsSlenderVowel(this.getGrapheme());
-    }
-    String[] getUnstressed() {
-        if (this.unstressed == null) {
-            return null;
-        } else {
-            return unstressed.split(" ");
-        }
-    }
-    String[] getStressed() {
-        return stressedPhoneme.split(" ");
-    }
-    @Override
-    public boolean isVowel() {
-        return true;
-    }
-    @Override
-    String[][] getPhonemes () {
-        List<String[]> out = new ArrayList<String[]>();
-        if(getStressed() != null) {
-            out.add(getStressed());
-        }
-        if(getUnstressed() != null) {
-            out.add(getUnstressed());
-        }
-        return out.toArray(new String[out.size()][]);
+import static org.junit.Assert.*;
+
+public class ShortVowelTest {
+    @Test
+    public void testShortVowel() {
+        ShortVowel a = new ShortVowel("a", "a");
+        String[][] phones = new String[][]{new String[]{"a"}, new String[]{"ə"}};
+        assertEquals(a.getGrapheme(), "a");
+        assertEquals(a.getPhonemes().length, 2);
+        assertArrayEquals(a.getPhonemes(), phones);
     }
 }

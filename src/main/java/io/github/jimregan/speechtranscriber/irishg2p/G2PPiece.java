@@ -21,12 +21,12 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class G2PPiece {
     String grapheme;
     String context = null;
-    List<List<String>> phonemes;
 
     String getGrapheme() {
         return grapheme;
@@ -45,33 +45,41 @@ public abstract class G2PPiece {
     public boolean hasContext() {
         return context != null;
     }
-    private String makeMatchString() throws Exception {
+    public String makeMatchString() throws Exception {
         if (!hasContext()) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        if (this.getContext().startsWith("^")) {
-            sb.append(this.getContext());
-            sb.append('(');
-            sb.append(this.getGrapheme());
-            sb.append(')');
-        } else if (this.getContext().endsWith("$")) {
-            sb.append('(');
-            sb.append(this.getGrapheme());
-            sb.append(')');
-            sb.append(this.getContext());
-        } else if (this.getContext().contains("_")) {
+        if (this.getContext().contains("_")) {
             String[] parts = getContext().split("_");
             if (parts.length != 2) {
                 throw new Exception("Context has more than one instance of grapheme");
+            }
+            if (!this.getContext().startsWith("^")) {
+                sb.append(".*");
             }
             sb.append(parts[0]);
             sb.append('(');
             sb.append(this.getGrapheme());
             sb.append(')');
             sb.append(parts[1]);
+            if (!this.getContext().endsWith("$")) {
+                sb.append(".*");
+            }
+        } else if (this.getContext().startsWith("^")) {
+            sb.append(this.getContext());
+            sb.append('(');
+            sb.append(this.getGrapheme());
+            sb.append(')');
+            sb.append(".*");
+        } else if (this.getContext().endsWith("$")) {
+            sb.append(".*");
+            sb.append('(');
+            sb.append(this.getGrapheme());
+            sb.append(')');
+            sb.append(this.getContext());
         }
-        return getContext();
+        return sb.toString();
     }
     public boolean hasUnstressedSequence() {
         return false;
@@ -84,5 +92,17 @@ public abstract class G2PPiece {
     }
     public boolean isLong() {
         return false;
+    }
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        out.append(grapheme);
+        out.append('[');
+        List<String> phn = new ArrayList<>();
+        for (String[] ss : getPhonemes()) {
+            phn.add(String.join(" ", ss));
+        }
+        out.append(String.join("; ", phn));
+        out.append(']');
+        return out.toString();
     }
 }

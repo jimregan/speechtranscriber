@@ -21,41 +21,38 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.Test;
 
-public abstract class Vowel extends G2PPiece {
-    String stressedPhoneme;
-    String unstressed = null;
-    public boolean startSlender() {
-        return Utils.startsSlenderVowel(this.getGrapheme());
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import static org.junit.Assert.*;
+
+public class SegmentTest {
+
+    private static final List<G2PPiece> l(G2PPiece g) {
+        List<G2PPiece> out = new ArrayList<>();
+        out.add(g);
+        return out;
     }
-    public boolean endsSlender() {
-        return Utils.endsSlenderVowel(this.getGrapheme());
+    private static final Entry athas = Entry.fromLine("áthas aː h ə sˠ");
+    private static Map<String, List<G2PPiece>> getAthasMap() {
+        Map<String, List<G2PPiece>> out = new HashMap<>();
+        out.put("a", l(new ShortVowel("a", "a")));
+        out.put("á", l(new LongVowel("á", "aː")));
+        out.put("th", l(new Consonant("th", "h", "h")));
+        out.put("s", l(new Consonant("s", "sˠ", "ʃ")));
+        return out;
     }
-    String[] getUnstressed() {
-        if (this.unstressed == null) {
-            return null;
-        } else {
-            return unstressed.split(" ");
-        }
-    }
-    String[] getStressed() {
-        return stressedPhoneme.split(" ");
-    }
-    @Override
-    public boolean isVowel() {
-        return true;
-    }
-    @Override
-    String[][] getPhonemes () {
-        List<String[]> out = new ArrayList<String[]>();
-        if(getStressed() != null) {
-            out.add(getStressed());
-        }
-        if(getUnstressed() != null) {
-            out.add(getUnstressed());
-        }
-        return out.toArray(new String[out.size()][]);
+
+    @Test
+    public void testSegment() throws Exception {
+        List<G2PPiece> t1 = Segment.segment(athas, getAthasMap());
+        assertEquals(t1.size(), 4);
+        assertEquals(t1.get(0).getGrapheme(), "á");
+        assertEquals(t1.get(1).getGrapheme(), "th");
+        assertEquals(t1.get(2).getGrapheme(), "a");
+        assertEquals(t1.get(3).getGrapheme(), "s");
     }
 }

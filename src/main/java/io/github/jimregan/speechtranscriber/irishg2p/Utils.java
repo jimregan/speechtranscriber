@@ -21,6 +21,10 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Utils {
     public static boolean startsSlenderVowel(String s) {
         if (s == null) {
@@ -61,5 +65,49 @@ public class Utils {
             default:
                 return false;
         }
+    }
+    public static boolean arrayEquals(String[] a, String[] b, int from) {
+        if (a.length > b.length) {
+            return false;
+        }
+        for (int i = 0; i < a.length; i++) {
+            if(!a[i].equals(b[from + i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean arrayEquals(String[] a, String[] b) {
+        return arrayEquals(a, b, 0);
+    }
+
+    public static boolean checkContext(G2PPiece piece, String curstring, int i) throws Exception {
+        if(piece.hasContext()) {
+            Pattern p = Pattern.compile(piece.makeMatchString());
+            Matcher m = p.matcher(curstring);
+            if(piece.getContext().startsWith("^") && i != 0) {
+                return false;
+            }
+            if(!m.matches()) {
+                return false;
+            }
+            if(piece.getContext().startsWith("^") || piece.getContext().endsWith("$")) {
+                return true;
+            }
+            m.reset();
+            while(m.find()) {
+                if(m.start(1) == i) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public static <T> String buildRegex(Map<String, T> in) {
+        String[] tmp = in.keySet().toArray(new String[in.size()]);
+        Arrays.sort(tmp, Comparator.comparingInt(String::length).reversed());
+        return "(" + String.join("|", tmp) + ")";
     }
 }

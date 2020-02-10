@@ -21,41 +21,30 @@
  */
 package io.github.jimregan.speechtranscriber.irishg2p;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class Vowel extends G2PPiece {
-    String stressedPhoneme;
-    String unstressed = null;
-    public boolean startSlender() {
-        return Utils.startsSlenderVowel(this.getGrapheme());
+public class Entry {
+    private String word;
+    private String[] phones;
+    public Entry(String word, String[] phones) {
+        this.word = word;
+        this.phones = phones;
     }
-    public boolean endsSlender() {
-        return Utils.endsSlenderVowel(this.getGrapheme());
-    }
-    String[] getUnstressed() {
-        if (this.unstressed == null) {
-            return null;
-        } else {
-            return unstressed.split(" ");
+    public static Entry fromLine(String line) {
+        String word;
+        int index = 0;
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == ' ' || line.charAt(i) == '\t') {
+                index = i;
+                break;
+            }
         }
+        word = line.substring(0, index);
+        String[] phones = line.substring(index + 1).split(" ");
+        return new Entry(word, phones);
     }
-    String[] getStressed() {
-        return stressedPhoneme.split(" ");
+    public String getWord() {
+        return word;
     }
-    @Override
-    public boolean isVowel() {
-        return true;
-    }
-    @Override
-    String[][] getPhonemes () {
-        List<String[]> out = new ArrayList<String[]>();
-        if(getStressed() != null) {
-            out.add(getStressed());
-        }
-        if(getUnstressed() != null) {
-            out.add(getUnstressed());
-        }
-        return out.toArray(new String[out.size()][]);
+    public String[] getPhones() {
+        return phones;
     }
 }

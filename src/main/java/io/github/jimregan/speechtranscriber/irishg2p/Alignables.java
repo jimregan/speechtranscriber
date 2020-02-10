@@ -22,9 +22,15 @@
 package io.github.jimregan.speechtranscriber.irishg2p;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Alignables {
+
+    public final static Map<String, List<G2PPiece>> MUNSTER;
+    public final static Map<String, List<G2PPiece>> CONNACHT;
+    public final static Map<String, List<G2PPiece>> ULSTER;
     static {
         List<G2PPiece> commonPieces = new ArrayList<>();
         commonPieces.add(new ShortVowel("a", "a"));
@@ -122,17 +128,85 @@ public class Alignables {
             commonPieces.add(new LongVowelPair("u ái", "uː aː"));
             commonPieces.add(new LongVowelPair("iu á", "uː aː"));
             commonPieces.add(new LongVowelPair("iu ái", "uː aː"));
+            commonPieces.add(new LongVowelPair("i ó", "iː oː"));
+            commonPieces.add(new LongVowelPair("i ói", "iː oː"));
+            commonPieces.add(new LongVowelPair("u ó", "uː oː"));
+            commonPieces.add(new LongVowelPair("u ói", "uː oː"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         commonPieces.add(new Consonant("b", "bˠ", "bʲ"));
+        commonPieces.add(new Consonant("b'", "bˠ", "bʲ"));
+        commonPieces.add(new Consonant("b’", "bˠ", "bʲ"));
+        commonPieces.add(new Consonant("b'fh", "bˠ", "bʲ"));
+        commonPieces.add(new Consonant("b’fh", "bˠ", "bʲ"));
+        commonPieces.add(new Consonant("bp", "bˠ", "bʲ"));
         commonPieces.add(new Consonant("c", "k", "c"));
+        commonPieces.add(new Consonant("d", "d̪ˠ", "dʲ"));
+        commonPieces.add(new Consonant("d'", "d̪ˠ", "dʲ"));
+        commonPieces.add(new Consonant("d’", "d̪ˠ", "dʲ"));
+        commonPieces.add(new Consonant("dt", "d̪ˠ", "dʲ"));
         commonPieces.add(new Consonant("f", "fˠ", "fʲ"));
         commonPieces.add(new Consonant("g", "ɡ", "ɟ"));
+        commonPieces.add(new Consonant("gc", "ɡ", "ɟ"));
+        commonPieces.add(new Consonant("h", "h", "h"));
+        commonPieces.add(new Consonant("j", "dʲ", "dʲ"));
         commonPieces.add(new Consonant("k", "k", "c"));
+        commonPieces.add(new Consonant("m", "mˠ", "mʲ"));
+        commonPieces.add(new Consonant("mb", "mˠ", "mʲ", "^"));
+        commonPieces.add(new Consonant("m'", "mˠ", "mʲ"));
+        commonPieces.add(new Consonant("m’", "mˠ", "mʲ"));
+        commonPieces.add(new Consonant("mb'", "mˠ", "mʲ"));
+        commonPieces.add(new Consonant("mb’", "mˠ", "mʲ"));
+        commonPieces.add(new Consonant("mb'fh", "mˠ", "mʲ"));
+        commonPieces.add(new Consonant("mb’fh", "mˠ", "mʲ"));
+        // not Munster
+        commonPieces.add(new Consonant("l", "l̻ˠ", "lʲ"));
+        commonPieces.add(new Consonant("ll", "l̻ˠ", "l̻ʲ"));
+        commonPieces.add(new Consonant("n", "n̻ˠ", "nʲ"));
+        commonPieces.add(new Consonant("nn", "n̻ˠ", "n̻ʲ"));
+        commonPieces.add(new Consonant("l", "l̻ˠ", "l̻ʲ", "^"));
+        commonPieces.add(new Consonant("n", "n̻ˠ", "n̻ʲ", "^"));
+        commonPieces.add(new Consonant("n-", "n̻ˠ", "n̻ʲ", "^"));
+        commonPieces.add(new Consonant("nd", "n̻ˠ", "n̻ʲ", "^"));
+
         commonPieces.add(new Consonant("q", "k", "c"));
         commonPieces.add(new Consonant("p", "pˠ", "pʲ"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾʲ"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾˠ", "^"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾˠ", "_d"));
+        commonPieces.add(new Consonant("r", "ɾˠ", "ɾˠ", "_t[^h]"));
+        commonPieces.add(new Consonant("rr", "ɾˠ", "ɾʲ"));
+        commonPieces.add(new Consonant("rr", "ɾˠ", "ɾˠ", "_d"));
+        commonPieces.add(new Consonant("rr", "ɾˠ", "ɾˠ", "_t[^h]"));
+        commonPieces.add(new Consonant("s", "sˠ", "ʃ"));
+        commonPieces.add(new Consonant("t", "t̪ˠ", "tʲ"));
+        commonPieces.add(new Consonant("t'", "t̪ˠ", "tʲ"));
+        commonPieces.add(new Consonant("t’", "t̪ˠ", "tʲ"));
+        commonPieces.add(new Consonant("t-", "t̪ˠ", "tʲ", "^_[aeiouáéíóú]"));
+        commonPieces.add(new Consonant("ts", "t̪ˠ", "tʲ", "^"));
+        commonPieces.add(new Consonant("v", "vʲ", "vʲ"));
+        commonPieces.add(new Consonant("w", "vˠ", "vˠ"));
+        commonPieces.add(new Consonant("x", "k sˠ", "k sˠ"));
+        commonPieces.add(new Consonant("bh", "vˠ", "vʲ"));
+        commonPieces.add(new Consonant("bhf", "vˠ", "vʲ", "^"));
+        commonPieces.add(new Consonant("ch", "x", "ç"));
+        commonPieces.add(new Consonant("ch", "x", "", "$"));
+        commonPieces.add(new Consonant("dh", "ɣ", "j"));
+        commonPieces.add(new Consonant("dh'", "ɣ", "j"));
+        commonPieces.add(new Consonant("dh’", "ɣ", "j"));
+        commonPieces.add(new Consonant("fh", "", ""));
+        commonPieces.add(new Consonant("gh", "ɣ", "j"));
+        commonPieces.add(new Consonant("mh", "vˠ", "vʲ"));
+        commonPieces.add(new Consonant("mh'", "vˠ", "vʲ"));
+        commonPieces.add(new Consonant("mh’", "vˠ", "vʲ"));
+        commonPieces.add(new Consonant("ph", "fˠ", "fʲ"));
+        commonPieces.add(new Consonant("sh", "h", "h"));
+        commonPieces.add(new Consonant("sh", "h", "ç", "_(?:e[áo]i?|iúi?)"));
+        commonPieces.add(new Consonant("th", "h", "h"));
+        commonPieces.add(new Consonant("th", "h", "h", "^"));
+        commonPieces.add(new Consonant("th", "", "", "$"));
         // devoicings
         commonPieces.add(new Consonant("b", "pˠ", "pʲ", "f(?:á|eá|a?í)$"));
         commonPieces.add(new Consonant("d", "t̪ˠ", "tʲ", "f(?:á|eá|a?í)$"));
@@ -162,15 +236,28 @@ public class Alignables {
             piecesMU.add(new MaybeDiphthong("a mh", "au", "ə vˠ"));
             piecesMU.add(new MaybeDiphthong("ea mh", "au", "ə vˠ"));
 
-            piecesMU.add(new LongVowelPair("i á", "i aː"));
-            piecesMU.add(new LongVowelPair("i ái", "i aː"));
-            piecesMU.add(new LongVowelPair("u á", "u aː"));
-            piecesMU.add(new LongVowelPair("u ái", "u aː"));
-            piecesMU.add(new LongVowelPair("iu á", "u aː"));
-            piecesMU.add(new LongVowelPair("iu ái", "u aː"));
+            piecesMU.add(new ShortLongVowelPair("i á", "i aː"));
+            piecesMU.add(new ShortLongVowelPair("i ái", "i aː"));
+            piecesMU.add(new ShortLongVowelPair("u á", "u aː"));
+            piecesMU.add(new ShortLongVowelPair("u ái", "u aː"));
+            piecesMU.add(new ShortLongVowelPair("iu á", "u aː"));
+            piecesMU.add(new ShortLongVowelPair("iu ái", "u aː"));
+            piecesMU.add(new ShortLongVowelPair("i ó", "i oː"));
+            piecesMU.add(new ShortLongVowelPair("i ói", "i oː"));
+            piecesMU.add(new ShortLongVowelPair("u ó", "u oː"));
+            piecesMU.add(new ShortLongVowelPair("u ói", "u oː"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        piecesMU.add(new Consonant("l", "lˠ", "lʲ"));
+        piecesMU.add(new Consonant("ll", "lˠ", "l̻ʲ"));
+        piecesMU.add(new Consonant("l", "lˠ", "lʲ", "^"));
+        piecesMU.add(new Consonant("n", "nˠ", "nʲ"));
+        piecesMU.add(new Consonant("nn", "nˠ", "n̻ʲ"));
+        piecesMU.add(new Consonant("n", "nˠ", "nʲ", "^"));
+        piecesMU.add(new Consonant("n-", "nˠ", "nʲ", "^"));
+        piecesMU.add(new Consonant("nd", "nˠ", "nʲ", "^"));
+        piecesMU.add(new Consonant("sh", "h", "ç", "_(?:e[áo]i?)"));
 
         List<G2PPiece> piecesCO = new ArrayList<>();
         piecesCO.add(new LongVowel("a", "au", "(?:ll|nn|rr)(?:[bcdfghjklmnpqrstvwxyz]+)?$"));
@@ -220,5 +307,35 @@ public class Alignables {
         piecesUL.add(new Diphthong("amh", "au", "uː"));
         piecesUL.add(new Diphthong("eamh", "au", "uː"));
         piecesUL.add(new Diphthong("odh", "au", "uː"));
+        piecesUL.add(new Consonant("ch", "h", "ç"));
+        piecesUL.add(new Consonant("ch", "h", "ç", "$"));
+        piecesUL.add(new Consonant("ch", "x", "ç", "^"));
+        piecesUL.add(new Consonant("n", "ɾˠ", null, "^c_[aouáóú]"));
+        piecesUL.add(new Consonant("ch", "ɾˠ", "ɾˠ", "_t"));
+
+        MUNSTER = makeMap(commonPieces, piecesMU);
+        CONNACHT = makeMap(commonPieces, piecesCO);
+        ULSTER = makeMap(commonPieces, piecesUL);
+    }
+
+    private static Map<String, List<G2PPiece>> makeMap(List<G2PPiece> common, List<G2PPiece> dialect) {
+        Map<String, List<G2PPiece>> out = new HashMap<>();
+        for (G2PPiece piece : dialect) {
+            if(out.containsKey(piece.getGrapheme())) {
+                out.get(piece.getGrapheme()).add(piece);
+            } else {
+                List<G2PPiece> tmp = new ArrayList<>();
+                tmp.add(piece);
+                out.put(piece.getGrapheme(), tmp);
+            }
+        }
+        for (G2PPiece piece : common) {
+            if(out.containsKey(piece.getGrapheme())) {
+                List<G2PPiece> tmp = new ArrayList<>();
+                tmp.add(piece);
+                out.put(piece.getGrapheme(), tmp);
+            }
+        }
+        return out;
     }
 }
