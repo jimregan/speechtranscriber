@@ -71,5 +71,11 @@ public class Segment {
         }
         return out;
     }
-
+    public static List<List<G2PPiece>> generateMiscues(List<G2PPiece> in) {
+        List<List<G2PPiece>> out = new ArrayList<>();
+        for (int i = in.size() - 1; i > 0; i--) {
+            out.add(in.subList(0, i));
+        }
+        return out;
+    }
 }
