@@ -46,7 +46,7 @@ public class Roman {
         return total;
     }
 
-    public static int romanChar(char c) {
+    private static int romanChar(char c) {
         switch (Character.toLowerCase(c)) {
             case 'i':
                 return 1;
