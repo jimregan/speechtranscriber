@@ -22,15 +22,26 @@
 package io.github.jimregan.speechtranscriber.segment;
 
 import net.loomchild.segment.srx.SrxDocument;
+import net.loomchild.segment.srx.SrxParser;
+import net.loomchild.segment.srx.io.Srx2Parser;
 import net.loomchild.segment.util.Util;
 
+import java.io.IOException;
 import java.io.Reader;
 
 public class SRXSentence {
-    SrxDocument document;
+    private SrxDocument document;
 
     public static String readAll(String filename) {
         Reader r = Util.getReader(Util.getFileInputStream(filename));
         return Util.readAll(r);
+    }
+
+    private static final String POLISH_SRX = "io/github/jimregan/speechtranscriber/polish_srx_rules/polish.srx";
+    void loadPolishSRX() throws IOException {
+        Reader reader = Util.getReader(Util.getResourceStream(POLISH_SRX));
+        SrxParser parser = new Srx2Parser();
+        this.document = parser.parse(reader);
+        reader.close();
     }
 }
