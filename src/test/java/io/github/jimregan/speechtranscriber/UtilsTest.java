@@ -21,38 +21,17 @@
  */
 package io.github.jimregan.speechtranscriber;
 
-public class Utils {
-    static String join(String joiner, String[] arr) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr.length - 1; i++) {
-            sb.append(arr[i]);
-            sb.append(joiner);
-        }
-        sb.append(arr[arr.length - 1]);
-        return sb.toString();
-    }
-    static String join(String[] arr) {
-        return join("", arr);
-    }
+import org.junit.Test;
 
-    static String trim(String s) {
-        int begin = 0;
-        int end = s.length();
+import static org.junit.Assert.assertEquals;
 
-        for(int i = 0; i < s.length(); i++) {
-            if(Character.isWhitespace(s.charAt(i))) {
-                begin++;
-            } else {
-                break;
-            }
-        }
-        for(int j = s.length() - 1; j >= 0; j--) {
-            if(Character.isWhitespace(s.charAt(j))) {
-                end--;
-            } else {
-                break;
-            }
-        }
-        return s.substring(begin, end);
+public class UtilsTest {
+    @Test
+    public void testTrim() {
+        assertEquals("test", Utils.trim("test"));
+        assertEquals("test", Utils.trim("test "));
+        assertEquals("test", Utils.trim(" test"));
+        assertEquals("test", Utils.trim(" test "));
+        assertEquals("test", Utils.trim("\t test \t\t"));
     }
 }
