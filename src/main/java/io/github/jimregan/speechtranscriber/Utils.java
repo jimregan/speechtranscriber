@@ -55,4 +55,10 @@ public class Utils {
         }
         return s.substring(begin, end);
     }
+
+    public static int getNumberPlace(int in, int place) {
+        final int powers[] = new int[]{1, 1, 10, 100, 1000, 10000, 100000, 1000000};
+        int mult = powers[place];
+        return (in / mult) % 10;
+    }
 }

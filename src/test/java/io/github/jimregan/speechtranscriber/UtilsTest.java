@@ -34,4 +34,11 @@ public class UtilsTest {
         assertEquals("test", Utils.trim(" test "));
         assertEquals("test", Utils.trim("\t test \t\t"));
     }
+
+    @Test
+    public void testGetNumberPlace() {
+        assertEquals(6, Utils.getNumberPlace(356, 1));
+        assertEquals(5, Utils.getNumberPlace(356, 2));
+        assertEquals(3, Utils.getNumberPlace(356, 3));
+    }
 }
