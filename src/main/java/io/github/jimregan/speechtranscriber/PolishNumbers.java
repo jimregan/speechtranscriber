@@ -221,4 +221,22 @@ public class PolishNumbers {
         return inflectOrdinal(ordinal, null, null);
     }
 
+    public static String romanToOrdinal(String roman, String gender, String gcase) {
+        String in = roman.toUpperCase();
+        if (ROMAN_ORDINALS.containsKey(in)) {
+            if (gender.equals("m") && gcase.equals("nom")) {
+                return ROMAN_ORDINALS.get(in);
+            } else {
+                return inflectOrdinal(ROMAN_ORDINALS.get(in), gender, gcase);
+            }
+        }
+        int num = Roman.romanToInt(Utils.trim(roman));
+        int ones = Utils.getNumberPlace(num, 1);
+        int tens = Utils.getNumberPlace(num, 2);
+        int rest = num / 100;
+
+        return roman;
+    }
+
+
 }
