@@ -25,7 +25,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Utils {
+public class Tools {
     public static boolean startsSlenderVowel(String s) {
         if (s == null) {
             return false;

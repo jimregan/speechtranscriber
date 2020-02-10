@@ -28,10 +28,10 @@ public abstract class Vowel extends G2PPiece {
     String stressedPhoneme;
     String unstressed = null;
     public boolean startSlender() {
-        return Utils.startsSlenderVowel(this.getGrapheme());
+        return Tools.startsSlenderVowel(this.getGrapheme());
     }
     public boolean endsSlender() {
-        return Utils.endsSlenderVowel(this.getGrapheme());
+        return Tools.endsSlenderVowel(this.getGrapheme());
     }
     String[] getUnstressed() {
         if (this.unstressed == null) {

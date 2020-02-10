@@ -31,7 +31,7 @@ public class Segment {
     public static List<G2PPiece> segment(Entry e, Map<String, List<G2PPiece>> map) throws Exception {
         List<G2PPiece> out = new ArrayList<>();
         String in = e.getWord();
-        Pattern p = Pattern.compile("^" + Utils.buildRegex(map) + ".*$");
+        Pattern p = Pattern.compile("^" + Tools.buildRegex(map) + ".*$");
         for (int i = 0, j = 0; i < in.length() && j < e.getPhones().length; i++, j++) {
             Matcher m = p.matcher(in.substring(i));
             if(!m.matches()) {
@@ -55,9 +55,9 @@ public class Segment {
                 List<G2PPiece> cur = map.get(key);
                 for (G2PPiece piece : cur) {
                     String[][] phones = piece.getPhonemes();
-                    if (Utils.checkContext(piece, in.substring(i), i)) {
+                    if (Tools.checkContext(piece, in.substring(i), i)) {
                         for (String[] phoneset : phones) {
-                            if(Utils.arrayEquals(phoneset, e.getPhones(), j)) {
+                            if(Tools.arrayEquals(phoneset, e.getPhones(), j)) {
                                 out.add(piece);
                                 matched = true;
                                 i += (ext != 1) ? ext - 1 : 0;
