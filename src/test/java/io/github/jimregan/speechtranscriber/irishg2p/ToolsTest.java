@@ -30,29 +30,29 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class UtilsTest {
+public class ToolsTest {
 
     @Test
     public void testStartsSlenderVowel() {
-        assertEquals(false, Utils.startsSlenderVowel("a"));
-        assertEquals(true, Utils.startsSlenderVowel("ea"));
+        assertEquals(false, Tools.startsSlenderVowel("a"));
+        assertEquals(true, Tools.startsSlenderVowel("ea"));
     }
 
     @Test
     public void testEndsSlenderVowel() {
-        assertEquals(false, Utils.endsSlenderVowel("ae"));
-        assertEquals(true, Utils.endsSlenderVowel("e"));
-        assertEquals(true, Utils.endsSlenderVowel("blé"));
+        assertEquals(false, Tools.endsSlenderVowel("ae"));
+        assertEquals(true, Tools.endsSlenderVowel("e"));
+        assertEquals(true, Tools.endsSlenderVowel("blé"));
     }
 
     @Test
     public void testArrayEquals() {
         String[] a = new String[]{"a", "b"};
         String[] b = new String[]{"a", "b", "c"};
-        assertEquals(true, Utils.arrayEquals(a, b));
+        assertEquals(true, Tools.arrayEquals(a, b));
         String[] c = new String[]{"a", "b"};
         String[] d = new String[]{"x", "y", "a", "b", "c"};
-        assertEquals(true, Utils.arrayEquals(c, d, 2));
+        assertEquals(true, Tools.arrayEquals(c, d, 2));
     }
 
     @Test
@@ -63,11 +63,11 @@ public class UtilsTest {
         String t1 = "mbosca";
         assertEquals(mb.makeMatchString(), "^(mb).*");
         assertTrue(t1.matches("^(mb).*"));
-        assertTrue(Utils.checkContext(mb, t1, 0));
+        assertTrue(Tools.checkContext(mb, t1, 0));
         String t2 = "ambosca";
-        assertFalse(Utils.checkContext(mb, t1, 1));
+        assertFalse(Tools.checkContext(mb, t1, 1));
         String t3 = "mbambosca";
-        assertTrue(Utils.checkContext(mb2, t3, 3));
+        assertTrue(Tools.checkContext(mb2, t3, 3));
     }
 
     public void testBuildRegex() {
@@ -77,10 +77,10 @@ public class UtilsTest {
         tst.put("aa", l);
         tst.put("a", l);
         tst.put("aaa", l);
-        assertEquals("(aaa|aa|a)", Utils.buildRegex(tst));
+        assertEquals("(aaa|aa|a)", Tools.buildRegex(tst));
         Map<String, String> tst2 = new HashMap<>();
         tst2.put("foo", "bar");
         tst2.put("foobar", "baz");
-        assertEquals("(foobar|foo)", Utils.buildRegex(tst2));
+        assertEquals("(foobar|foo)", Tools.buildRegex(tst2));
     }
 }
