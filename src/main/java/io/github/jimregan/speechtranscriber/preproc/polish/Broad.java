@@ -1,4 +1,4 @@
-package io.github.jimregan.speechtranscriber.preproc.polish.wolne_lektury;
+package io.github.jimregan.speechtranscriber.preproc.polish;
 
 import java.util.ArrayList;
 import java.util.List;
