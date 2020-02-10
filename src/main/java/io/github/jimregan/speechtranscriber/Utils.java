@@ -35,7 +35,7 @@ public class Utils {
         return join("", arr);
     }
 
-    static String trim(String s) {
+    public static String trim(String s) {
         int begin = 0;
         int end = s.length();
 
