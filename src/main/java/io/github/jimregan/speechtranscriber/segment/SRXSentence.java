@@ -38,10 +38,13 @@ public class SRXSentence {
     }
 
     private static final String POLISH_SRX = "io/github/jimregan/speechtranscriber/polish_srx_rules/polish.srx";
-    void loadPolishSRX() throws IOException {
-        Reader reader = Util.getReader(Util.getResourceStream(POLISH_SRX));
+    void loadSRXResource(String filename) throws IOException {
+        Reader reader = Util.getReader(Util.getResourceStream(filename));
         SrxParser parser = new Srx2Parser();
         this.document = parser.parse(reader);
         reader.close();
+    }
+    void loadPolishSRX() throws IOException {
+        this.loadSRXResource(POLISH_SRX);
     }
 }
