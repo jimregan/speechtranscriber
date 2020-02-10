@@ -21,6 +21,9 @@
  */
 package io.github.jimregan.speechtranscriber;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Utils {
     static String join(String joiner, String[] arr) {
         StringBuilder sb = new StringBuilder();
@@ -33,5 +36,46 @@ public class Utils {
     }
     static String join(String[] arr) {
         return join("", arr);
+    }
+
+    public static String trim(String s) {
+        int begin = 0;
+        int end = s.length();
+
+        for(int i = 0; i < s.length(); i++) {
+            if(Character.isWhitespace(s.charAt(i))) {
+                begin++;
+            } else {
+                break;
+            }
+        }
+        for(int j = s.length() - 1; j >= 0; j--) {
+            if(Character.isWhitespace(s.charAt(j))) {
+                end--;
+            } else {
+                break;
+            }
+        }
+        return s.substring(begin, end);
+    }
+
+    static final int powers[] = new int[]{1, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
+    public static int getNumberPlace(int in, int place) {
+        int mult = powers[place];
+        return (in / mult) % 10;
+    }
+    public static int[] getNumberPlaces(int in) {
+        List<Integer> tmp = new ArrayList<>();
+        for(int i = 1; i < powers.length - 1; i++) {
+            if(in < powers[i]) {
+                break;
+            }
+            tmp.add(getNumberPlace(in, i));
+        }
+        int[] out = new int[tmp.size()];
+        for(int i = tmp.size() - 1, j = 0; i >= 0 && j <= tmp.size(); i--, j++) {
+            out[j] = tmp.get(i);
+        }
+        return out;
     }
 }
