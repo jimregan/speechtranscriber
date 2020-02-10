@@ -24,6 +24,7 @@ package io.github.jimregan.speechtranscriber.irishg2p;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Utils {
     public static boolean startsSlenderVowel(String s) {
@@ -109,5 +110,12 @@ public class Utils {
         String[] tmp = in.keySet().toArray(new String[in.size()]);
         Arrays.sort(tmp, Comparator.comparingInt(String::length).reversed());
         return "(" + String.join("|", tmp) + ")";
+    }
+
+    public static String[] printableG2PPieceList(List<G2PPiece> in) {
+        List<String> graphemes = in.stream().map(s -> s.getGrapheme()).collect(Collectors.toList());
+        String grapheme = String.join("", graphemes);
+
+        return new String[]{};
     }
 }
