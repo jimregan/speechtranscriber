@@ -231,9 +231,16 @@ public class PolishNumbers {
             }
         }
         int num = Roman.romanToInt(Utils.trim(roman));
+        int[] nums = Utils.getNumberPlaces(num);
+        String[] numwords = new String[nums.length];
+        for (int i = nums.length - 3, pos = 1; i >= 0; i--, pos++) {
+            if (pos % 3 == 2 && pos != 5 && nums[i] == 1) {
+                numwords[i + 1] = "";
+                numwords[i] = TEENS_ORD.get((nums[i] * 10) + nums[i + 1]);
+            }
+        }
         int ones = Utils.getNumberPlace(num, 1);
         int tens = Utils.getNumberPlace(num, 2);
-        int rest = num / 100;
 
         return roman;
     }
