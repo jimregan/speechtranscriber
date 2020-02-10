@@ -24,7 +24,6 @@ package io.github.jimregan.speechtranscriber.segment;
 import net.loomchild.segment.srx.SrxDocument;
 import net.loomchild.segment.util.Util;
 
-import java.io.File;
 import java.io.Reader;
 
 public class SRXSentence {
