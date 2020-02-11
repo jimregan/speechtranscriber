@@ -41,7 +41,7 @@ public class PolishNumbersTest {
         assertEquals("drugim", PolishNumbers.romanToOrdinal("ii", "m", "loc"));
         assertEquals("jedenasty", PolishNumbers.romanToOrdinal("xi"));
         assertEquals("trzydziesty", PolishNumbers.romanToOrdinal("xxx"));
-        //assertEquals("setny", PolishNumbers.romanToOrdinal("c"));
+        assertEquals("setny", PolishNumbers.romanToOrdinal("c"));
         assertEquals("sto drugi", PolishNumbers.romanToOrdinal("cii"));
     }
 }

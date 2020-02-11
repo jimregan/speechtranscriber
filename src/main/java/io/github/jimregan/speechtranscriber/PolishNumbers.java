@@ -283,7 +283,7 @@ public class PolishNumbers {
         }
         pos += 2;
         boolean ends_zeros = (ones == 0 && tens == 0);
-        if(num > 100) {
+        if(num >= 100) {
             int h = Utils.getNumberPlace(num, 3);
             if(h == 0) {
                 numwords[fromback - pos] = "";
@@ -296,7 +296,7 @@ public class PolishNumbers {
             }
             ends_zeros = ends_zeros && h == 0;
         }
-        return String.join(" ", numwords).replaceAll("  +", " ");
+        return String.join(" ", numwords).replaceAll("  +", " ").trim();
     }
     public static String romanToOrdinal(String roman, String gender) {
         return romanToOrdinal(roman, gender, "nom");
