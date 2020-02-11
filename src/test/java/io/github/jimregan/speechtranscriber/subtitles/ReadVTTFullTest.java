@@ -21,10 +21,12 @@
  */
 package io.github.jimregan.speechtranscriber.subtitles;
 
+import io.github.jimregan.speechtranscriber.Utils;
 import org.junit.Test;
 import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ReadVTTFullTest {
 
@@ -37,5 +39,12 @@ public class ReadVTTFullTest {
         byte[] bom = new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF, (byte) 0x57};
         byte[] bomexp = ReadVTTFull.cleanBuffer(bom);
         assertArrayEquals(new byte[]{0x57}, bomexp);
+    }
+
+    @Test
+    public void testCollectUntil() {
+        String t1 = "thing; foo; bar";
+        assertEquals("thing", ReadVTTFull.collectUntil(t1, 0, ';'));
+        assertEquals("foo", ReadVTTFull.collectUntil(t1, 7, ';'));
     }
 }

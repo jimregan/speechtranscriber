@@ -24,6 +24,7 @@ package io.github.jimregan.speechtranscriber.subtitles;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 
@@ -58,12 +59,32 @@ public class ReadVTTFull {
         }
         return Arrays.copyOfRange(out, 0, used + 1);
     }
+    public static String collectUntil(String input, int position, char notChar) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = position; i < input.length(); i++) {
+            if(input.charAt(i) != notChar) {
+                sb.append(input.charAt(i));
+            } else {
+                break;
+            }
+        }
+        return sb.toString();
+    }
     void parse(String filename) throws FileNotFoundException, IOException {
-        byte[] buffer = fillBuf(filename);
-        if(buffer.length < 6) {
+        byte[] bbuffer = cleanBuffer(fillBuf(filename));
+        if(bbuffer.length < 6) {
             throw new IOException("Invalid VTT file: does not begin with \"WEBVTT\"");
         }
         int cur = 0;
+        String buf = new String(bbuffer, StandardCharsets.UTF_8);
+        if(!buf.startsWith("WEBVTT")) {
+            throw new IOException("Invalid VTT file: does not begin with \"WEBVTT\"");
+        }
+        if(buf.charAt(6) != '\u0020' && buf.charAt(6) != '\u0009' && buf.charAt(6) != 0x0A) {
+            throw new IOException("Invalid VTT file: initial \"WEBVTT\" not followed by valid whitespace");
+        }
+        boolean seen_cue = false;
+
         //if(buffer[0] == '')
     }
 }
