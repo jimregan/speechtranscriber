@@ -32,6 +32,7 @@ public class PolishNumbers {
     static final Map<Integer, String> TEENS_ORD;
     static final Map<Integer, String> TEENS;
     static final Map<Integer, String> TENS;
+    static final Map<Integer, String> TENS_ORD;
     static final Map<Integer, String> ONES;
     static final Map<Integer, String> ONES_ORD;
     static final Map<Integer, String> HUNDREDS_ORD;
@@ -111,6 +112,18 @@ public class PolishNumbers {
         tens.put(8, "osiemdziesiąt");
         tens.put(9, "dziewięćdziesiąt");
         TENS = Collections.unmodifiableMap(tens);
+
+        Map<Integer, String> tens_ord = new HashMap<>();
+        tens_ord.put(1, "dziesiąty");
+        tens_ord.put(2, "dwudziesty");
+        tens_ord.put(3, "trzydziesty");
+        tens_ord.put(4, "czterdziesty");
+        tens_ord.put(5, "pięćdziesiąty");
+        tens_ord.put(6, "sześćdziesiąty");
+        tens_ord.put(7, "siedemdziesiąty");
+        tens_ord.put(8, "osiemdziesiąty");
+        tens_ord.put(9, "dziewięćdziesiąty");
+        TENS_ORD = Collections.unmodifiableMap(tens_ord);
 
         Map<Integer, String> ones = new HashMap<>();
         ones.put(1, "jeden");
@@ -246,16 +259,36 @@ public class PolishNumbers {
         int num = Roman.romanToInt(Utils.trim(roman));
         int[] nums = Utils.getNumberPlaces(num);
         String[] numwords = new String[nums.length];
-        for (int i = nums.length - 3, pos = 1; i >= 0; i--, pos++) {
-            if (pos % 3 == 2 && pos != 5 && nums[i] == 1) {
-                numwords[i + 1] = "";
-                numwords[i] = TEENS_ORD.get((nums[i] * 10) + nums[i + 1]);
-            }
+        int pos = 0;
+        int fromback = nums.length - 1;
+        if (num < 10) {
+            return ONES_ORD.get(num);
         }
         int ones = Utils.getNumberPlace(num, 1);
         int tens = Utils.getNumberPlace(num, 2);
-
-        return roman;
+        if(tens == 1) {
+            numwords[fromback] = "";
+            numwords[fromback - 1] = inflectOrdinal(TEENS_ORD.get(10 + ones), gender, gcase);
+        } else {
+            if(ones == 0) {
+                numwords[fromback] = "";
+            } else {
+                numwords[fromback] = inflectOrdinal(ONES_ORD.get(ones), gender, gcase);
+            }
+            if(tens == 0) {
+                numwords[fromback - 1] = "";
+            } else {
+                numwords[fromback - 1] = inflectOrdinal(TENS_ORD.get(tens), gender, gcase);
+            }
+        }
+        pos += 2;
+        return String.join(" ", numwords);
+    }
+    public static String romanToOrdinal(String roman, String gender) {
+        return romanToOrdinal(roman, gender, "nom");
+    }
+    public static String romanToOrdinal(String roman) {
+        return romanToOrdinal(roman, "m", "nom");
     }
 
 

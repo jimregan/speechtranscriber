@@ -33,4 +33,11 @@ public class PolishNumbersTest {
         assertEquals("druga", PolishNumbers.inflectOrdinal("drugi", "f"));
         assertEquals("drugim", PolishNumbers.inflectOrdinal("drugi", "m", "loc"));
     }
+
+    @Test
+    public void testRomanToOrdinal() {
+        assertEquals("drugi", PolishNumbers.romanToOrdinal("ii"));
+        assertEquals("druga", PolishNumbers.romanToOrdinal("ii", "f"));
+        assertEquals("drugim", PolishNumbers.romanToOrdinal("ii", "m", "loc"));
+    }
 }
