@@ -31,7 +31,7 @@ import static org.junit.Assert.assertEquals;
 public class SimpleTimeTest {
 
     SimpleTime t1 = new SimpleTime(1, 5, 32, 101);
-    //
+    SimpleTime t2 = new SimpleTime(21, 14, 23, 11);
 
     @Test
     public void testGetMilliseconds() {
@@ -55,15 +55,23 @@ public class SimpleTimeTest {
         SimpleTime.fromString("21:14:23:011");
     }
 
+    @Test
     public void testGetSeconds() {
+        assertEquals(3_932, t1.getSeconds());
     }
 
+    @Test
     public void testToVTTString() {
+        assertEquals("21:14:23.011", t2.toVTTString());
     }
 
+    @Test
     public void testToSRTString() {
+        assertEquals("21:14:23,011", t2.toSRTString());
     }
 
+    @Test
     public void testToFTASString() {
+        assertEquals("76463.011", t2.toFTASString());
     }
 }
