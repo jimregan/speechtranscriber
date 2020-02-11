@@ -34,6 +34,7 @@ public class PolishNumbers {
     static final Map<Integer, String> TENS;
     static final Map<Integer, String> ONES;
     static final Map<Integer, String> ONES_ORD;
+    static final Map<Integer, String> HUNDREDS_ORD;
     static final Map<String, String> CARD_TO_ORD;
     static {
         Map<Integer, String> hundreds = new HashMap<>();
@@ -177,6 +178,18 @@ public class PolishNumbers {
         card_to_ord.put("osiemdziesiąt", "osiemdziesiąty");
         card_to_ord.put("dziewięćdziesiąt", "dziewięćdziesiąty");
         CARD_TO_ORD = Collections.unmodifiableMap(card_to_ord);
+
+        Map<Integer, String> hundreds_ord = new HashMap<>();
+        hundreds_ord.put(1, "setny");
+        hundreds_ord.put(2, "dwusetny");
+        hundreds_ord.put(3, "trzechsetny");
+        hundreds_ord.put(4, "czterechsetny");
+        hundreds_ord.put(5, "pięćsetny");
+        hundreds_ord.put(6, "sześćsetny");
+        hundreds_ord.put(7, "siedemsetny");
+        hundreds_ord.put(8, "osiemsetny");
+        hundreds_ord.put(9, "dziewięćsetny");
+        HUNDREDS_ORD = Collections.unmodifiableMap(hundreds_ord);
     }
 
     public static String inflectOrdinal(String ordinal, String gender, String gcase) {
