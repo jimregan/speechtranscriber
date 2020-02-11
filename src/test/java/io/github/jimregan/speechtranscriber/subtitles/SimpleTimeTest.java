@@ -21,41 +21,49 @@
  */
 package io.github.jimregan.speechtranscriber.subtitles;
 
+import org.junit.Test;
+
 import java.io.IOException;
 
-public class SimpleTimedObject {
-    SimpleTime start;
-    SimpleTime end;
-    String text;
-    String id;
-    public SimpleTimedObject() {}
-    public SimpleTimedObject(String start, String end) throws IOException {
-        this.start = SimpleTime.fromString(start);
-        this.end = SimpleTime.fromString(end);
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
+public class SimpleTimeTest {
+
+    SimpleTime t1 = new SimpleTime(1, 5, 32, 101);
+    //
+
+    @Test
+    public void testGetMilliseconds() {
+        assertEquals(3_932_101, t1.getMilliseconds());
     }
 
-    public int getStartTime() {
-        return this.start.getMilliseconds();
+    public void testFromString() throws IOException {
+        SimpleTime st1 = SimpleTime.fromString("01:05:32.101");
+        assertEquals(1, st1.hours);
+        assertEquals(5, st1.minutes);
+        assertEquals(32, st1.seconds);
+        assertEquals(101, st1.millis);
+        SimpleTime st2 = SimpleTime.fromString("21:14:23,011");
+        assertEquals(21, st2.hours);
+        assertEquals(14, st2.minutes);
+        assertEquals(23, st2.seconds);
+        assertEquals(11, st2.millis);
     }
-    public void setStartTime(String startTime) throws IOException {
-        this.start = SimpleTime.fromString(startTime);
+    @Test(expected = IOException.class)
+    public void testFromString1() throws IOException {
+        SimpleTime.fromString("21:14:23:011");
     }
-    public int getEndTime() {
-        return this.end.getMilliseconds();
+
+    public void testGetSeconds() {
     }
-    public void setEndTime(String endTime) throws IOException {
-        this.end = SimpleTime.fromString(endTime);
+
+    public void testToVTTString() {
     }
-    public String getText() {
-        return text;
+
+    public void testToSRTString() {
     }
-    public void setText(String text) {
-        this.text = text;
-    }
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
+
+    public void testToFTASString() {
     }
 }

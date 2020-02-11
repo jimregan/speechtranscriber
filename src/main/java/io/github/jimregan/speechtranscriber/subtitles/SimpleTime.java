@@ -21,10 +21,11 @@
  */
 package io.github.jimregan.speechtranscriber.subtitles;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SimpleTime {
+public class SimpleTime implements Comparable<SimpleTime> {
     int hours;
     int minutes;
     int seconds;
@@ -37,9 +38,9 @@ public class SimpleTime {
         this.millis = ms;
     }
     public int getMilliseconds() {
-        return (this.millis + (this.getSeconds() * 100));
+        return (this.millis + (this.getSeconds() * 1000));
     }
-    public static SimpleTime fromString(String s) {
+    public static SimpleTime fromString(String s) throws IOException {
         Pattern p = Pattern.compile(TIME_PATTERN);
         Matcher matcher = p.matcher(s);
         if(matcher.matches()) {
@@ -49,7 +50,7 @@ public class SimpleTime {
             int ms = Integer.parseInt(matcher.group(4));
             return new SimpleTime(h, m, sec, ms);
         } else {
-            return null;
+            throw new IOException("Input " + s + " is malformed");
         }
     }
     public int getSeconds() {
@@ -65,5 +66,14 @@ public class SimpleTime {
     }
     public String toFTASString() {
         return String.format("%d.%03d", getSeconds(), this.millis);
+    }
+    public int compareTo(SimpleTime st) {
+        if(this.getMilliseconds() == st.getMilliseconds()) {
+            return 0;
+        } else if (this.getMilliseconds() > st.getMilliseconds()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }
