@@ -22,27 +22,27 @@
 package io.github.jimregan.speechtranscriber.subtitles;
 
 public class SimpleTimedObject {
-    int startTime;
-    int endTime;
+    SimpleTime start;
+    SimpleTime end;
     String text;
     String id;
     public SimpleTimedObject() {}
-    public SimpleTimedObject(int start, int end) {
-        this.startTime = start;
-        this.endTime = end;
+    public SimpleTimedObject(String start, String end) {
+        this.start = SimpleTime.fromString(start);
+        this.end = SimpleTime.fromString(end);
     }
 
     public int getStartTime() {
-        return startTime;
+        return this.start.getMilliseconds();
     }
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
+    public void setStartTime(String startTime) {
+        this.start = SimpleTime.fromString(startTime);
     }
     public int getEndTime() {
-        return endTime;
+        return this.end.getMilliseconds();
     }
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
+    public void setEndTime(String endTime) {
+        this.end = SimpleTime.fromString(endTime);
     }
     public String getText() {
         return text;
