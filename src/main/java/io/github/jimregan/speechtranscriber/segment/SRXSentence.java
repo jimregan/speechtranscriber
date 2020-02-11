@@ -21,7 +21,6 @@
  */
 package io.github.jimregan.speechtranscriber.segment;
 
-import io.github.jimregan.speechtranscriber.Utils;
 import net.loomchild.segment.TextIterator;
 import net.loomchild.segment.srx.SrxDocument;
 import net.loomchild.segment.srx.SrxParser;
