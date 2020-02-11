@@ -47,7 +47,7 @@ public class ReadVTT {
                     throw new IOException("Missing WEBVTT header");
                 }
             } else {
-                if(line_type == 0) {
+                if(line_type == 0 || line_type == 1) {
                     if(line.contains("-->")) {
                         line_type = 2;
                         String[] parts = line.split("-->");
@@ -79,13 +79,17 @@ public class ReadVTT {
                     if(line.trim().equals("")) {
                         line_type = 0;
                         out.add(current);
+                        current = new SimpleTimedObject();
                     } else {
                         line_type = 3;
-                        current.addText(line.trim());
+                        if(line.trim() != null) {
+                            current.addText(line.trim());
+                        }
                     }
                 } else if(line.trim().equals("")) {
                     line_type = 0;
                     out.add(current);
+                    current = new SimpleTimedObject();
                 }
             }
         }
@@ -94,6 +98,9 @@ public class ReadVTT {
     }
     public static List<SimpleTimedObject> readSimpleVTT(InputStreamReader isr) throws IOException {
         return readSimpleVTT(new BufferedReader(isr));
+    }
+    public static List<SimpleTimedObject> readSimpleVTT(InputStream is) throws IOException {
+        return readSimpleVTT(new InputStreamReader(is));
     }
     public static List<SimpleTimedObject> readSimpleVTT(FileInputStream fis) throws IOException {
         return readSimpleVTT(new InputStreamReader(fis, StandardCharsets.UTF_8));

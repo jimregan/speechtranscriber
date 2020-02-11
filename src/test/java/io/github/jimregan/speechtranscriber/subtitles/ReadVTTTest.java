@@ -21,46 +21,28 @@
  */
 package io.github.jimregan.speechtranscriber.subtitles;
 
+import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class SimpleTimedObject {
-    SimpleTime start;
-    SimpleTime end;
-    List<String> text;
-    String id;
-    public SimpleTimedObject() {
-        this.text = new ArrayList<>();
-    }
-    public SimpleTimedObject(String start, String end) throws IOException {
-        this();
-        this.start = SimpleTime.fromString(start);
-        this.end = SimpleTime.fromString(end);
-    }
+import static org.junit.Assert.assertEquals;
 
-    public int getStartTime() {
-        return this.start.getMilliseconds();
-    }
-    public void setStartTime(String startTime) throws IOException {
-        this.start = SimpleTime.fromString(startTime);
-    }
-    public int getEndTime() {
-        return this.end.getMilliseconds();
-    }
-    public void setEndTime(String endTime) throws IOException {
-        this.end = SimpleTime.fromString(endTime);
-    }
-    public String[] getText() {
-        return text.toArray(new String[text.size()]);
-    }
-    public void addText(String text) {
-        this.text.add(text);
-    }
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
+public class ReadVTTTest {
+
+    String sample = "WEBVTT\n"
+            + "1\n00:00:00.060 --> 00:00:02.210\n"
+            + "A simple caption\n\n"
+            + "2\n00:00:02.220 --> 00:00:03.010\n"
+            + "Another simple caption\n";
+
+    @Test
+    public void testReadSimpleVTT() throws IOException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(sample.getBytes(StandardCharsets.UTF_8));
+        List<SimpleTimedObject> l = ReadVTT.readSimpleVTT(bis);
+        assertEquals(2, l.size());
+        assertEquals("A simple caption", l.get(0).getText()[0]);
     }
 }
