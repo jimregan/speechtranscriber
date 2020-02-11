@@ -21,16 +21,31 @@
  */
 package io.github.jimregan.speechtranscriber.segment;
 
+import io.github.jimregan.speechtranscriber.Utils;
+import net.loomchild.segment.TextIterator;
 import net.loomchild.segment.srx.SrxDocument;
 import net.loomchild.segment.srx.SrxParser;
+import net.loomchild.segment.srx.SrxTextIterator;
 import net.loomchild.segment.srx.io.Srx2Parser;
 import net.loomchild.segment.util.Util;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SRXSentence {
     private SrxDocument document;
+    private String language;
+
+    public SRXSentence(String language) throws IOException {
+        this.language = language;
+        if(language.equals("pl")) {
+            loadPolishSRX();
+        } else {
+            throw new IOException("No pre-configured SRX for language: " + language);
+        }
+    }
 
     public static String readAll(String filename) {
         Reader r = Util.getReader(Util.getFileInputStream(filename));
@@ -44,7 +59,26 @@ public class SRXSentence {
         this.document = parser.parse(reader);
         reader.close();
     }
-    void loadPolishSRX() throws IOException {
+    private void loadPolishSRX() throws IOException {
         this.loadSRXResource(POLISH_SRX);
+    }
+
+    String[] getSegments(String[] pieces, boolean merge) {
+        List<String> segments = new ArrayList<>();
+        if(merge) {
+            String merged = String.join("\n", pieces);
+            TextIterator textit = new SrxTextIterator(this.document, this.language, merged);
+            while(textit.hasNext()) {
+                segments.add(textit.next());
+            }
+        } else {
+            for(String piece : pieces) {
+                TextIterator textit = new SrxTextIterator(this.document, this.language, piece);
+                while(textit.hasNext()) {
+                    segments.add(textit.next());
+                }
+            }
+        }
+        return segments.toArray(new String[segments.size()]);
     }
 }
