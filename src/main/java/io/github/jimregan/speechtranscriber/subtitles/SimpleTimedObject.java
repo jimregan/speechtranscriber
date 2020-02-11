@@ -25,11 +25,35 @@ public class SimpleTimedObject {
     int startTime;
     int endTime;
     String text;
+    String id;
     public SimpleTimedObject() {}
     public SimpleTimedObject(int start, int end) {
         this.startTime = start;
         this.endTime = end;
     }
 
-
+    public int getStartTime() {
+        return startTime;
+    }
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+    public int getEndTime() {
+        return endTime;
+    }
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
+    }
+    public String getText() {
+        return text;
+    }
+    public void setText(String text) {
+        this.text = text;
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
 }
