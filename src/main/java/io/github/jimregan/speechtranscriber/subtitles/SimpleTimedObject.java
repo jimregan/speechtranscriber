@@ -22,13 +22,17 @@
 package io.github.jimregan.speechtranscriber.subtitles;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleTimedObject {
     SimpleTime start;
     SimpleTime end;
-    String text;
+    List<String> text;
     String id;
-    public SimpleTimedObject() {}
+    public SimpleTimedObject() {
+        this.text = new ArrayList<>();
+    }
     public SimpleTimedObject(String start, String end) throws IOException {
         this.start = SimpleTime.fromString(start);
         this.end = SimpleTime.fromString(end);
@@ -46,11 +50,11 @@ public class SimpleTimedObject {
     public void setEndTime(String endTime) throws IOException {
         this.end = SimpleTime.fromString(endTime);
     }
-    public String getText() {
-        return text;
+    public String[] getText() {
+        return text.toArray(new String[text.size()]);
     }
-    public void setText(String text) {
-        this.text = text;
+    public void addText(String text) {
+        this.text.add(text);
     }
     public String getId() {
         return id;
