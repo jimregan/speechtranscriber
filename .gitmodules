@@ -1,0 +1,3 @@
+[submodule "src/main/resources/io/github/jimregan/speechtranscriber/polish_srx_rules"]
+	path = src/main/resources/io/github/jimregan/speechtranscriber/polish_srx_rules
+	url = https://github.com/milekpl/polish_srx_rules
