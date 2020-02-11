@@ -29,6 +29,7 @@ public class SimpleTime {
     int minutes;
     int seconds;
     int millis;
+    public static String TIME_PATTERN = "([0-9][0-9]):([0-9][0-9]):([0-9][0-9])[,\\.]([0-9][0-9][0-9])";
     SimpleTime(int h, int m, int s, int ms) {
         this.hours = h;
         this.minutes = m;
@@ -39,7 +40,7 @@ public class SimpleTime {
         return (this.millis + (this.getSeconds() * 100));
     }
     public static SimpleTime fromString(String s) {
-        Pattern p = Pattern.compile("([0-9][0-9]):([0-9][0-9]):([0-9][0-9])[,\\.]([0-9][0-9][0-9])");
+        Pattern p = Pattern.compile(TIME_PATTERN);
         Matcher matcher = p.matcher(s);
         if(matcher.matches()) {
             int h = Integer.parseInt(matcher.group(1));
