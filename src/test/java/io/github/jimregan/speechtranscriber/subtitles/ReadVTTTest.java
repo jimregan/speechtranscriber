@@ -19,22 +19,30 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.speechtranscriber.segment;
+package io.github.jimregan.speechtranscriber.subtitles;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
-public class SRXSentenceTest {
+import static org.junit.Assert.assertEquals;
+
+public class ReadVTTTest {
+
+    String sample = "WEBVTT\n"
+            + "1\n00:00:00.060 --> 00:00:02.210\n"
+            + "A simple caption\n\n"
+            + "2\n00:00:02.220 --> 00:00:03.010\n"
+            + "Another simple caption\n";
 
     @Test
-    public void testGetSegments() throws IOException {
-        SRXSentence sents = new SRXSentence("pl");
-        String sample = "To mały test. Blah np. blah, blah. Foo blah.";
-        String[] exp = new String[]{"To mały test. ", "Blah np. blah, blah. ", "Foo blah."};
-        String[] out = sents.getSegments(new String[]{sample}, false);
-        assertArrayEquals(exp, out);
+    public void testReadSimpleVTT() throws IOException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(sample.getBytes(StandardCharsets.UTF_8));
+        List<SimpleTimedObject> l = ReadVTT.readSimpleVTT(bis);
+        assertEquals(2, l.size());
+        assertEquals("A simple caption", l.get(0).getText()[0]);
     }
 }
