@@ -34,5 +34,8 @@ public class ReadVTTFullTest {
         byte[] exp1 = new byte[]{(byte) 0xEF, (byte) 0xBF, (byte) 0xBD, (byte) 0xEF, (byte) 0xBF, (byte) 0xBD, (byte) 0xEF, (byte) 0xBF, (byte) 0xBD};
         assertArrayEquals(exp1, ReadVTTFull.cleanBuffer(b1));
         assertArrayEquals(exp1, "\uFFFD\uFFFD\uFFFD".getBytes(StandardCharsets.UTF_8));
+        byte[] bom = new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF, (byte) 0x57};
+        byte[] bomexp = ReadVTTFull.cleanBuffer(bom);
+        assertArrayEquals(new byte[]{0x57}, bomexp);
     }
 }

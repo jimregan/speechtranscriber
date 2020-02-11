@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 
 public class ReadVTTFull {
     private static byte[] buf;
@@ -33,8 +34,13 @@ public class ReadVTTFull {
         return Files.readAllBytes(f.toPath());
     }
     public static byte[] cleanBuffer(byte[] in) {
-        byte[] out = new byte[in.length * 3];
-        for (int i = 0, j = 0; i < in.length && j < out.length; i++, j++) {
+        int start = 0;
+        if(in.length > 3 && (in[0] == (byte) 0xEF && in[1] == (byte) 0xBB && in[2] == (byte) 0xBF)) {
+            start = 3;
+        }
+        byte[] out = new byte[(in.length - start) * 3];
+        int used = out.length;
+        for (int i = start, j = 0; i < in.length && j < out.length; i++, j++) {
             if(in[i] == 0) {
                 out[j] = (byte) 0xEF;
                 out[j + 1] = (byte) 0xBF;
@@ -48,8 +54,9 @@ public class ReadVTTFull {
             } else {
                 out[j] = in[i];
             }
+            used = j;
         }
-        return out;
+        return Arrays.copyOfRange(out, 0, used + 1);
     }
     void parse(String filename) throws FileNotFoundException, IOException {
         byte[] buffer = fillBuf(filename);
