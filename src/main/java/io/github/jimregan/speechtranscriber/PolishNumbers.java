@@ -282,7 +282,19 @@ public class PolishNumbers {
             }
         }
         pos += 2;
-        return String.join(" ", numwords);
+        int hundreds = Utils.getNumberPlace(num, 3);
+        if(num > 100) {
+            if(hundreds == 0) {
+                numwords[fromback - pos] = "";
+            } else {
+                if (ones == 0 && tens == 0) {
+                    numwords[fromback - pos] = inflectOrdinal(HUNDREDS_ORD.get(hundreds), gender, gcase);
+                } else {
+                    numwords[fromback - pos] = HUNDREDS.get(hundreds);
+                }
+            }
+        }
+        return String.join(" ", numwords).replaceAll("  +", " ");
     }
     public static String romanToOrdinal(String roman, String gender) {
         return romanToOrdinal(roman, gender, "nom");
