@@ -36,10 +36,7 @@ public class SimpleTime {
         this.millis = ms;
     }
     public int getMilliseconds() {
-        return (this.millis
-                + (this.seconds * 100)
-                + (this.minutes * 100 * 60)
-                + (this.hours * 100 * 60 * 60));
+        return (this.millis + (this.getSeconds() * 100));
     }
     public static SimpleTime fromString(String s) {
         Pattern p = Pattern.compile("([0-9][0-9]):([0-9][0-9]):([0-9][0-9])[,\\.]([0-9][0-9][0-9])");
@@ -54,10 +51,18 @@ public class SimpleTime {
             return null;
         }
     }
+    public int getSeconds() {
+        return (this.seconds
+                + (this.minutes * 60)
+                + (this.hours * 60 * 60));
+    }
     public String toVTTString() {
         return String.format("%02d:%02d:%02d.%03d", this.hours, this.minutes, this.seconds, this.millis);
     }
     public String toSRTString() {
         return String.format("%02d:%02d:%02d,%03d", this.hours, this.minutes, this.seconds, this.millis);
+    }
+    public String toFTASString() {
+        return String.format("%d.%03d", getSeconds(), this.millis);
     }
 }
