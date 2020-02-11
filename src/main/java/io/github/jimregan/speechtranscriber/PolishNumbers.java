@@ -282,17 +282,19 @@ public class PolishNumbers {
             }
         }
         pos += 2;
-        int hundreds = Utils.getNumberPlace(num, 3);
+        boolean ends_zeros = (ones == 0 && tens == 0);
         if(num > 100) {
-            if(hundreds == 0) {
+            int h = Utils.getNumberPlace(num, 3);
+            if(h == 0) {
                 numwords[fromback - pos] = "";
             } else {
-                if (ones == 0 && tens == 0) {
-                    numwords[fromback - pos] = inflectOrdinal(HUNDREDS_ORD.get(hundreds), gender, gcase);
+                if (ends_zeros) {
+                    numwords[fromback - pos] = inflectOrdinal(HUNDREDS_ORD.get(h), gender, gcase);
                 } else {
-                    numwords[fromback - pos] = HUNDREDS.get(hundreds);
+                    numwords[fromback - pos] = HUNDREDS.get(h);
                 }
             }
+            ends_zeros = ends_zeros && h == 0;
         }
         return String.join(" ", numwords).replaceAll("  +", " ");
     }
