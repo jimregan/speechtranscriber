@@ -22,9 +22,12 @@
 package io.github.jimregan.speechtranscriber;
 
 import net.bramp.ffmpeg.FFmpeg;
+import net.bramp.ffmpeg.FFmpegExecutor;
+import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 public class Ffmpeg {
@@ -52,14 +55,26 @@ public class Ffmpeg {
             return null;
         }
     }
-    //FFmpeg ffmpeg = new FFmpeg();
-    FFmpegBuilder buildBuilder(String in, String out) {
+    static FFmpegBuilder buildBuilder(File in, File out) {
         FFmpegBuilder fb = new FFmpegBuilder();
-        return fb.setInput(in)
-                 .addOutput(out)
+        return fb.setInput(in.getAbsolutePath())
+                 .addOutput(out.getAbsolutePath())
                  .setAudioChannels(1)
                  .setAudioCodec("pcm_s16le")
                  .setAudioSampleRate(16_000)
                  .done();
+    }
+    public static void convert(File in, File out, String ffmpeg, String ffprobe) throws IOException {
+        if(ffmpeg == null) {
+            ffmpeg = defaultFFmpegPath();
+        }
+        if(ffprobe == null) {
+            ffprobe = defaultFFprobePath();
+        }
+        FFmpegBuilder builder = buildBuilder(in, out);
+        FFmpeg fm = new FFmpeg(ffmpeg);
+        FFprobe fp = new FFprobe(ffprobe);
+        FFmpegExecutor executor = new FFmpegExecutor(fm, fp);
+        executor.createJob(builder).run();
     }
 }
