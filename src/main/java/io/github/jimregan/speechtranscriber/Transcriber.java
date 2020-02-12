@@ -25,7 +25,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import edu.cmu.sphinx.api.SpeechAligner;
 import edu.cmu.sphinx.result.WordResult;
@@ -137,34 +136,10 @@ public class Transcriber {
         List<String> sentences = aligner.getTokenizer().expand(transcript);
         List<String> words = aligner.sentenceToWords(sentences);
 
-        int[] aid = textAligner.align(words);
-
-        int lastId = -1;
-        for (int i = 0; i < aid.length; ++i) {
-            if (aid[i] == -1) {
-                System.out.format("- %s\n", words.get(i));
-            } else {
-                if (aid[i] - lastId > 1) {
-                    for (WordResult result : results.subList(lastId + 1,
-                            aid[i])) {
-                        System.out.format("+ %s\t%s\t%s\n", result.getWord()
-                                .getSpelling(), result.getTimeFrame(),
-                                result.getPronunciation().toString().trim());
-                    }
-                }
-                System.out.format("  %s\t%s\t%s\n", results.get(aid[i])
-                        .getWord().getSpelling(), results.get(aid[i])
-                        .getTimeFrame(), results.get(aid[i])
-                        .getPronunciation().toString().trim());
-                lastId = aid[i];
-            }
+        List<String> aligned = AlignmentResult.extractCTMish(results, textAligner, words);
+        for (String al : aligned) {
+            System.out.println(al);
         }
+    }
 
-        if (lastId >= 0 && results.size() - lastId > 1) {
-            for (WordResult result : results.subList(lastId + 1,
-                    results.size())) {
-                System.out.format("+ %-25s [%s]\n", result.getWord()
-                        .getSpelling(), result.getTimeFrame());
-            }
-        }
-    }}
+}
