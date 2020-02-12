@@ -21,6 +21,7 @@
  */
 package io.github.jimregan.speechtranscriber;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,5 +78,20 @@ public class Utils {
             out[j] = tmp.get(i);
         }
         return out;
+    }
+
+    public static String[] readTextLines(BufferedReader br) throws IOException {
+        String line;
+        List<String> tmp = new ArrayList<>();
+        while((line = br.readLine()) != null) {
+            tmp.add(line);
+        }
+        return tmp.toArray(new String[0]);
+    }
+    public static String[] readTextLines(InputStream is) throws IOException {
+        return readTextLines(new BufferedReader(new InputStreamReader(is)));
+    }
+    public static String[] readTextLines(String filename) throws IOException {
+        return readTextLines(new FileInputStream(filename));
     }
 }
