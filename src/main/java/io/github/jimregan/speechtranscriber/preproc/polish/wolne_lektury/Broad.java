@@ -21,6 +21,7 @@
  */
 package io.github.jimregan.speechtranscriber.preproc.polish.wolne_lektury;
 
+import io.github.jimregan.speechtranscriber.PolishNumbers;
 import io.github.jimregan.speechtranscriber.Roman;
 import io.github.jimregan.speechtranscriber.Utils;
 
@@ -39,8 +40,18 @@ public class Broad {
                 String rest = line.substring(9);
                 rest = Utils.trim(rest);
                 if(Roman.isValid(rest)) {
-                    int roman = Roman.romanToInt(rest);
+                    sb.append(PolishNumbers.romanToOrdinal(rest));
                 }
+                out.add(sb.toString());
+            } else if (line.toLowerCase().startsWith("pieśń ")) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(line.substring(0, 6));
+                String rest = line.substring(6);
+                rest = Utils.trim(rest);
+                if(Roman.isValid(rest)) {
+                    sb.append(PolishNumbers.romanToOrdinal(rest, "f"));
+                }
+                out.add(sb.toString());
             } else if (line.startsWith("ISBN")) {
                 continue;
             } else if (line.equals("-----")) {
