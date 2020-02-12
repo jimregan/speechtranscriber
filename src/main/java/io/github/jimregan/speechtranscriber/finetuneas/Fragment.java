@@ -21,22 +21,81 @@
  */
 package io.github.jimregan.speechtranscriber.finetuneas;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Fragment {
     String id;
     String language;
+    @JsonIgnore
     int start;
+    @JsonIgnore
     int start_ms;
+    @JsonIgnore
     int end;
+    @JsonIgnore
     int end_ms;
-    String[] lines;
+    List<String> lines;
+    public Fragment() {
+        this.lines = new ArrayList<>();
+    }
+    public Fragment(String id, String start, String end) {
+        this();
+        this.id = id;
+        setStart(start);
+        setEnd(end);
+    }
+    public void addLine(String s) {
+        this.lines.add(s);
+    }
+    public void addLines(String[] s) {
+        this.lines.addAll(Arrays.asList(s));
+    }
+    public void addLines(List<String> l) {
+        this.lines.addAll(l);
+    }
+    @JsonSetter("start")
     public void setStart(String start) {
         String[] t = start.split("\\.");
         this.start = Integer.parseInt(t[0]);
         this.start_ms = Integer.parseInt(t[1]);
     }
+    @JsonGetter("start")
+    public String getStart() {
+        return String.format("%d.%03d", this.start, this.start_ms);
+    }
+    @JsonSetter("end")
     public void setEnd(String end) {
         String[] t = end.split("\\.");
         this.end = Integer.parseInt(t[0]);
         this.end_ms = Integer.parseInt(t[1]);
+    }
+    @JsonGetter("end")
+    public String getEnd() {
+        return String.format("%d.%03d", this.end, this.end_ms);
+    }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getLanguage() {
+        return language;
+    }
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+    public List<String> getLines() {
+        return lines;
+    }
+    public void setLines(List<String> lines) {
+        this.lines = lines;
     }
 }
