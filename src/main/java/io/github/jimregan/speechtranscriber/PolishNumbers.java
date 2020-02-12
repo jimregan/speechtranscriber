@@ -296,6 +296,9 @@ public class PolishNumbers {
             }
             ends_zeros = ends_zeros && h == 0;
         }
+        if(num > 499) {
+            return null;
+        }
         return String.join(" ", numwords).replaceAll("  +", " ").trim();
     }
     public static String romanToOrdinal(String roman, String gender) {
