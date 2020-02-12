@@ -59,13 +59,13 @@ public class Fragment {
     public void addLines(List<String> l) {
         this.lines.addAll(l);
     }
-    @JsonSetter("start")
+    @JsonSetter("begin")
     public void setStart(String start) {
         String[] t = start.split("\\.");
         this.start = Integer.parseInt(t[0]);
         this.start_ms = Integer.parseInt(t[1]);
     }
-    @JsonGetter("start")
+    @JsonGetter("begin")
     public String getStart() {
         return String.format("%d.%03d", this.start, this.start_ms);
     }
@@ -87,7 +87,7 @@ public class Fragment {
         this.id = id;
     }
     public String getLanguage() {
-        return language;
+        return (language == null) ? "" : language;
     }
     public void setLanguage(String language) {
         this.language = language;
