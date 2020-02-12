@@ -39,7 +39,8 @@ public class IO {
             throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, List<Fragment>> fragments1 = mapper.readValue(is, Map.class);
-        Map<String, List<Fragment>> fragments = mapper.convertValue(fragments1, new TypeReference<Map<String, List<Fragment>>>() { });
+        Map<String, List<Fragment>> fragments = mapper.convertValue(fragments1,
+                new TypeReference<Map<String, List<Fragment>>>(){});
         return fragments.get("fragments");
     }
     public static List<Fragment> read(String filename)
