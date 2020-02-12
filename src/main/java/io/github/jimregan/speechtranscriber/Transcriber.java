@@ -78,13 +78,13 @@ public class Transcriber {
                             aid[i])) {
                         System.out.format("+ %s\t%s\t%s\n", result.getWord()
                                 .getSpelling(), result.getTimeFrame(),
-                                result.getPronunciation().toString());
+                                result.getPronunciation().toString().trim());
                     }
                 }
                 System.out.format("  %s\t%s\t%s\n", results.get(aid[i])
                         .getWord().getSpelling(), results.get(aid[i])
                         .getTimeFrame(), results.get(aid[i])
-                        .getPronunciation().toString());
+                        .getPronunciation().toString().trim());
                 lastId = aid[i];
             }
         }
