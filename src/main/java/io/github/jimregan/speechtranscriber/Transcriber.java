@@ -30,6 +30,10 @@ import java.util.Scanner;
 import edu.cmu.sphinx.api.SpeechAligner;
 import edu.cmu.sphinx.result.WordResult;
 import edu.cmu.sphinx.alignment.LongTextAligner;
+import net.sourceforge.argparse4j.ArgumentParsers;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
+import net.sourceforge.argparse4j.inf.Namespace;
 
 public class Transcriber {
     private static final String ACOUSTIC_MODEL_PATH =
@@ -42,6 +46,27 @@ public class Transcriber {
             "resource:/io/github/jimregan/cmusphinx-clarinpl/model-6.fst";
 
     public static void main(String args[]) throws Exception {
+        ArgumentParser parser = ArgumentParsers
+                .newFor("Transcriber")
+                .build()
+                .defaultHelp(true)
+                .description("Transcribe audio");
+        parser.addArgument("-l", "--lang")
+                .choices("pl", "ga").setDefault("pl")
+                .help("Specify language");
+        parser.addArgument("-F", "--ffmpeg")
+                .help("Path to ffmpeg");
+        parser.addArgument("-a", "--audio")
+                .help("Path to audio file");
+        parser.addArgument("-t", "--text")
+                .help("Path to text file");
+        Namespace ns = null;
+        try {
+            ns = parser.parseArgs(args);
+        } catch (ArgumentParserException e) {
+            parser.handleError(e);
+            System.exit(1);
+        }
         URL audioUrl = null;
         String transcript = null;
         if (args.length > 1) {
