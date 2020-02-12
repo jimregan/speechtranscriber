@@ -23,9 +23,6 @@ package io.github.jimregan.speechtranscriber.finetuneas;
 
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.junit.Assert.*;
