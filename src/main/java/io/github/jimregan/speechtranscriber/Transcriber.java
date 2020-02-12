@@ -22,6 +22,7 @@
 package io.github.jimregan.speechtranscriber;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
 import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 
 import static java.lang.System.exit;
@@ -118,8 +120,24 @@ public class Transcriber {
         }
 
         AudioFileFormat af = AudioSystem.getAudioFileFormat(new File(audioFilePath));
+        boolean mono = (af.getFormat().getChannels() == 1);
+        boolean samplerate = ((int) af.getFormat().getSampleRate() == 16_000);
+        boolean pcm_signed = af.getFormat().getEncoding().equals(AudioFormat.Encoding.PCM_SIGNED);
+        boolean pcm_unsigned = af.getFormat().getEncoding().equals(AudioFormat.Encoding.PCM_UNSIGNED);
+        boolean convert = (!pcm_signed && !pcm_unsigned);
+        File tmpFile = File.createTempFile("temp", "wav");
+        tmpFile.deleteOnExit();
+        if(convert) {
+            try {
+                Ffmpeg.convert(new File(audioFilePath), tmpFile, ffmpegPath, ffprobePath);
+            } catch(IOException e) {
+                System.err.println("Error running ffmpeg: " + e);
+                exit(1);
+            }
+        }
 
-        URL audioUrl = new File(audioFilePath).toURI().toURL();
+        File audioFile = (convert) ? tmpFile : new File(audioFilePath);
+        URL audioUrl = audioFile.toURI().toURL();
         String[] lines = Utils.readTextLines(textFilePath);
         String transcript = String.join("\n", lines);
 
