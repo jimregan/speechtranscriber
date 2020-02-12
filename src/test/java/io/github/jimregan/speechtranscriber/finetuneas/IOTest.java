@@ -28,8 +28,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class IOTest {
 
@@ -55,8 +54,10 @@ public class IOTest {
             " ]\n" +
             "}";
     @Test
-    public void testRead() throws Exception {
-        InputStream is = new ByteArrayInputStream(sample.getBytes(StandardCharsets.UTF_8));
-        List<Fragment> fragments = IO.read(is);
+    public void testFromString() throws Exception {
+        List<Fragment> fragments = IO.fromString(sample);
+        assertEquals(2, fragments.size());
+        Fragment f = fragments.get(1);
+        assertEquals("1.510", f.getStart());
     }
 }

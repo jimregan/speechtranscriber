@@ -28,6 +28,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,11 +38,29 @@ public class IO {
             throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, List<Fragment>> fragments = mapper.readValue(is, Map.class);
-
         return fragments.get("fragments");
     }
     public static List<Fragment> read(String filename)
             throws FileNotFoundException, JsonParseException, JsonMappingException, IOException {
         return read(new FileInputStream(filename));
+    }
+    public static List<Fragment> fromString(String json)
+            throws JsonParseException, JsonMappingException, IOException {
+        InputStream is = new ByteArrayInputStream(json.getBytes(StandardCharsets.UTF_8));
+        return read(is);
+    }
+    public static void write(OutputStream os, List<Fragment> list) throws IOException {
+        Map<String, List<Fragment>> output = new HashMap<>();
+        output.put("fragments", list);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.writeValue(os, list);
+    }
+    public static String toString(List<Fragment> list) throws JsonProcessingException {
+        Map<String, List<Fragment>> output = new HashMap<>();
+        output.put("fragments", list);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        return mapper.writeValueAsString(output);
     }
 }
