@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Broad {
-    public static String[] proc(String[] in) {
+    public static String[] proc(String[] in, boolean norm) {
         List<String> out = new ArrayList<>();
         for (String line : in) {
             if (line.equals("E. T. A. Hoffmann")) {
                 out.add("Ernst Teodor Amadeusz Hoffmann");
-            } else if (line.toLowerCase().startsWith("rozdział ")) {
+            } else if (norm && line.toLowerCase().startsWith("rozdział ")) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(line.substring(0, 9));
                 String rest = line.substring(9);
@@ -43,7 +43,7 @@ public class Broad {
                     sb.append(PolishNumbers.romanToOrdinal(rest));
                 }
                 out.add(sb.toString());
-            } else if (line.toLowerCase().startsWith("pieśń ")) {
+            } else if (norm && line.toLowerCase().startsWith("pieśń ")) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(line.substring(0, 6));
                 String rest = line.substring(6);
@@ -59,8 +59,10 @@ public class Broad {
             } else {
                 out.add(line);
             }
-
         }
         return out.toArray(new String[out.size()]);
+    }
+    public static String[] proc(String[] in) {
+        return proc(in, true);
     }
 }
