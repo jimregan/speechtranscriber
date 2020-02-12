@@ -51,13 +51,16 @@ public class Interjections {
     public static String[] proc(String[] lines) {
         List<String> out = new ArrayList<>();
         for(String line : lines) {
-            String[] words = line.split(" ");
-            List<String> words_out = new ArrayList<>();
-            for(String word : words) {
-                words_out.add(procInterjections(word));
-            }
-            out.add(String.join(" ", words_out));
+            out.add(proc(line));
         }
         return out.toArray(new String[0]);
+    }
+    public static String proc(String line) {
+        String[] words = line.split(" ");
+        List<String> words_out = new ArrayList<>();
+        for(String word : words) {
+            words_out.add(procInterjections(word));
+        }
+        return String.join(" ", words_out);
     }
 }
