@@ -57,7 +57,11 @@ public class IOTest {
     public void testFromString() throws Exception {
         List<Fragment> fragments = IO.fromString(sample);
         assertEquals(2, fragments.size());
-        Fragment f = fragments.get(1);
-        assertEquals("1.510", f.getStart());
+        Fragment f = fragments.get(0);
+        Fragment f1 = fragments.get(1);
+        assertFalse(f == null);
+        assertEquals("1.510", f1.getStart());
+        assertEquals(1, f1.getLines().size());
+        assertEquals("Second line,", f1.getLines().get(0));
     }
 }

@@ -23,6 +23,7 @@ package io.github.jimregan.speechtranscriber.finetuneas;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -37,7 +38,8 @@ public class IO {
     public static List<Fragment> read(InputStream is)
             throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, List<Fragment>> fragments = mapper.readValue(is, Map.class);
+        Map<String, List<Fragment>> fragments1 = mapper.readValue(is, Map.class);
+        Map<String, List<Fragment>> fragments = mapper.convertValue(fragments1, new TypeReference<Map<String, List<Fragment>>>() { });
         return fragments.get("fragments");
     }
     public static List<Fragment> read(String filename)
