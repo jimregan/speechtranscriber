@@ -19,29 +19,29 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-package io.github.jimregan.speechtranscriber;
+package io.github.jimregan.speechtranscriber.preproc.polish.wolne_lektury;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class PolishNumbersTest {
+public class BroadTest {
 
+    String[] test1 = new String[] {
+      "Header",
+      "Rozdział xxi",
+      "Blah blah",
+      "-----",
+      "Foo", "Bar", "Baz"
+    };
+    String[] exp1 = new String[] {
+      "Header",
+      "Rozdział dwudziesty pierwszy",
+      "Blah blah"
+    };
     @Test
-    public void testInflectOrdinal() {
-        assertEquals("drugi", PolishNumbers.inflectOrdinal("drugi"));
-        assertEquals("druga", PolishNumbers.inflectOrdinal("drugi", "f"));
-        assertEquals("drugim", PolishNumbers.inflectOrdinal("drugi", "m", "loc"));
-    }
-
-    @Test
-    public void testRomanToOrdinal() {
-        assertEquals("drugi", PolishNumbers.romanToOrdinal("ii"));
-        assertEquals("druga", PolishNumbers.romanToOrdinal("ii", "f"));
-        assertEquals("drugim", PolishNumbers.romanToOrdinal("ii", "m", "loc"));
-        assertEquals("jedenasty", PolishNumbers.romanToOrdinal("xi"));
-        assertEquals("trzydziesty", PolishNumbers.romanToOrdinal("xxx"));
-        assertEquals("setny", PolishNumbers.romanToOrdinal("c"));
-        assertEquals("sto drugi", PolishNumbers.romanToOrdinal("cii"));
+    public void testProc() {
+        assertArrayEquals(exp1, Broad.proc(test1));
     }
 }

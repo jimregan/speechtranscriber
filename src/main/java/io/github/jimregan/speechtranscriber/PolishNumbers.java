@@ -32,8 +32,10 @@ public class PolishNumbers {
     static final Map<Integer, String> TEENS_ORD;
     static final Map<Integer, String> TEENS;
     static final Map<Integer, String> TENS;
+    static final Map<Integer, String> TENS_ORD;
     static final Map<Integer, String> ONES;
     static final Map<Integer, String> ONES_ORD;
+    static final Map<Integer, String> HUNDREDS_ORD;
     static final Map<String, String> CARD_TO_ORD;
     static {
         Map<Integer, String> hundreds = new HashMap<>();
@@ -111,6 +113,18 @@ public class PolishNumbers {
         tens.put(9, "dziewięćdziesiąt");
         TENS = Collections.unmodifiableMap(tens);
 
+        Map<Integer, String> tens_ord = new HashMap<>();
+        tens_ord.put(1, "dziesiąty");
+        tens_ord.put(2, "dwudziesty");
+        tens_ord.put(3, "trzydziesty");
+        tens_ord.put(4, "czterdziesty");
+        tens_ord.put(5, "pięćdziesiąty");
+        tens_ord.put(6, "sześćdziesiąty");
+        tens_ord.put(7, "siedemdziesiąty");
+        tens_ord.put(8, "osiemdziesiąty");
+        tens_ord.put(9, "dziewięćdziesiąty");
+        TENS_ORD = Collections.unmodifiableMap(tens_ord);
+
         Map<Integer, String> ones = new HashMap<>();
         ones.put(1, "jeden");
         ones.put(2, "dwa");
@@ -177,6 +191,18 @@ public class PolishNumbers {
         card_to_ord.put("osiemdziesiąt", "osiemdziesiąty");
         card_to_ord.put("dziewięćdziesiąt", "dziewięćdziesiąty");
         CARD_TO_ORD = Collections.unmodifiableMap(card_to_ord);
+
+        Map<Integer, String> hundreds_ord = new HashMap<>();
+        hundreds_ord.put(1, "setny");
+        hundreds_ord.put(2, "dwusetny");
+        hundreds_ord.put(3, "trzechsetny");
+        hundreds_ord.put(4, "czterechsetny");
+        hundreds_ord.put(5, "pięćsetny");
+        hundreds_ord.put(6, "sześćsetny");
+        hundreds_ord.put(7, "siedemsetny");
+        hundreds_ord.put(8, "osiemsetny");
+        hundreds_ord.put(9, "dziewięćsetny");
+        HUNDREDS_ORD = Collections.unmodifiableMap(hundreds_ord);
     }
 
     public static String inflectOrdinal(String ordinal, String gender, String gcase) {
@@ -220,5 +246,67 @@ public class PolishNumbers {
     public static String inflectOrdinal(String ordinal) {
         return inflectOrdinal(ordinal, null, null);
     }
+
+    public static String romanToOrdinal(String roman, String gender, String gcase) {
+        String in = roman.toUpperCase();
+        if (ROMAN_ORDINALS.containsKey(in)) {
+            if (gender.equals("m") && gcase.equals("nom")) {
+                return ROMAN_ORDINALS.get(in);
+            } else {
+                return inflectOrdinal(ROMAN_ORDINALS.get(in), gender, gcase);
+            }
+        }
+        int num = Roman.romanToInt(Utils.trim(roman));
+        int[] nums = Utils.getNumberPlaces(num);
+        String[] numwords = new String[nums.length];
+        int pos = 0;
+        int fromback = nums.length - 1;
+        if (num < 10) {
+            return ONES_ORD.get(num);
+        }
+        int ones = Utils.getNumberPlace(num, 1);
+        int tens = Utils.getNumberPlace(num, 2);
+        if(tens == 1) {
+            numwords[fromback] = "";
+            numwords[fromback - 1] = inflectOrdinal(TEENS_ORD.get(10 + ones), gender, gcase);
+        } else {
+            if(ones == 0) {
+                numwords[fromback] = "";
+            } else {
+                numwords[fromback] = inflectOrdinal(ONES_ORD.get(ones), gender, gcase);
+            }
+            if(tens == 0) {
+                numwords[fromback - 1] = "";
+            } else {
+                numwords[fromback - 1] = inflectOrdinal(TENS_ORD.get(tens), gender, gcase);
+            }
+        }
+        pos += 2;
+        boolean ends_zeros = (ones == 0 && tens == 0);
+        if(num >= 100) {
+            int h = Utils.getNumberPlace(num, 3);
+            if(h == 0) {
+                numwords[fromback - pos] = "";
+            } else {
+                if (ends_zeros) {
+                    numwords[fromback - pos] = inflectOrdinal(HUNDREDS_ORD.get(h), gender, gcase);
+                } else {
+                    numwords[fromback - pos] = HUNDREDS.get(h);
+                }
+            }
+            ends_zeros = ends_zeros && h == 0;
+        }
+        if(num > 499) {
+            return null;
+        }
+        return String.join(" ", numwords).replaceAll("  +", " ").trim();
+    }
+    public static String romanToOrdinal(String roman, String gender) {
+        return romanToOrdinal(roman, gender, "nom");
+    }
+    public static String romanToOrdinal(String roman) {
+        return romanToOrdinal(roman, "m", "nom");
+    }
+
 
 }
