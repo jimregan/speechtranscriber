@@ -35,14 +35,19 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+
+import static java.lang.System.exit;
+
 public class Transcriber {
-    private static final String ACOUSTIC_MODEL_PATH =
+    private static final String PL_ACOUSTIC_MODEL_PATH =
             "resource:/io/github/jimregan/cmusphinx-clarinpl/";
-    private static final String DICTIONARY_PATH =
+    private static final String PL_DICTIONARY_PATH =
             "resource:/io/github/jimregan/cmusphinx-clarinpl/pl.dic";
-    private static final String LANGUAGE_MODEL_PATH =
+    private static final String PL_LANGUAGE_MODEL_PATH =
             "resource:/io/github/jimregan/cmusphinx-clarinpl/pl.lm.DMP";
-    private static final String G2P_MODEL_PATH =
+    private static final String PL_G2P_MODEL_PATH =
             "resource:/io/github/jimregan/cmusphinx-clarinpl/model-6.fst";
 
     public static void main(String args[]) throws Exception {
@@ -56,29 +61,70 @@ public class Transcriber {
                 .help("Specify language");
         parser.addArgument("-F", "--ffmpeg")
                 .help("Path to ffmpeg");
+        parser.addArgument("-P", "--ffprobe")
+                .help("Path to ffprobe");
         parser.addArgument("-a", "--audio")
+                .required(true)
                 .help("Path to audio file");
         parser.addArgument("-t", "--text")
+                .required(true)
                 .help("Path to text file");
+        parser.addArgument("-L", "--lm")
+                .help("Path to language model");
+        parser.addArgument("-G", "--g2p")
+                .help("Path to g2p model");
+        parser.addArgument("-D", "--dict")
+                .help("Path to pronunciation dictionary");
+        parser.addArgument("-A", "--am")
+                .help("Path to acoustic model");
         Namespace ns = null;
         try {
             ns = parser.parseArgs(args);
         } catch (ArgumentParserException e) {
             parser.handleError(e);
-            System.exit(1);
+            exit(1);
         }
-        URL audioUrl = null;
-        String transcript = null;
-        if (args.length > 1) {
-            audioUrl = new File(args[0]).toURI().toURL();
-            Scanner scanner = new Scanner(new File(args[1]));
-            scanner.useDelimiter("\\Z");
-            transcript = scanner.next();
-            scanner.close();
+        String language = ns.getString("lang");
+        String audioFilePath = ns.getString("audio");
+        String textFilePath = ns.getString("text");
+        String ffmpegPath = ns.getString("ffmpeg");
+        String ffprobePath = ns.getString("ffprobe");
+
+        String lm = ns.getString("lm");
+        String am = ns.getString("am");
+        String g2p = ns.getString("g2p");
+        String dict = ns.getString("dict");
+        if(language == null) {
+            if(am == null) {
+                System.err.println("Error: no acoustic model or language specified");
+                exit(1);
+            }
+            if(dict == null) {
+                System.err.println("Error: no dictionary or language specified");
+                exit(1);
+            }
+        } else if(language.equals("pl")) {
+            if(am == null) {
+                am = PL_ACOUSTIC_MODEL_PATH;
+            }
+            if(lm == null) {
+                lm = PL_LANGUAGE_MODEL_PATH;
+            }
+            if(dict == null) {
+                dict = PL_DICTIONARY_PATH;
+            }
+            if(g2p == null) {
+                g2p = PL_G2P_MODEL_PATH;
+            }
         }
 
-        SpeechAligner aligner =
-                new SpeechAligner(ACOUSTIC_MODEL_PATH, DICTIONARY_PATH, G2P_MODEL_PATH);
+        AudioFileFormat af = AudioSystem.getAudioFileFormat(new File(audioFilePath));
+
+        URL audioUrl = new File(audioFilePath).toURI().toURL();
+        String[] lines = Utils.readTextLines(textFilePath);
+        String transcript = String.join("\n", lines);
+
+        SpeechAligner aligner = new SpeechAligner(am, dict, g2p);
 
         List<WordResult> results = aligner.align(audioUrl, transcript);
         List<String> stringResults = new ArrayList<String>();
