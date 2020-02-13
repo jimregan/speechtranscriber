@@ -140,8 +140,7 @@ public class Transcriber {
             stringResults.add(wr.getWord().getSpelling());
         }
 
-        LongTextAligner textAligner =
-                new LongTextAligner(stringResults, 2);
+        LongTextAligner textAligner = new LongTextAligner(stringResults, 2);
         List<String> sentences = aligner.getTokenizer().expand(transcript);
         List<String> words = aligner.sentenceToWords(sentences);
 
