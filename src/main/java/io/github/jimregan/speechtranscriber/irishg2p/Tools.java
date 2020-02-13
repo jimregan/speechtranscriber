@@ -110,4 +110,17 @@ public class Tools {
         Arrays.sort(tmp, Comparator.comparingInt(String::length).reversed());
         return "(" + String.join("|", tmp) + ")";
     }
+
+    public static String dumpPhoneset(String[][] phones) {
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for(int i = 0; i < phones.length; i++) {
+            sb.append(String.join(" ", phones[i]));
+            if(i < phones.length - 1) {
+                sb.append(";");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }
