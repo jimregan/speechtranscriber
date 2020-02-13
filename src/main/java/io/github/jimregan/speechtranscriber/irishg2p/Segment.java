@@ -63,6 +63,9 @@ public class Segment {
                                 i += (ext != 1) ? ext - 1 : 0;
                                 j += (phoneset.length != 1) ? phoneset.length - 1 : 0;
                                 break;
+                            } else {
+                                System.err.println("Can't align " + piece + " with " + String.join(Tools.dumpPhoneset(phones)));
+                                return null;
                             }
                         }
                     }
