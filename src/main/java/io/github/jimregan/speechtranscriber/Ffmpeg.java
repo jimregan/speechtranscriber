@@ -26,6 +26,10 @@ import net.bramp.ffmpeg.FFmpegExecutor;
 import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -76,5 +80,14 @@ public class Ffmpeg {
         FFprobe fp = new FFprobe(ffprobe);
         FFmpegExecutor executor = new FFmpegExecutor(fm, fp);
         executor.createJob(builder).run();
+    }
+
+    public static boolean canConvert(String audioFilePath) throws UnsupportedAudioFileException, IOException {
+        AudioFileFormat af = AudioSystem.getAudioFileFormat(new File(audioFilePath));
+        boolean mono = (af.getFormat().getChannels() == 1);
+        boolean samplerate = ((int) af.getFormat().getSampleRate() == 16_000);
+        boolean pcm_signed = af.getFormat().getEncoding().equals(AudioFormat.Encoding.PCM_SIGNED);
+        boolean pcm_unsigned = af.getFormat().getEncoding().equals(AudioFormat.Encoding.PCM_UNSIGNED);
+        return !pcm_signed && !pcm_unsigned;
     }
 }
