@@ -36,13 +36,13 @@ public class SegmentTest {
         out.add(g);
         return out;
     }
-    private static final Entry athas = Entry.fromLine("áthas aː h ə sˠ");
+    private static final Entry athas = Entry.fromLine("\u00e1thas a\u02d0 h \u0259 s\u02e0");
     private static Map<String, List<G2PPiece>> getAthasMap() {
         Map<String, List<G2PPiece>> out = new HashMap<>();
         out.put("a", l(new ShortVowel("a", "a")));
-        out.put("á", l(new LongVowel("á", "aː")));
+        out.put("á", l(new LongVowel("\u00e1", "a\u02d0")));
         out.put("th", l(new Consonant("th", "h", "h")));
-        out.put("s", l(new Consonant("s", "sˠ", "ʃ")));
+        out.put("s", l(new Consonant("s", "s\u02e0", "\u0283")));
         return out;
     }
 
@@ -50,7 +50,7 @@ public class SegmentTest {
     public void testSegment() throws Exception {
         List<G2PPiece> t1 = Segment.segment(athas, getAthasMap());
         assertEquals(t1.size(), 4);
-        assertEquals(t1.get(0).getGrapheme(), "á");
+        assertEquals(t1.get(0).getGrapheme(), "\u00e1");
         assertEquals(t1.get(1).getGrapheme(), "th");
         assertEquals(t1.get(2).getGrapheme(), "a");
         assertEquals(t1.get(3).getGrapheme(), "s");
