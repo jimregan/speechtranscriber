@@ -35,10 +35,6 @@ import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-
 import static java.lang.System.exit;
 
 public class Transcriber {
@@ -119,12 +115,7 @@ public class Transcriber {
             }
         }
 
-        AudioFileFormat af = AudioSystem.getAudioFileFormat(new File(audioFilePath));
-        boolean mono = (af.getFormat().getChannels() == 1);
-        boolean samplerate = ((int) af.getFormat().getSampleRate() == 16_000);
-        boolean pcm_signed = af.getFormat().getEncoding().equals(AudioFormat.Encoding.PCM_SIGNED);
-        boolean pcm_unsigned = af.getFormat().getEncoding().equals(AudioFormat.Encoding.PCM_UNSIGNED);
-        boolean convert = (!pcm_signed && !pcm_unsigned);
+        boolean convert = Ffmpeg.canConvert(audioFilePath);
         File tmpFile = File.createTempFile("temp", "wav");
         tmpFile.deleteOnExit();
         if(convert) {
