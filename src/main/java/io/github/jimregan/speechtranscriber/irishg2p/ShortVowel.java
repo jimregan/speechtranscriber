@@ -37,11 +37,11 @@ public class ShortVowel extends Vowel {
     @Override
     String[][] getPhonemes () {
         List<String[]> out = new ArrayList<String[]>();
-        if(getUnstressed() != null) {
-            out.add(getStressed());
-        }
         if(getStressed() != null) {
             out.add(getStressed());
+        }
+        if(getUnstressed() != null) {
+            out.add(getUnstressed());
         }
         return out.toArray(new String[out.size()][]);
     }
