@@ -34,4 +34,14 @@ public class InSentenceWord {
     public InSentenceWord(String s) {
         this(s, false, false);
     }
+
+    public String getWord() {
+        return word;
+    }
+    public boolean isStart() {
+        return isStart;
+    }
+    public boolean isEnd() {
+        return isEnd;
+    }
 }
