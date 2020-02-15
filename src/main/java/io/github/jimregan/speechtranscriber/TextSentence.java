@@ -39,6 +39,19 @@ public class TextSentence {
             boolean isEnd = (i == end);
             this.words.add(new InSentenceWord(in.get(i), isStart, isEnd));
         }
+    }
+    TextSentence(String[] in) {
+        this();
+        int start = 0;
+        int end = in.length - 1;
+        for (int i = start; i <= end; i++) {
+            boolean isStart = (i == start);
+            boolean isEnd = (i == end);
+            this.words.add(new InSentenceWord(in[i], isStart, isEnd));
+        }
+    }
 
+    public List<InSentenceWord> getWords() {
+        return words;
     }
 }
