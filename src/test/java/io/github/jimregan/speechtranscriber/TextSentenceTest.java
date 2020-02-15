@@ -33,6 +33,12 @@ public class TextSentenceTest {
     public void testTextSentence() {
         List<String> sent = Arrays.asList("a test sentence".split(" "));
         TextSentence sent1 = new TextSentence(sent);
-        assertEquals(3, sent1.words.size());
+        assertEquals(3, sent1.getWords().size());
+        assertEquals(true, sent1.getWords().get(0).isStart);
+        assertEquals(false, sent1.getWords().get(0).isEnd);
+        assertEquals(false, sent1.getWords().get(1).isStart);
+        assertEquals(false, sent1.getWords().get(1).isEnd);
+        assertEquals(true, sent1.getWords().get(2).isEnd);
+        assertEquals(false, sent1.getWords().get(2).isStart);
     }
 }
