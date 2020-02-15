@@ -40,5 +40,9 @@ public class TextSentenceTest {
         assertEquals(false, sent1.getWords().get(1).isEnd);
         assertEquals(true, sent1.getWords().get(2).isEnd);
         assertEquals(false, sent1.getWords().get(2).isStart);
+        TextSentence sent2 = new TextSentence(new String[]{"foo"});
+        assertEquals(1, sent2.getWords().size());
+        assertEquals(true, sent2.getWords().get(0).isStart);
+        assertEquals(true, sent2.getWords().get(0).isEnd);
     }
 }
