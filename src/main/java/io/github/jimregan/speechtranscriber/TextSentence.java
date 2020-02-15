@@ -54,4 +54,11 @@ public class TextSentence {
     public List<InSentenceWord> getWords() {
         return words;
     }
+    public String[] getStrings() {
+        List<String> out = new ArrayList<>();
+        for(InSentenceWord w : this.getWords()) {
+            out.add(w.getWord());
+        }
+        return out.toArray(new String[0]);
+    }
 }
