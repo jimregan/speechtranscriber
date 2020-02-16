@@ -26,8 +26,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClarinPLAlignedCTMFile {
-    boolean ignoreSilences = false;
-    ClarinPLAlignedCTMFile() {}
+    List<CTMTimedWord> words;
+    public ClarinPLAlignedCTMFile() {
+        this.words = new ArrayList<>();
+    }
+    public ClarinPLAlignedCTMFile(String filename) throws IOException {
+        this.words = fromFile(filename);
+    }
+    public String[] toStrings() {
+        List<String> out = new ArrayList<>();
+        for(CTMTimedWord w : words) {
+            out.add(w.getText());
+        }
+        return out.toArray(new String[0]);
+    }
     public static List<CTMTimedWord> fromFile(String filename) throws IOException {
         String lines[] = Utils.readTextLines(filename);
         List<CTMTimedWord> out = new ArrayList<>();
