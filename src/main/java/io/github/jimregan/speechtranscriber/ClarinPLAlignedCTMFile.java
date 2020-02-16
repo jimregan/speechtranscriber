@@ -21,7 +21,8 @@
  */
 package io.github.jimregan.speechtranscriber;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,5 +86,70 @@ public class ClarinPLAlignedCTMFile {
     }
     private static boolean checkTime(String s) {
         return s.matches("[0-9]+\\.[0-9][0-9][0-9]");
+    }
+    int countWordPhones() {
+        int ret = 0;
+        for(CTMTimedWord w : words) {
+            ret += w.pronunciation.size();
+        }
+        return ret;
+    }
+    static String escapeText(String s) {
+        StringBuilder sb = new StringBuilder();
+        for(char c : s.toCharArray()) {
+            if(c == '"') {
+                sb.append("\"\"");
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+    void writeTextGrid(String filename) throws IOException {
+        BufferedWriter bw = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8));
+        bw.write("File type = \"ooTextFile\"\n");
+        bw.write("Object class = \"TextGrid\"\n\n");
+        bw.write("xmin = ");
+        double xmin = words.get(0).start / 1000.0;
+        bw.write(Double.toString(xmin));
+        bw.write("\n");
+        bw.write("xmax = ");
+        double xmax = words.get(0).start / 1000.0;
+        bw.write(Double.toString(xmax));
+        bw.write("\n");
+        bw.write("tiers? <exists>\n");
+        bw.write("size = 2\n");
+        bw.write("item []:\n");
+        bw.write("    item [1]:\n");
+        bw.write("       class = \"IntervalTier\"\n");
+        bw.write("       name = \"words\"\n");
+        bw.write("       xmin = " + xmin + "\n");
+        bw.write("       xmax = " + xmax + "\n");
+        bw.write("       intervals: size = " + words.size() + "\n");
+        for(int i = 0; i < words.size(); i++) {
+            bw.write("       intervals [" + (i + 1) + "]:\n");
+            bw.write("          xmin = " + Double.toString(words.get(i).start / 1000.0) + "\n");
+            bw.write("          xmax = " + Double.toString(words.get(i).end / 1000.0) + "\n");
+            bw.write("          text = " + escapeText(words.get(i).getText()) + "\n");
+        }
+        bw.write("    item [2]:\n");
+        bw.write("       class = \"IntervalTier\"\n");
+        bw.write("       name = \"phones\"\n");
+        bw.write("       xmin = " + xmin + "\n");
+        bw.write("       xmax = " + xmax + "\n");
+        bw.write("       intervals: size = " + countWordPhones() + "\n");
+        int phone = 1;
+        for(CTMTimedWord w : words) {
+            for(int i = 0; i < w.getPronunciation().size(); i++) {
+                bw.write("       intervals [" + phone + "]:\n");
+                bw.write("          xmin = " + Double.toString(w.getPronunciation().get(i).start / 1000.0) + "\n");
+                bw.write("          xmax = " + Double.toString(w.getPronunciation().get(i).end / 1000.0) + "\n");
+                bw.write("          text = " + escapeText(w.getPronunciation().get(i).getText()) + "\n");
+                phone++;
+            }
+        }
+        bw.flush();
+        bw.close();
     }
 }
