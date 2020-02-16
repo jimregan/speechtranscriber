@@ -115,7 +115,7 @@ public class ClarinPLAlignedCTMFile {
         bw.write(Double.toString(xmin));
         bw.write("\n");
         bw.write("xmax = ");
-        double xmax = words.get(0).start / 1000.0;
+        double xmax = words.get(words.size() - 1).start / 1000.0;
         bw.write(Double.toString(xmax));
         bw.write("\n");
         bw.write("tiers? <exists>\n");
@@ -140,12 +140,14 @@ public class ClarinPLAlignedCTMFile {
         bw.write("       xmax = " + xmax + "\n");
         bw.write("       intervals: size = " + countWordPhones() + "\n");
         int phone = 1;
-        for(CTMTimedWord w : words) {
-            for(int i = 0; i < w.getPronunciation().size(); i++) {
+        for(int i = 0; i < words.size(); i++) {
+            CTMTimedWord w = words.get(i);
+            for(int j = 0; j < w.getPronunciation().size(); j++) {
+                CTMTimedItem it = w.getPronunciation().get(j);
                 bw.write("       intervals [" + phone + "]:\n");
-                bw.write("          xmin = " + Double.toString(w.getPronunciation().get(i).start / 1000.0) + "\n");
-                bw.write("          xmax = " + Double.toString(w.getPronunciation().get(i).end / 1000.0) + "\n");
-                bw.write("          text = \"" + escapeText(w.getPronunciation().get(i).getText()) + "\"\n");
+                bw.write("          xmin = " + Double.toString(it.start / 1000.0) + "\n");
+                bw.write("          xmax = " + Double.toString(it.end / 1000.0) + "\n");
+                bw.write("          text = \"" + escapeText(it.getText()) + "\"\n");
                 phone++;
             }
         }
@@ -156,6 +158,8 @@ public class ClarinPLAlignedCTMFile {
     public static void main(String[] args) throws IOException {
         String in = args[0];
         String out = args[1];
+        //String in = "C:\\Temp\\ck\\00-rudyard-kipling-kim-wstep.ctm";
+        //String out = "C:\\Temp\\ck\\00-rudyard-kipling-kim-wstep.textgrid";
         ClarinPLAlignedCTMFile ctm = new ClarinPLAlignedCTMFile(in);
         ctm.writeTextGrid(out);
     }
