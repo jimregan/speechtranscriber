@@ -21,29 +21,13 @@
  */
 package io.github.jimregan.speechtranscriber;
 
-import edu.cmu.sphinx.linguist.acoustic.Unit;
-import edu.cmu.sphinx.linguist.dictionary.Pronunciation;
-import edu.cmu.sphinx.linguist.dictionary.Word;
-import edu.cmu.sphinx.result.WordResult;
-import edu.cmu.sphinx.util.TimeFrame;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClarinPLAlignedCTMFile {
-    List<WordResult> words;
     boolean ignoreSilences = false;
-    ClarinPLAlignedCTMFile() {
-        words = new ArrayList<>();
-    }
-    void thing() {
-        TimeFrame tf = new TimeFrame(0, 0);
-        //WordResult wr = new WordResult()
-    }
-    private Word mkWord(String s) {
-        return new Word(s, null, false);
-    }
+    ClarinPLAlignedCTMFile() {}
     public static List<CTMTimedWord> fromFile(String filename) throws IOException {
         String lines[] = Utils.readTextLines(filename);
         List<CTMTimedWord> out = new ArrayList<>();
