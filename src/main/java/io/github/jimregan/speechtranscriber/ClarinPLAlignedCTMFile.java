@@ -152,4 +152,11 @@ public class ClarinPLAlignedCTMFile {
         bw.flush();
         bw.close();
     }
+
+    public static void main(String[] args) throws IOException {
+        String in = args[0];
+        String out = args[1];
+        ClarinPLAlignedCTMFile ctm = new ClarinPLAlignedCTMFile(in);
+        ctm.writeTextGrid(out);
+    }
 }
