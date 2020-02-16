@@ -156,10 +156,10 @@ public class ClarinPLAlignedCTMFile {
     }
 
     public static void main(String[] args) throws IOException {
-        String in = args[0];
-        String out = args[1];
-        //String in = "C:\\Temp\\ck\\00-rudyard-kipling-kim-wstep.ctm";
-        //String out = "C:\\Temp\\ck\\00-rudyard-kipling-kim-wstep.textgrid";
+        //String in = args[0];
+        //String out = args[1];
+        String in = "C:\\Temp\\ck\\00-rudyard-kipling-kim-wstep.ctm";
+        String out = "C:\\Temp\\ck\\00-rudyard-kipling-kim-wstep.textgrid";
         ClarinPLAlignedCTMFile ctm = new ClarinPLAlignedCTMFile(in);
         ctm.writeTextGrid(out);
     }

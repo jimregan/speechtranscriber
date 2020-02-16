@@ -41,7 +41,7 @@ public class CTMTimedWord extends CTMTimedItem {
         return this.pronunciation;
     }
     void setPronunciation(List<CTMTimedItem> p) {
-        this.pronunciation = p;
+        this.pronunciation.addAll(p);
     }
     boolean hasPronunciation() {
         return !(pronunciation == null && pronunciation.isEmpty());
