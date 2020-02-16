@@ -21,34 +21,43 @@
  */
 package io.github.jimregan.speechtranscriber;
 
-public class CTMTimedItem {
-    long start;
-    long end;
-    String text;
-    CTMTimedItem(){}
-    CTMTimedItem(String text, long start, long end) {
-        this.text = text;
-        this.start = start;
-        this.end = end;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CTMTimedWord extends CTMTimedItem {
+    List<CTMTimedItem> pronunciation;
+    CTMTimedWord() {
+        this.pronunciation = new ArrayList<>();
     }
-    CTMTimedItem(String text, String start, String duration) {
-        this.text = text;
-        if(!checkTime(start) || !checkTime(duration)) {
-            throw new RuntimeException("Invalid time: (" + text + ") [" + start + ":" + end + "]");
+    CTMTimedWord(String text, long start, long end) {
+        super(text, start, end);
+        this.pronunciation = new ArrayList<>();
+    }
+    CTMTimedWord(String text, String start, String duration) {
+        super(text, start, duration);
+        this.pronunciation = new ArrayList<>();
+    }
+    List<CTMTimedItem> getPronunciation() {
+        return this.pronunciation;
+    }
+    void setPronunciation(List<CTMTimedItem> p) {
+        this.pronunciation = p;
+    }
+    boolean hasPronunciation() {
+        return !(pronunciation == null && pronunciation.isEmpty());
+    }
+    private String printPronunciation() {
+        List<String> tmp = new ArrayList<>();
+        for(CTMTimedItem i : pronunciation) {
+            tmp.add(i.getText());
         }
-        this.start = getTime(start);
-        this.end = this.start + getTime(duration);
-    }
-    private static boolean checkTime(String s) {
-        return s.matches("[0-9]+\\.[0-9][0-9][0-9]");
-    }
-    private static long getTime(String s) {
-        return Long.parseLong(s.replace(".", ""));
-    }
-    public String getText() {
-        return text;
+        return String.join(" ", tmp);
     }
     public String toString() {
-        return this.text + " [" + this.start + ":" + this.end + "]";
+        if(hasPronunciation()) {
+            return super.toString() + " (" + printPronunciation() + ")";
+        } else {
+            return super.toString();
+        }
     }
 }
