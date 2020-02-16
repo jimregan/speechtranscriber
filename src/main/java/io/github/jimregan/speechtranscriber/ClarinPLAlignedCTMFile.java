@@ -43,10 +43,7 @@ public class ClarinPLAlignedCTMFile {
     public static List<CTMTimedWord> fromFile(String filename) throws IOException {
         String lines[] = Utils.readTextLines(filename);
         List<CTMTimedWord> out = new ArrayList<>();
-        boolean saw_word = false;
-        List<String> phones = new ArrayList<>();
         int line_no = 0;
-        CTMTimedWord last_word = null;
         List<CTMTimedItem> pron = new ArrayList<>();
         for(String line : lines) {
             line_no++;
