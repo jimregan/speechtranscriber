@@ -131,7 +131,7 @@ public class ClarinPLAlignedCTMFile {
             bw.write("       intervals [" + (i + 1) + "]:\n");
             bw.write("          xmin = " + Double.toString(words.get(i).start / 1000.0) + "\n");
             bw.write("          xmax = " + Double.toString(words.get(i).end / 1000.0) + "\n");
-            bw.write("          text = " + escapeText(words.get(i).getText()) + "\n");
+            bw.write("          text = \"" + escapeText(words.get(i).getText()) + "\"\n");
         }
         bw.write("    item [2]:\n");
         bw.write("       class = \"IntervalTier\"\n");
@@ -145,7 +145,7 @@ public class ClarinPLAlignedCTMFile {
                 bw.write("       intervals [" + phone + "]:\n");
                 bw.write("          xmin = " + Double.toString(w.getPronunciation().get(i).start / 1000.0) + "\n");
                 bw.write("          xmax = " + Double.toString(w.getPronunciation().get(i).end / 1000.0) + "\n");
-                bw.write("          text = " + escapeText(w.getPronunciation().get(i).getText()) + "\n");
+                bw.write("          text = \"" + escapeText(w.getPronunciation().get(i).getText()) + "\"\n");
                 phone++;
             }
         }
