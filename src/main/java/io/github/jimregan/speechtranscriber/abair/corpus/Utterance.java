@@ -49,6 +49,19 @@ public class Utterance {
         this.sentences.add(s);
     }
 
+    public String getInputString() {
+        return inputString;
+    }
+    public void setInputString(String inputString) {
+        this.inputString = inputString;
+    }
+    public List<Sentence> getSentences() {
+        return sentences;
+    }
+    public void setSentences(List<Sentence> sentences) {
+        this.sentences = sentences;
+    }
+
     public static Utterance loadXML(InputSource is) throws Exception {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
