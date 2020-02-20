@@ -51,6 +51,24 @@ public class Token {
         this.words = words;
     }
 
+    public boolean isFullyTimed() {
+        if(this.words == null || this.words.isEmpty()) {
+            return false;
+        }
+        for(Word w : words) {
+            if(!w.isFullyTimed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean lastIsTimed() {
+        if(this.words == null || this.words.isEmpty()) {
+            return false;
+        }
+        return this.words.get(this.words.size() - 1).lastIsTimed();
+    }
+
     public static Token fromXML(Node n) throws Exception {
         List<Word> words = new ArrayList<>();
         if (n.getNodeName().equals("token")) {
