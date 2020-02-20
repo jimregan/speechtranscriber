@@ -23,11 +23,16 @@ package io.github.jimregan.speechtranscriber.abair.corpus;
 
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+
 import static org.junit.Assert.*;
 
-public class TokenTest {
+public class UtteranceTest {
 
-    String eg = "<token input_string=\"abc\">" +
+    String eg = "<?xml version=\"1.0\" encoding=\"iso-8859-1\" ?>" +
+            "<utterance input_string=\"abc abc\">" +
+            "<sentence input_string=\"abc abc\">" +
+            "<token input_string=\"abc\">" +
             "<word input_string=\"abc\" trans_source=\"LTS++\">" +
             "<syllable stress=\"1\">\n" +
             "<phoneme symbol=\"a\"/>\n" +
@@ -35,13 +40,22 @@ public class TokenTest {
             "<phoneme symbol=\"c\" end=\"2.0\"/>\n" +
             "</syllable>" +
             "</word>" +
-            "</token>";
+            "</token>" +
+            "<token input_string=\"abc\">" +
+            "<word input_string=\"abc\" trans_source=\"LTS++\">" +
+            "<syllable stress=\"1\">\n" +
+            "<phoneme symbol=\"a\"/>\n" +
+            "<phoneme symbol=\"b\"/>\n" +
+            "<phoneme symbol=\"c\" end=\"2.0\"/>\n" +
+            "</syllable>" +
+            "</word>" +
+            "</token>" +
+            "</sentence>" +
+            "</utterance>";
 
     @Test
-    public void testFromXML() throws Exception {
-        Token t = Token.fromXML(XML.stringToNode(eg));
-        assertEquals(1, t.getWords().size());
-        assertTrue(t.lastIsTimed());
-        assertFalse(t.isFullyTimed());
+    public void testLoadXML() throws Exception {
+        Utterance u = Utterance.loadXML(new ByteArrayInputStream(eg.getBytes()));
+        assertEquals(1, u.getSentences().size());
     }
 }
