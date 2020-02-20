@@ -52,5 +52,7 @@ public class SentenceTest {
     public void testFromXML() throws Exception {
         Sentence s = Sentence.fromXML(XML.stringToNode(eg));
         assertEquals(2, s.getTokens().size());
+        assertTrue(s.lastIsTimed());
+        assertFalse(s.isFullyTimed());
     }
 }
