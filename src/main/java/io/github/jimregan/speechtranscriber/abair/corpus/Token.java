@@ -21,5 +21,60 @@
  */
 package io.github.jimregan.speechtranscriber.abair.corpus;
 
+import org.w3c.dom.Node;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Token {
+    String input;
+    List<Word> words;
+
+    public Token() {
+        this.words = new ArrayList<>();
+    }
+    public Token(String s) {
+        this();
+        this.input = s;
+    }
+
+    public String getInput() {
+        return input;
+    }
+    public void setInput(String input) {
+        this.input = input;
+    }
+    public List<Word> getWords() {
+        return words;
+    }
+    public void setWords(List<Word> words) {
+        this.words = words;
+    }
+
+    public static Token fromXML(Node n) throws Exception {
+        List<Word> words = new ArrayList<>();
+        if (n.getNodeName().equals("token")) {
+            String string_attr = "input_string";
+            if(n.getAttributes().getNamedItem("input_string") == null) {
+                string_attr = "string";
+            }
+            String input = XML.attrib(n, string_attr, true);
+
+            Token out = new Token(input);
+            for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+                Node ch = n.getChildNodes().item(i);
+                if (ch.getNodeName().equals("syllable")) {
+                    words.add(Word.fromXML(ch));
+                } else if (XML.canSkipNode(ch)) {
+                    // skip
+                } else {
+                    throw new Exception("Unexpected child node: " + ch.getNodeName());
+                }
+            }
+            out.setWords(words);
+            return out;
+        } else {
+            throw new Exception("Node does not contain word");
+        }
+    }
 }
