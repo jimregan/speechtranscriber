@@ -22,7 +22,6 @@
 package io.github.jimregan.speechtranscriber.abair.corpus;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -46,33 +45,7 @@ public class Utterance {
     public void addSentence(Sentence s) {
         this.sentences.add(s);
     }
-    public static boolean canSkipNode(Node n) {
-        if(n.getNodeName().equals("#text") && n.getTextContent().trim().equals("")) {
-            return true;
-        } else if(n.getNodeType() == Element.COMMENT_NODE) {
-            return true;
-        } else if(n.getNodeType() == Element.PROCESSING_INSTRUCTION_NODE) {
-            return true;
-        } else if(n.getNodeType() == Element.ELEMENT_NODE) {
-            return false;
-        } else {
-            return false;
-        }
-    }
-    public static String attrib(Node n, String attrib, boolean required) throws Exception {
-        if(n.getAttributes() == null || n.getAttributes().getLength() == 0) {
-            throw new IOException("Missing required attributes in node " + n.getNodeName());
-        }
-        if(n.getAttributes().getNamedItem(attrib) != null) {
-            return n.getAttributes().getNamedItem(attrib).getTextContent();
-        } else {
-            if(required) {
-                throw new IOException("Required attribute \"" + attrib + "\" missing in node " + n.getNodeName());
-            } else {
-                return null;
-            }
-        }
-    }
+
     public void loadXML(InputSource is) throws Exception {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -90,7 +63,7 @@ public class Utterance {
             Node n = nl.item(i);
             if(n.getNodeName().equals("sentence")) {
                 addSentence(Sentence.fromXML(n));
-            } else if(canSkipNode(n)) {
+            } else if(XML.canSkipNode(n)) {
                 // do nothing
             } else {
                 throw new IOException("Unexpected node: " + n.getNodeName());
