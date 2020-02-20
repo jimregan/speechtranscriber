@@ -58,6 +58,9 @@ public class Utterance {
         if (doc.getDocumentElement().hasAttribute("input_string")) {
             input = doc.getDocumentElement().getAttribute("input_string");
         }
+        if (input == null && doc.getDocumentElement().hasAttribute("string")) {
+            input = doc.getDocumentElement().getAttribute("string");
+        }
         NodeList nl = doc.getDocumentElement().getChildNodes();
         for (int i = 0; i < nl.getLength(); i++) {
             Node n = nl.item(i);
