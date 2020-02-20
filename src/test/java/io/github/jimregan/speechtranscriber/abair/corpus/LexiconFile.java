@@ -39,4 +39,17 @@ public class LexiconFile {
             lex.get(words[i]).add(phones[i]);
         }
     }
+    public void writeSphinx() {
+        for(String k : lex.keySet()) {
+            Set<String> cur = lex.get(k);
+            int i = 0;
+            for (Iterator<String> it = cur.iterator(); it.hasNext(); i++) {
+                System.out.println(k);
+                if(i > 0) {
+                    System.out.println("(" + i + ") ");
+                }
+                System.out.println(it.next());
+            }
+        }
+    }
 }
