@@ -29,6 +29,10 @@ import java.util.List;
 public class Word {
     List<Syllable> syllables;
     String inputString;
+    String transSource;
+    String transOutputFormat;
+    String postlex;
+    String origTrans;
     public Word() {
         this.syllables = new ArrayList<>();
     }
@@ -49,12 +53,60 @@ public class Word {
         this.inputString = inputString;
     }
 
+    public String getTransSource() {
+        return transSource;
+    }
+
+    public void setTransSource(String transSource) {
+        this.transSource = transSource;
+    }
+
+    public String getTransOutputFormat() {
+        return transOutputFormat;
+    }
+
+    public void setTransOutputFormat(String transOutputFormat) {
+        this.transOutputFormat = transOutputFormat;
+    }
+
+    public String getPostlex() {
+        return postlex;
+    }
+
+    public void setPostlex(String postlex) {
+        this.postlex = postlex;
+    }
+
+    public String getOrigTrans() {
+        return origTrans;
+    }
+
+    public void setOrigTrans(String origTrans) {
+        this.origTrans = origTrans;
+    }
+
     public static Word fromXML(Node n) throws Exception {
         List<Syllable> syllables = new ArrayList<>();
         if (n.getNodeName().equals("word")) {
             String input = XML.attrib(n, "input_string", true);
             String trSrc = XML.attrib(n, "trans_source", false);
+            String postlex = XML.attrib(n, "postlex", false);
+            String trOut = XML.attrib(n, "trans_output_format", false);
+            String origTr = XML.attrib(n, "original_transcription", false);
+
             Word out = new Word(input);
+            if(trSrc != null) {
+                out.setTransSource(trSrc);
+            }
+            if(postlex != null) {
+                out.setPostlex(postlex);
+            }
+            if(trOut != null) {
+                out.setTransOutputFormat(trOut);
+            }
+            if(origTr != null) {
+                out.setOrigTrans(origTr);
+            }
             for (int i = 0; i < n.getChildNodes().getLength(); i++) {
                 Node ch = n.getChildNodes().item(i);
                 if (ch.getNodeName().equals("syllable")) {
