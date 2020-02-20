@@ -37,6 +37,7 @@ public class Word {
         this.syllables = new ArrayList<>();
     }
     public Word(String input) {
+        this();
         this.inputString = input;
     }
 
