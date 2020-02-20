@@ -23,8 +23,12 @@ package io.github.jimregan.speechtranscriber.abair.corpus;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
+import java.io.StringReader;
 
 public class XML {
     public static boolean canSkipNode(Node n) {
@@ -57,6 +61,12 @@ public class XML {
     }
     public static String attrib(Node n, String attrib) throws Exception {
         return XML.attrib(n, attrib, false);
+    }
+    public static Node stringToNode(String s)  throws Exception {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        InputSource is = new InputSource(new StringReader(s));
+        return db.parse(is).getDocumentElement();
     }
 
 }

@@ -22,13 +22,6 @@
 package io.github.jimregan.speechtranscriber.abair.corpus;
 
 import org.junit.Test;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.ByteArrayInputStream;
-import java.io.StringReader;
 
 import static org.junit.Assert.*;
 
@@ -37,19 +30,12 @@ public class PhonemeTest {
     String ph1 = "<phoneme symbol=\"tj\"/>";
     String ph2 = "<phoneme symbol=\"tj\" end=\"2.5\"/>";
 
-    public static Node stringToNode(String s)  throws Exception {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        InputSource is = new InputSource(new StringReader(s));
-        return db.parse(is).getDocumentElement();
-    }
-
     @Test
     public void testFromXML() throws Exception {
-        Phoneme p1 = Phoneme.fromXML(stringToNode(ph1));
+        Phoneme p1 = Phoneme.fromXML(XML.stringToNode(ph1));
         assertEquals("tj", p1.getSymbol());
         assertFalse(p1.hasEnd());
-        Phoneme p2 = Phoneme.fromXML(stringToNode(ph2));
+        Phoneme p2 = Phoneme.fromXML(XML.stringToNode(ph2));
         assertEquals("tj", p2.getSymbol());
         assertTrue(p2.hasEnd());
         assertEquals("2.5", p2.getRawEnd());
