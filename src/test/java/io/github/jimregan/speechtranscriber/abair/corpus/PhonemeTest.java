@@ -21,50 +21,37 @@
  */
 package io.github.jimregan.speechtranscriber.abair.corpus;
 
+import org.junit.Test;
 import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
-import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.ByteArrayInputStream;
+import java.io.StringReader;
 
-public class Phoneme {
-    String symbol;
-    String rawEnd;
-    double end;
-    boolean has_end = false;
-    public Phoneme(String symbol) {
-        this.symbol = symbol;
-        this.rawEnd = null;
-        this.has_end = false;
-        this.end = 0.0;
+import static org.junit.Assert.*;
+
+public class PhonemeTest {
+
+    String ph1 = "<phoneme symbol=\"tj\"/>";
+    String ph2 = "<phoneme symbol=\"tj\" end=\"2.5\"/>";
+
+    public static Node stringToNode(String s)  throws Exception {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        InputSource is = new InputSource(new StringReader(s));
+        return db.parse(is).getDocumentElement();
     }
-    public Phoneme(String symbol, String end) {
-        this.symbol = symbol;
-        this.rawEnd = end;
-        this.has_end = true;
-        this.end = Double.parseDouble(this.rawEnd);
-    }
-    public String getSymbol() {
-        return symbol;
-    }
-    public String getRawEnd() {
-        return rawEnd;
-    }
-    public double getEnd() {
-        return end;
-    }
-    public boolean hasEnd() {
-        return has_end;
-    }
-    public static Phoneme fromXML(Node n) throws Exception {
-        if(n.getNodeName().equals("phoneme")) {
-            String symbol = XML.attrib(n, "symbol", true);
-            String end = XML.attrib(n, "end", false);
-            if(end != null) {
-                return new Phoneme(symbol, end);
-            } else {
-                return new Phoneme(symbol);
-            }
-        } else {
-            throw new IOException("Node does not contain phoneme");
-        }
+
+    @Test
+    public void testFromXML() throws Exception {
+        Phoneme p1 = Phoneme.fromXML(stringToNode(ph1));
+        assertEquals("tj", p1.getSymbol());
+        assertFalse(p1.hasEnd());
+        Phoneme p2 = Phoneme.fromXML(stringToNode(ph2));
+        assertEquals("tj", p2.getSymbol());
+        assertTrue(p2.hasEnd());
+        assertEquals("2.5", p2.getRawEnd());
     }
 }
