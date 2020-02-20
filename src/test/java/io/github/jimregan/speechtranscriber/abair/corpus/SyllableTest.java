@@ -39,5 +39,7 @@ public class SyllableTest {
         Syllable s = Syllable.fromXML(XML.stringToNode(eg));
         assertEquals(1, s.getStress());
         assertEquals(3, s.getPhonemes().size());
+        assertFalse(s.isFullyTimed());
+        assertTrue(s.lastIsTimed());
     }
 }

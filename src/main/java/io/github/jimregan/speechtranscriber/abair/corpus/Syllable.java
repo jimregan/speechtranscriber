@@ -55,6 +55,23 @@ public class Syllable {
     public void setPhonemes(List<Phoneme> phonemes) {
         this.phonemes = phonemes;
     }
+    public boolean isFullyTimed() {
+        if(this.phonemes == null || this.phonemes.isEmpty()) {
+            return false;
+        }
+        for(Phoneme p : phonemes) {
+            if(!p.hasEnd()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean lastIsTimed() {
+        if(this.phonemes == null || this.phonemes.isEmpty()) {
+            return false;
+        }
+        return this.phonemes.get(this.phonemes.size() - 1).hasEnd();
+    }
 
     public static Syllable fromXML(Node n) throws Exception {
         List<Phoneme> phonemes = new ArrayList<>();
