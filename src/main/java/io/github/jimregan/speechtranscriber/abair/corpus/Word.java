@@ -85,6 +85,10 @@ public class Word {
         this.origTrans = origTrans;
     }
 
+    public boolean isGenerated() {
+        return this.transSource.equals("LTS++");
+    }
+
     public static Word fromXML(Node n) throws Exception {
         List<Syllable> syllables = new ArrayList<>();
         if (n.getNodeName().equals("word")) {
