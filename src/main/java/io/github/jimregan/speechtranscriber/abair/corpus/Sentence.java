@@ -51,6 +51,25 @@ public class Sentence {
         this.tokens = tokens;
     }
 
+    public boolean isFullyTimed() {
+        if(this.tokens == null || this.tokens.isEmpty()) {
+            return false;
+        }
+        for(Token t : tokens) {
+            if(!t.isFullyTimed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean lastIsTimed() {
+        if(this.tokens == null || this.tokens.isEmpty()) {
+            return false;
+        }
+        return this.tokens.get(this.tokens.size() - 1).lastIsTimed();
+    }
+
+
     public static Sentence fromXML(Node n) throws Exception {
         List<Token> tokens = new ArrayList<>();
         if (n.getNodeName().equals("sentence")) {
