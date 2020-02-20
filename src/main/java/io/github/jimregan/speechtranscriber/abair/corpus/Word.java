@@ -88,6 +88,23 @@ public class Word {
     public boolean isGenerated() {
         return this.transSource.equals("LTS++");
     }
+    public boolean isFullyTimed() {
+        if(this.syllables == null || this.syllables.isEmpty()) {
+            return false;
+        }
+        for(Syllable s : syllables) {
+            if(!s.isFullyTimed()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean lastIsTimed() {
+        if(this.syllables == null || this.syllables.isEmpty()) {
+            return false;
+        }
+        return this.syllables.get(this.syllables.size() - 1).lastIsTimed();
+    }
 
     public static Word fromXML(Node n) throws Exception {
         List<Syllable> syllables = new ArrayList<>();

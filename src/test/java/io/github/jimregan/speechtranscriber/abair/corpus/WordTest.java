@@ -41,5 +41,7 @@ public class WordTest {
         Word w = Word.fromXML(XML.stringToNode(eg));
         assertTrue(w.isGenerated());
         assertEquals(1, w.getSyllables().size());
+        assertTrue(w.lastIsTimed());
+        assertFalse(w.isFullyTimed());
     }
 }
