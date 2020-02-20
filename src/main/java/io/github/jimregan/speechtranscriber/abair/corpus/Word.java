@@ -21,5 +21,56 @@
  */
 package io.github.jimregan.speechtranscriber.abair.corpus;
 
+import org.w3c.dom.Node;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Word {
+    List<Syllable> syllables;
+    String inputString;
+    public Word() {
+        this.syllables = new ArrayList<>();
+    }
+    public Word(String input) {
+        this.inputString = input;
+    }
+
+    public List<Syllable> getSyllables() {
+        return syllables;
+    }
+    public void setSyllables(List<Syllable> syllables) {
+        this.syllables = syllables;
+    }
+    public String getInputString() {
+        return inputString;
+    }
+    public void setInputString(String inputString) {
+        this.inputString = inputString;
+    }
+
+    public static Word fromXML(Node n) throws Exception {
+        List<Syllable> syllables = new ArrayList<>();
+        if (n.getNodeName().equals("word")) {
+            String input = XML.attrib(n, "input_string", true);
+            String trSrc = XML.attrib(n, "trans_source", false);
+            Word out = new Word(input);
+            for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+                Node ch = n.getChildNodes().item(i);
+                if (ch.getNodeName().equals("syllable")) {
+                    syllables.add(Syllable.fromXML(ch));
+                } else if (XML.canSkipNode(ch)) {
+                    // skip
+                } else {
+                    throw new Exception("Unexpected child node: " + ch.getNodeName());
+                }
+            }
+            out.setSyllables(syllables);
+            return out;
+        } else {
+            throw new Exception("Node does not contain word");
+        }
+    }
+
 }
+
