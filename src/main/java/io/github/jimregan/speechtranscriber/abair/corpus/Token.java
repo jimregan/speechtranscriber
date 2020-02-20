@@ -81,7 +81,7 @@ public class Token {
             Token out = new Token(input);
             for (int i = 0; i < n.getChildNodes().getLength(); i++) {
                 Node ch = n.getChildNodes().item(i);
-                if (ch.getNodeName().equals("syllable")) {
+                if (ch.getNodeName().equals("word")) {
                     words.add(Word.fromXML(ch));
                 } else if (XML.canSkipNode(ch)) {
                     // skip
