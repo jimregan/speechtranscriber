@@ -23,6 +23,8 @@ package io.github.jimregan.speechtranscriber.abair.corpus;
 
 import org.w3c.dom.Node;
 
+import java.io.IOException;
+
 public class Phoneme {
     String symbol;
     String rawEnd;
@@ -32,8 +34,22 @@ public class Phoneme {
         this.rawEnd = null;
         this.has_end = false;
     }
-    public static Phoneme fromXML(Node n) {
-
-        return new Phoneme("");
+    public Phoneme(String symbol, String end) {
+        this.symbol = symbol;
+        this.rawEnd = end;
+        this.has_end = true;
+    }
+    public static Phoneme fromXML(Node n) throws Exception {
+        if(n.getNodeName().equals("phoneme")) {
+            String symbol = XML.attrib(n, "symbol", true);
+            String end = XML.attrib(n, "end", false);
+            if(end != null) {
+                return new Phoneme(symbol, end);
+            } else {
+                return new Phoneme(symbol);
+            }
+        } else {
+            throw new IOException("Node does not contain phoneme");
+        }
     }
 }

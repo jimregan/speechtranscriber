@@ -55,4 +55,8 @@ public class XML {
             }
         }
     }
+    public static String attrib(Node n, String attrib) throws Exception {
+        return XML.attrib(n, attrib, false);
+    }
+
 }
