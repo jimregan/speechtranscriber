@@ -87,7 +87,7 @@ public class Word {
     }
 
     public boolean isGenerated() {
-        return this.transSource.equals("LTS++");
+        return this.transSource.contains("LTS++");
     }
     public boolean isFullyTimed() {
         if(this.syllables == null || this.syllables.isEmpty()) {
@@ -110,7 +110,11 @@ public class Word {
     public static Word fromXML(Node n) throws Exception {
         List<Syllable> syllables = new ArrayList<>();
         if (n.getNodeName().equals("word")) {
-            String input = XML.attrib(n, "input_string", true);
+            String string_attr = "input_string";
+            if(n.getAttributes().getNamedItem("input_string") == null) {
+                string_attr = "string";
+            }
+            String input = XML.attrib(n, string_attr, true);
             String trSrc = XML.attrib(n, "trans_source", false);
             String postlex = XML.attrib(n, "postlex", false);
             String trOut = XML.attrib(n, "trans_output_format", false);
