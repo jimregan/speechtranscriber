@@ -23,30 +23,44 @@ package io.github.jimregan.speechtranscriber.abair.corpus;
 
 import org.w3c.dom.Node;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Syllable {
-    int Stress;
+    int stress;
     private String raw_stress = null;
     List<Phoneme> phonemes;
     public Syllable() {
         this.phonemes = new ArrayList<>();
+    }
+    public Syllable(String stress) {
+        this();
+        this.raw_stress = stress;
+        if(stress.matches("^[012]$")) {
+            this.stress = Integer.parseInt(stress);
+        } else {
+            this.stress = 0;
+        }
+    }
+
+    public int getStress() {
+        return stress;
+    }
+    public void setStress(int stress) {
+        this.stress = stress;
+    }
+    public List<Phoneme> getPhonemes() {
+        return phonemes;
+    }
+    public void setPhonemes(List<Phoneme> phonemes) {
+        this.phonemes = phonemes;
     }
 
     public static Syllable fromXML(Node n) throws Exception {
         List<Phoneme> phonemes = new ArrayList<>();
         if (n.getNodeName().equals("syllable")) {
             String stress = XML.attrib(n, "stress", false);
-            int stress_no = 0;
-            if(stress.matches("^[012]$")) {
-                stress_no = Integer.parseInt(stress);
-            } else if(stress.toLowerCase().equals("none")) {
-                stress_no = 0;
-            } else {
-                throw new IOException("Unknown stress value: " + stress);
-            }
+            Syllable out = new Syllable(stress);
             for (int i = 0; i < n.getChildNodes().getLength(); i++) {
                 Node ch = n.getChildNodes().item(i);
                 if (ch.getNodeName().equals("phoneme")) {
@@ -57,6 +71,8 @@ public class Syllable {
                     throw new Exception("Unexpected child node: " + ch.getNodeName());
                 }
             }
+            out.setPhonemes(phonemes);
+            return out;
         } else {
             throw new Exception("Node does not contain syllable");
         }
