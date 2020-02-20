@@ -21,15 +21,12 @@
  */
 package io.github.jimregan.speechtranscriber.abair.corpus;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LexiconFile {
     Map<String, Set<String>> lex;
     public LexiconFile() {
-        this.lex = new HashMap<>();
+        this.lex = new TreeMap<>();
     }
     public void insert(String[] words, String[] phones) throws Exception {
         if(words.length != phones.length) {
