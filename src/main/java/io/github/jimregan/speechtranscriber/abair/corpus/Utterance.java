@@ -28,7 +28,10 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +49,7 @@ public class Utterance {
         this.sentences.add(s);
     }
 
-    public void loadXML(InputSource is) throws Exception {
+    public static Utterance loadXML(InputSource is) throws Exception {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document doc = docBuilder.parse(is);
@@ -61,16 +64,27 @@ public class Utterance {
         if (input == null && doc.getDocumentElement().hasAttribute("string")) {
             input = doc.getDocumentElement().getAttribute("string");
         }
+        Utterance out = new Utterance(input);
         NodeList nl = doc.getDocumentElement().getChildNodes();
         for (int i = 0; i < nl.getLength(); i++) {
             Node n = nl.item(i);
             if(n.getNodeName().equals("sentence")) {
-                addSentence(Sentence.fromXML(n));
+                out.addSentence(Sentence.fromXML(n));
             } else if(XML.canSkipNode(n)) {
                 // do nothing
             } else {
                 throw new IOException("Unexpected node: " + n.getNodeName());
             }
         }
+        return out;
+    }
+    public static Utterance loadXML(InputStream is) throws Exception {
+        return loadXML(new InputSource(is));
+    }
+    public static Utterance loadXML(File f) throws Exception {
+        return loadXML(new FileInputStream(f));
+    }
+    public static Utterance loadXML(String filename) throws Exception {
+        return loadXML(new File(filename));
     }
 }
