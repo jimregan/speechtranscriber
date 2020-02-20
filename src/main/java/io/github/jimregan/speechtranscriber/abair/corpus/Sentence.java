@@ -29,12 +29,52 @@ import java.util.List;
 public class Sentence {
     String inputString;
     List<Token> tokens;
+
     public Sentence() {
         this.tokens = new ArrayList<>();
     }
-    public static Sentence fromXML(Node n) {
-        Sentence out = new Sentence();
+    public Sentence(String s) {
+        this();
+        this.inputString = s;
+    }
 
-        return out;
+    public String getInputString() {
+        return inputString;
+    }
+    public void setInputString(String inputString) {
+        this.inputString = inputString;
+    }
+    public List<Token> getTokens() {
+        return tokens;
+    }
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    public static Sentence fromXML(Node n) throws Exception {
+        List<Token> tokens = new ArrayList<>();
+        if (n.getNodeName().equals("sentence")) {
+            String string_attr = "input_string";
+            if(n.getAttributes().getNamedItem("input_string") == null) {
+                string_attr = "string";
+            }
+            String input = XML.attrib(n, string_attr, true);
+
+            Sentence out = new Sentence(input);
+            for (int i = 0; i < n.getChildNodes().getLength(); i++) {
+                Node ch = n.getChildNodes().item(i);
+                if (ch.getNodeName().equals("token")) {
+                    tokens.add(Token.fromXML(ch));
+                } else if (XML.canSkipNode(ch)) {
+                    // skip
+                } else {
+                    throw new Exception("Unexpected child node: " + ch.getNodeName());
+                }
+            }
+            out.setTokens(tokens);
+            return out;
+        } else {
+            throw new Exception("Node does not contain sentence");
+        }
     }
 }

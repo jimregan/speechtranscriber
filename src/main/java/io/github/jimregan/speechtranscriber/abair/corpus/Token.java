@@ -92,7 +92,7 @@ public class Token {
             out.setWords(words);
             return out;
         } else {
-            throw new Exception("Node does not contain word");
+            throw new Exception("Node does not contain token");
         }
     }
 }
