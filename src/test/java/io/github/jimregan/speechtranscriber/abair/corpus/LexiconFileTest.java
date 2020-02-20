@@ -21,37 +21,18 @@
  */
 package io.github.jimregan.speechtranscriber.abair.corpus;
 
-import java.util.*;
+import org.junit.Test;
 
-public class LexiconFile {
-    Map<String, Set<String>> lex;
-    public LexiconFile() {
-        this.lex = new TreeMap<>();
-    }
-    public void insert(String[] words, String[] phones) throws Exception {
-        if(words.length != phones.length) {
-            throw new Exception("words and phones do not contain the same number of entries");
-        }
-        for(int i = 0; i < words.length; i++) {
-            if(!lex.containsKey(words[i])) {
-                lex.put(words[i], new HashSet<>());
-            }
-            lex.get(words[i]).add(phones[i]);
-        }
-    }
-    public void writeSphinx() {
-        for(String k : lex.keySet()) {
-            Set<String> cur = lex.get(k);
-            int i = 0;
-            for (Iterator<String> it = cur.iterator(); it.hasNext(); i++) {
-                System.out.print(k);
-                if(i > 0) {
-                    System.out.print("(" + i + ") ");
-                } else {
-                    System.out.print(" ");
-                }
-                System.out.println(it.next());
-            }
-        }
+import static org.junit.Assert.*;
+
+public class LexiconFileTest {
+
+    String[] w = new String[]{"b", "a", "a", "c", "b"};
+    String[] p = new String[]{"be", "a", "aa", "ce", "ba"};
+    @Test
+    public void testWriteSphinx() throws Exception {
+        LexiconFile lx = new LexiconFile();
+        lx.insert(w, p);
+        lx.writeSphinx();
     }
 }
